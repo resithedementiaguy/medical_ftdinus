@@ -17,12 +17,10 @@ class Mod_darah extends CI_Model
         return $query->result();
     }
 
-    public function get_penduduk_by_id($id) {
-        $this->db->select('*');
-        $this->db->from('ktp');
-        $this->db->where('nik', $id);
-        $query = $this->db->get();
-        return $query->row(); // Using row() to get a single row result
+    public function get_nama_by_nik($nik) {
+        $this->db->where('nik', $nik);
+        $query = $this->db->get('ktp');
+        return $query->row();
     }
 
     // Tambah data program studi

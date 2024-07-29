@@ -11,9 +11,16 @@ class Analisis_darah extends CI_Controller
 
     public function index()
     {
+        $data['ktp']= $this->Mod_darah->get_penduduk();
         $this->load->view('partials/header');
-        $this->load->view('frontend/analisis_darah');
+        $this->load->view('frontend/analisis_darah',$data);
         $this->load->view('partials/footer');
+    }
+
+    public function get_nama() {
+        $nik = $this->input->post('nik');
+        $nama = $this->Mod_darah->get_nama_by_nik($nik);
+        echo json_encode($nama);
     }
 
     public function add()
@@ -28,7 +35,7 @@ class Analisis_darah extends CI_Controller
         $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
         $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
-        
+
         if ($this->form_validation->run() === FALSE) {
             redirect('analisis_darah');
         } else {
