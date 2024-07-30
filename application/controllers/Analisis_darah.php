@@ -11,13 +11,14 @@ class Analisis_darah extends CI_Controller
 
     public function index()
     {
-        $data['ktp']= $this->Mod_darah->get_penduduk();
+        $data['ktp'] = $this->Mod_darah->get_penduduk();
         $this->load->view('partials/header');
-        $this->load->view('frontend/analisis_darah',$data);
+        $this->load->view('frontend/analisis_darah', $data);
         $this->load->view('partials/footer');
     }
 
-    public function get_nama() {
+    public function get_nama()
+    {
         $nik = $this->input->post('nik');
         $nama = $this->Mod_darah->get_nama_by_nik($nik);
         echo json_encode($nama);
