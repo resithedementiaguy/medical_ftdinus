@@ -34,11 +34,9 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="nik" name="nik">
-                                                    <option value="" selected hidden>Pilih NIK</option>
-                                                    <?php foreach($ktp as $data): ?>
-                                                    <option value="<?= $data->nik ?>"><?= $data->nik ?></option>
-                                                    <?php endforeach; ?>
+                                                <select class="form-select" id="basicSelect">
+                                                    <option>Pilih Alat</option>
+                                                    <option>42564676466784</option>
                                                 </select>
                                             </fieldset>
                                         </div>
@@ -47,7 +45,7 @@
                                             <label for="first-name-horizontal">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly>
+                                            <input type="text" id="first-name-horizontal" class="form-control" name="fname" placeholder="Nama Lengkap" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +73,8 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="alat" name="alat">
-                                                    <option value="" selected hidden>Pilih Alat</option>
+                                                <select class="form-select" id="basicSelect">
+                                                    <option>Pilih Alat</option>
                                                     <option>Suntik</option>
                                                     <option>Ultra Sound</option>
                                                     <option>Super Bright</option>
@@ -164,28 +162,3 @@
         </div>
     </section>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('#nik').change(function() {
-        var nik = $(this).val();
-        if (nik != "") {
-            $.ajax({
-                url: '<?php echo base_url("Analisis_darah/get_nama"); ?>',
-                method: 'POST',
-                data: {nik: nik},
-                dataType: 'json',
-                success: function(response) {
-                    if (response) {
-                        $('#nama').val(response.nama);
-                    } else {
-                        $('#nama').val('');
-                    }
-                }
-            });
-        } else {
-            $('#nama').val('');
-        }
-    });
-});
-</script>
