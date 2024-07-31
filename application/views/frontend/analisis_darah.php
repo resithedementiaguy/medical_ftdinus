@@ -100,7 +100,7 @@
                                                 <label for="kolestrol">Kolestrol</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="kolestrol" class="form-control" name="kolestrol" placeholder="Masukkan Kolestrol">
+                                                <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan Kolestrol">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="asam_urat">Asam Urat</label>
