@@ -24,92 +24,55 @@ class Analisis_darah extends CI_Controller
         echo json_encode($nama);
     }
 
-    public function add_suntik()
+    public function add()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
+        $alat = $this->input->post('alat');
         $this->form_validation->set_rules('nik', 'NIK', 'required');
-        $this->form_validation->set_rules('glukosa', 'Glukosa', 'required');
-        $this->form_validation->set_rules('hb', 'hb', 'required');
-        $this->form_validation->set_rules('spo2', 'SPO2', 'required');
-        $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
-        $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
-        if ($this->form_validation->run() === FALSE) {
-            redirect('analisis_darah');
-        } else {
-            $data = array(
-                'nik' => $this->input->post('nik'),
-                'glukosa' => $this->input->post('glukosa'),
-                'hb' => $this->input->post('hb'),
-                'spo2' => $this->input->post('spo2'),
-                'kolesterol' => $this->input->post('kolesterol'),
-                'asam_urat' => $this->input->post('asam_urat'),
-                'keterangan' => $this->input->post('keterangan')
-            );
-            $this->Mod_darah->add_suntik($data);
-            redirect('analisis_darah');
+        if ($alat == 'suntik') {
+            $this->form_validation->set_rules('glukosa', 'Glukosa', 'required');
+            $this->form_validation->set_rules('hb', 'HB', 'required');
+            $this->form_validation->set_rules('spo2', 'SPO2', 'required');
+            $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
+            $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
+        } elseif ($alat == 'ultraSound') {
+            $this->form_validation->set_rules('us1', 'Ultrasound1', 'required');
+        } elseif ($alat == 'superBright') {
+            $this->form_validation->set_rules('sb1', 'Superbright1', 'required');
+        } elseif ($alat == 'magnetik') {
+            $this->form_validation->set_rules('mag1', 'Magnetik1', 'required');
         }
-    }
-
-    public function add_ultrasound()
-    {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('nik', 'NIK', 'required');
-        $this->form_validation->set_rules('us1', 'Ultrasound1', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            redirect('analisis_darah');
+            // Jika validasi gagal, kembalikan ke form dengan error
+            $this->index();
         } else {
-            $data = array(
-                'nik' => $this->input->post('nik'),
-                'us1' => $this->input->post('us1')
-            );
-            $this->Mod_darah->add_ultrasound($data);
-            redirect('analisis_darah');
-        }
-    }
+            $data = array('nik' => $this->input->post('nik'));
 
-    public function add_superbright()
-    {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+            if ($alat == 'suntik') {
+                $data += array(
+                    'glukosa' => $this->input->post('glukosa'),
+                    'hb' => $this->input->post('hb'),
+                    'spo2' => $this->input->post('spo2'),
+                    'kolesterol' => $this->input->post('kolesterol'),
+                    'asam_urat' => $this->input->post('asam_urat'),
+                    'keterangan' => $this->input->post('keterangan')
+                );
+                $this->Mod_darah->add_suntik($data);
+            } elseif ($alat == 'ultraSound') {
+                $data += array('us1' => $this->input->post('us1'));
+                $this->Mod_darah->add_ultrasound($data);
+            } elseif ($alat == 'superBright') {
+                $data += array('sb1' => $this->input->post('sb1'));
+                $this->Mod_darah->add_superbright($data);
+            } elseif ($alat == 'magnetik') {
+                $data += array('mag1' => $this->input->post('mag1'));
+                $this->Mod_darah->add_magnetik($data);
+            }
 
-        $this->form_validation->set_rules('nik', 'NIK', 'required');
-        $this->form_validation->set_rules('sb1', 'Superbright1', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            redirect('analisis_darah');
-        } else {
-            $data = array(
-                'nik' => $this->input->post('nik'),
-                'sb1' => $this->input->post('sb1')
-            );
-            $this->Mod_darah->add_ultrasound($data);
-            redirect('analisis_darah');
-        }
-    }
-
-    public function add_magnetik()
-    {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('nik', 'NIK', 'required');
-        $this->form_validation->set_rules('mag1', 'Magnetik1', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            redirect('analisis_darah');
-        } else {
-            $data = array(
-                'nik' => $this->input->post('nik'),
-                'mag1' => $this->input->post('mag1')
-            );
-            $this->Mod_darah->add_ultrasound($data);
             redirect('analisis_darah');
         }
     }

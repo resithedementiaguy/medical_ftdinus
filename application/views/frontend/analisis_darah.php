@@ -23,14 +23,14 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add_suntik') ?>" method="post">
+                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add') ?>" method="POST">
                                 <div class="form-body">
                                     <div class="row">
                                         <div>
                                             <h5 class="h5 mb-4">Informasi Pasien</h5>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="password-horizontal">NIK</label>
+                                            <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
@@ -44,7 +44,7 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="first-name-horizontal">Nama Lengkap</label>
+                                            <label for="nama">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly>
@@ -55,11 +55,11 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="password-horizontal">Nama Alat</label>
+                                            <label for="basicSelect">Nama Alat</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="alat" onchange="updateFormAction(); showFields()">
+                                                <select class="form-select" id="basicSelect" name="alat">
                                                     <option value="" selected hidden>Pilih Alat</option>
                                                     <option value="suntik">Suntik</option>
                                                     <option value="ultraSound">Ultra Sound</option>
@@ -99,10 +99,16 @@
                                                 <input type="text" id="kolestrol" class="form-control" name="kolestrol" placeholder="Masukkan Kolestrol">
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="asamUrat">Asam Urat</label>
+                                                <label for="asam_urat">Asam Urat</label>
                                             </div>
                                             <div class="col form-group">
                                                 <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="keterangan">Keterangan</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea id="keterangan" class="form-control" name="keterangan" rows="3" placeholder="Keterangan"></textarea>
                                             </div>
                                         </div>
 
@@ -112,10 +118,10 @@
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="sinyalUltrasound">Sinyal Ultrasound</label>
+                                                <label for="us1">Sinyal Ultrasound</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalUltrasound" name="us1" rows="5" placeholder="Sinyal Ultrasound" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -125,10 +131,10 @@
                                                 <h6 class="h6 mt-4 mb-4">Super Bright</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="sinyalSuperBright">Sinyal Super Bright</label>
+                                                <label for="sb1">Sinyal Super Bright</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalSuperBright" name="sb1" rows="5" placeholder="Sinyal Super Bright" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sb1" name="sb1" rows="5" placeholder="Sinyal Super Bright">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -138,10 +144,10 @@
                                                 <h6 class="h6 mt-4 mb-4">Magnetik</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="sinyalMagnetik">Sinyal Magnetik</label>
+                                                <label for="mag1">Sinyal Magnetik</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalMagnetik" name="mag1" rows="5" placeholder="Sinyal Magnetik" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -161,59 +167,38 @@
 </div>
 
 <script>
-    function showFields() {
-        var selectedValue = document.getElementById("basicSelect").value;
-        var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById('analisisForm');
+        var alatSelect = document.getElementById('basicSelect');
 
-        fields.forEach(function(field) {
-            document.getElementById(field).style.display = "none";
+        alatSelect.addEventListener('change', function() {
+            var selectedValue = alatSelect.value;
+            
+            // Menampilkan field sesuai dengan pilihan alat
+            var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
+            fields.forEach(function(field) {
+                document.getElementById(field).style.display = "none";
+            });
+
+            if (selectedValue) {
+                document.getElementById(selectedValue + "Fields").style.display = "block";
+            }
         });
 
-        if (selectedValue) {
-            document.getElementById(selectedValue + "Fields").style.display = "block";
-        }
-    }
+        // Tampilkan field yang sesuai saat halaman dimuat
+        alatSelect.dispatchEvent(new Event('change'));
 
-    function updateFormAction() {
-        var form = document.getElementById("analisisForm");
-        var selectedValue = document.getElementById("basicSelect").value;
-        var baseUrl = '<?= base_url('analisis_darah') ?>';
-
-        switch (selectedValue) {
-            case 'suntik':
-                form.action = baseUrl + '/add_suntik';
-                break;
-            case 'ultraSound':
-                form.action = baseUrl + '/add_ultrasound';
-                break;
-            case 'superBright':
-                form.action = baseUrl + '/add_superbright';
-                break;
-            case 'magnetik':
-                form.action = baseUrl + '/add_magnetik';
-                break;
-            default:
-                form.action = baseUrl;
-        }
-    }
-
-    $(document).ready(function() {
+        // Tampilkan NIK dan nama menggunakan Ajax
         $('#nik').change(function() {
             var nik = $(this).val();
             if (nik != "") {
                 $.ajax({
-                    url: '<?php echo base_url("Analisis_darah/get_nama"); ?>',
+                    url: '<?= base_url("Analisis_darah/get_nama") ?>',
                     method: 'POST',
-                    data: {
-                        nik: nik
-                    },
+                    data: { nik: nik },
                     dataType: 'json',
                     success: function(response) {
-                        if (response) {
-                            $('#nama').val(response.nama);
-                        } else {
-                            $('#nama').val('');
-                        }
+                        $('#nama').val(response ? response.nama : '');
                     }
                 });
             } else {
