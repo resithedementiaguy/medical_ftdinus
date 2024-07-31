@@ -75,6 +75,12 @@
                                 <span>Penduduk</span>
                             </a>
                         </li>
+                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'detail_medical') ? 'active' : ''; ?>">
+                            <a href="<?php echo site_url('detail_medical'); ?>" class="sidebar-link">
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>Hasil</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

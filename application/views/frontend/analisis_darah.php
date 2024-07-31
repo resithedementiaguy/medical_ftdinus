@@ -116,10 +116,64 @@
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us1">Sinyal Ultrasound</label>
+                                                <label for="us1">Sinyal Ultrasound 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us2">Sinyal Ultrasound 2</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly>Data untuk US 2</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us3">Sinyal Ultrasound 3</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly>Data untuk US 3</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us4">Sinyal Ultrasound 4</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly>Data untuk US 4</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us5">Sinyal Ultrasound 5</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly>Data untuk US 5</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us6">Sinyal Ultrasound 6</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly>Data untuk US 6</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us7">Sinyal Ultrasound 7</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly>Data untuk US 7</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us8">Sinyal Ultrasound 8</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly>Data untuk US 8</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us9">Sinyal Ultrasound 9</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly>Data untuk US 9</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="us10">Sinyal Ultrasound 10</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly>Data untuk US 10</textarea>
                                             </div>
                                         </div>
 
@@ -129,10 +183,64 @@
                                                 <h6 class="h6 mt-4 mb-4">Super Bright</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="sb1">Sinyal Super Bright</label>
+                                                <label for="sb1">Sinyal Super Bright 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sb1" name="sb1" rows="5" placeholder="Sinyal Super Bright" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sb1" name="sb1" rows="5" placeholder="Sinyal Super Bright 1" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb2">Sinyal Super Bright 2</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb2" name="sb2" rows="5" placeholder="Sinyal Super Bright 2" readonly>Data untuk SB 2</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb3">Sinyal Super Bright 3</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb3" name="sb3" rows="5" placeholder="Sinyal Super Bright 3" readonly>Data untuk SB 3</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb4">Sinyal Super Bright 4</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb4" name="sb4" rows="5" placeholder="Sinyal Super Bright 4" readonly>Data untuk SB 4</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb5">Sinyal Super Bright 5</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb5" name="sb5" rows="5" placeholder="Sinyal Super Bright 5" readonly>Data untuk SB 5</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb6">Sinyal Super Bright 6</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb6" name="sb6" rows="5" placeholder="Sinyal Super Bright 6" readonly>Data untuk SB 6</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb7">Sinyal Super Bright 7</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb7" name="sb7" rows="5" placeholder="Sinyal Super Bright 7" readonly>Data untuk SB 7</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb8">Sinyal Super Bright 8</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb8" name="sb8" rows="5" placeholder="Sinyal Super Bright 8" readonly>Data untuk SB 8</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb9">Sinyal Super Bright 9</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb9" name="sb9" rows="5" placeholder="Sinyal Super Bright 9" readonly>Data untuk SB 9</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sb10">Sinyal Super Bright 10</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="sb10" name="sb10" rows="5" placeholder="Sinyal Super Bright 10" readonly>Data untuk SB 10</textarea>
                                             </div>
                                         </div>
 
@@ -142,10 +250,64 @@
                                                 <h6 class="h6 mt-4 mb-4">Magnetik</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="mag1">Sinyal Magnetik</label>
+                                                <label for="mag1">Sinyal Magnetik 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag2">Sinyal Magnetik 2</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag2" name="mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly>Data untuk Magnetik 2</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag3">Sinyal Magnetik 3</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag3" name="mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly>Data untuk Magnetik 3</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag4">Sinyal Magnetik 4</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag4" name="mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly>Data untuk Magnetik 4</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag5">Sinyal Magnetik 5</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag5" name="mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly>Data untuk Magnetik 5</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag6">Sinyal Magnetik 6</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag6" name="mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly>Data untuk Magnetik 6</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag7">Sinyal Magnetik 7</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag7" name="mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly>Data untuk Magnetik 7</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag8">Sinyal Magnetik 8</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag8" name="mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly>Data untuk Magnetik 8</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag9">Sinyal Magnetik 9</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag9" name="mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly>Data untuk Magnetik 9</textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="mag10">Sinyal Magnetik 10</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="mag10" name="mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly>Data untuk Magnetik 10</textarea>
                                             </div>
                                         </div>
 
