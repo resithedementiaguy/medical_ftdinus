@@ -103,12 +103,6 @@
                                             <div class="col form-group">
                                                 <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="keterangan">Keterangan</label>
-                                            </div>
-                                            <div class="col form-group">
-                                                <textarea id="keterangan" class="form-control" name="keterangan" rows="3" placeholder="Keterangan"></textarea>
-                                            </div>
                                         </div>
 
                                         <!-- Fields untuk Ultrasound -->
@@ -120,7 +114,7 @@
                                                 <label for="us1">Sinyal Ultrasound</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -133,7 +127,7 @@
                                                 <label for="sb1">Sinyal Super Bright</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sb1" name="sb1" rows="5" placeholder="Sinyal Super Bright">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sb1" name="sb1" rows="5" placeholder="Sinyal Super Bright" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -146,7 +140,7 @@
                                                 <label for="mag1">Sinyal Magnetik</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik">0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 

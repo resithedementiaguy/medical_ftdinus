@@ -58,8 +58,7 @@ class Analisis_darah extends CI_Controller
                     'hb' => $this->input->post('hb'),
                     'spo2' => $this->input->post('spo2'),
                     'kolesterol' => $this->input->post('kolesterol'),
-                    'asam_urat' => $this->input->post('asam_urat'),
-                    'keterangan' => $this->input->post('keterangan')
+                    'asam_urat' => $this->input->post('asam_urat')
                 );
                 $this->Mod_darah->add_suntik($data);
             } elseif ($alat == 'ultraSound') {
