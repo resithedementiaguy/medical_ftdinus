@@ -22,6 +22,11 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
+                            <?php if (validation_errors()) : ?>
+                                <div class="alert alert-danger">
+                                    <?= validation_errors() ?>
+                                </div>
+                            <?php endif; ?>
                             <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add') ?>" method="POST">
                                 <div class="form-body">
                                     <div class="row">
@@ -166,7 +171,7 @@
 
         alatSelect.addEventListener('change', function() {
             var selectedValue = alatSelect.value;
-            
+
             // Menampilkan field sesuai dengan pilihan alat
             var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
             fields.forEach(function(field) {
@@ -188,7 +193,9 @@
                 $.ajax({
                     url: '<?= base_url("Analisis_darah/get_nama") ?>',
                     method: 'POST',
-                    data: { nik: nik },
+                    data: {
+                        nik: nik
+                    },
                     dataType: 'json',
                     success: function(response) {
                         $('#nama').val(response ? response.nama : '');
