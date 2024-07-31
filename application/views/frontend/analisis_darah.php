@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal">
+                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add_suntik') ?>" method="post">
                                 <div class="form-body">
                                     <div class="row">
                                         <div>
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" onchange="showFields()">
+                                                <select class="form-select" id="basicSelect" name="alat" onchange="updateFormAction(); showFields()">
                                                     <option value="" selected hidden>Pilih Alat</option>
                                                     <option value="suntik">Suntik</option>
                                                     <option value="ultraSound">Ultra Sound</option>
@@ -101,7 +101,7 @@
                                                 <label for="asamUrat">Asam Urat</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="asamUrat" class="form-control" name="asamUrat" placeholder="Masukkan Asam Urat">
+                                                <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
                                             </div>
                                         </div>
 
@@ -114,7 +114,7 @@
                                                 <label for="sinyalUltrasound">Sinyal Ultrasound</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalUltrasound" rows="5" placeholder="Sinyal Ultrasound" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sinyalUltrasound" name="us1" rows="5" placeholder="Sinyal Ultrasound" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -127,7 +127,7 @@
                                                 <label for="sinyalSuperBright">Sinyal Super Bright</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalSuperBright" rows="5" placeholder="Sinyal Super Bright" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sinyalSuperBright" name="sb1" rows="5" placeholder="Sinyal Super Bright" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -140,7 +140,7 @@
                                                 <label for="sinyalMagnetik">Sinyal Magnetik</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="sinyalMagnetik" rows="5" placeholder="Sinyal Magnetik" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="sinyalMagnetik" name="mag1" rows="5" placeholder="Sinyal Magnetik" disabled>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
                                             </div>
                                         </div>
 
@@ -160,7 +160,6 @@
 </div>
 
 <script>
-    // Menampilkan alat
     function showFields() {
         var selectedValue = document.getElementById("basicSelect").value;
         var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
@@ -174,7 +173,29 @@
         }
     }
 
-    // Tampilkan NIK
+    function updateFormAction() {
+        var form = document.getElementById("analisisForm");
+        var selectedValue = document.getElementById("basicSelect").value;
+        var baseUrl = '<?= base_url('analisis_darah') ?>';
+
+        switch (selectedValue) {
+            case 'suntik':
+                form.action = baseUrl + '/add_suntik';
+                break;
+            case 'ultraSound':
+                form.action = baseUrl + '/add_ultrasound';
+                break;
+            case 'superBright':
+                form.action = baseUrl + '/add_superbright';
+                break;
+            case 'magnetik':
+                form.action = baseUrl + '/add_magnetik';
+                break;
+            default:
+                form.action = baseUrl;
+        }
+    }
+
     $(document).ready(function() {
         $('#nik').change(function() {
             var nik = $(this).val();

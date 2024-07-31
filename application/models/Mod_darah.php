@@ -25,11 +25,25 @@ class Mod_darah extends CI_Model
     }
 
     // Tambah data program studi
-    public function add_medical($data)
+    public function add_suntik($data)
     {
-        return $this->db->insert('medical', $data);
+        return $this->db->insert('suntik', $data);
     }
 
+    public function add_ultrasound($data)
+    {
+        return $this->db->insert('ultrasound', $data);
+    }
+
+    public function add_superbright($data)
+    {
+        return $this->db->insert('superbright', $data);
+    }
+
+    public function add_magnetik($data)
+    {
+        return $this->db->insert('magnetik', $data);
+    }
     // Update data program studi
     public function update_program_studi($id, $data)
     {
