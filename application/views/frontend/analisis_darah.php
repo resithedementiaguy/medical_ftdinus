@@ -23,8 +23,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Analisis Darah</h4>
-
-                        
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -38,8 +36,8 @@
                                             <fieldset class="form-group">
                                                 <select class="form-select" id="nik" name="nik">
                                                     <option value="" selected hidden>Pilih NIK</option>
-                                                    <?php foreach($ktp as $data): ?>
-                                                    <option value="<?= $data->nik ?>"><?= $data->nik ?></option>
+                                                    <?php foreach ($ktp as $data) : ?>
+                                                        <option value="<?= $data->nik ?>"><?= $data->nik ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </fieldset>
@@ -51,27 +49,10 @@
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly>
                                         </div>
-                                    </div>
-                                </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="basic-horizontal-layouts">
-        <div class="row match-height">
-            <div class="col-md-12 col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Alat Medical</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            
-                                <div class="form-body">
-                                    <div class="row">
+
+                                        <div class="card-header">
+                                            <h4 class="card-title">Alat Medical</h4>
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="password-horizontal">Nama Alat</label>
                                         </div>
@@ -168,26 +149,28 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    $('#nik').change(function() {
-        var nik = $(this).val();
-        if (nik != "") {
-            $.ajax({
-                url: '<?php echo base_url("Analisis_darah/get_nama"); ?>',
-                method: 'POST',
-                data: {nik: nik},
-                dataType: 'json',
-                success: function(response) {
-                    if (response) {
-                        $('#nama').val(response.nama);
-                    } else {
-                        $('#nama').val('');
+    $(document).ready(function() {
+        $('#nik').change(function() {
+            var nik = $(this).val();
+            if (nik != "") {
+                $.ajax({
+                    url: '<?php echo base_url("Analisis_darah/get_nama"); ?>',
+                    method: 'POST',
+                    data: {
+                        nik: nik
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response) {
+                            $('#nama').val(response.nama);
+                        } else {
+                            $('#nama').val('');
+                        }
                     }
-                }
-            });
-        } else {
-            $('#nama').val('');
-        }
+                });
+            } else {
+                $('#nama').val('');
+            }
+        });
     });
-});
 </script>
