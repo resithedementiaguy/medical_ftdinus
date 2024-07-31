@@ -97,10 +97,14 @@
                                                 <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2">
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="kolestrol">Kolestrol</label>
+                                                <label for="kolesterol">Kolesterol</label>
                                             </div>
                                             <div class="col form-group">
+<<<<<<< HEAD
                                                 <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan Kolestrol">
+=======
+                                                <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol">
+>>>>>>> 9384d01510aba1bc4f4a320c76a03e90c69ce439
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="asam_urat">Asam Urat</label>
