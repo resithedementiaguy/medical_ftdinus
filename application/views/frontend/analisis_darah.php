@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Analisis Darah</h3>
-                <p class="text-subtitle text-muted">Silahkan untuk menganalisis darah pasien</p>
+                <p class="text-subtitle text-muted">Silahkan isi form di bawah untuk analisis darah</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -16,7 +16,6 @@
         </div>
     </div>
 
-    <!-- NIK -->
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-12 col-12">
@@ -146,8 +145,8 @@
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1 px-5">Simpan</button>
+                                            <!-- <button type="reset" class="btn btn-light-secondary me-1 mb-1 px-5">Selesai</button> -->
                                         </div>
                                     </div>
                                 </div>
