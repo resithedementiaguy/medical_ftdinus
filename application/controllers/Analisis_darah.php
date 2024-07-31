@@ -24,7 +24,7 @@ class Analisis_darah extends CI_Controller
         echo json_encode($nama);
     }
 
-    public function add()
+    public function add_suntik()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -49,7 +49,67 @@ class Analisis_darah extends CI_Controller
                 'asam_urat' => $this->input->post('asam_urat'),
                 'keterangan' => $this->input->post('keterangan')
             );
-            $this->Mod_darah->add_medical($data);
+            $this->Mod_darah->add_suntik($data);
+            redirect('analisis_darah');
+        }
+    }
+
+    public function add_ultrasound()
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('us1', 'Ultrasound1', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            redirect('analisis_darah');
+        } else {
+            $data = array(
+                'nik' => $this->input->post('nik'),
+                'us1' => $this->input->post('us1')
+            );
+            $this->Mod_darah->add_ultrasound($data);
+            redirect('analisis_darah');
+        }
+    }
+
+    public function add_superbright()
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('sb1', 'Superbright1', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            redirect('analisis_darah');
+        } else {
+            $data = array(
+                'nik' => $this->input->post('nik'),
+                'sb1' => $this->input->post('sb1')
+            );
+            $this->Mod_darah->add_ultrasound($data);
+            redirect('analisis_darah');
+        }
+    }
+
+    public function add_magnetik()
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('mag1', 'Magnetik1', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            redirect('analisis_darah');
+        } else {
+            $data = array(
+                'nik' => $this->input->post('nik'),
+                'mag1' => $this->input->post('mag1')
+            );
+            $this->Mod_darah->add_ultrasound($data);
             redirect('analisis_darah');
         }
     }
