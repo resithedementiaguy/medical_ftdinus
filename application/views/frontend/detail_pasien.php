@@ -25,14 +25,13 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>NIK</th>
                                 <th>Nama Lengkap</th>
                                 <th>Kota Asal</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,11 +43,6 @@
                                         <td><?php echo $pasien['nik']; ?></td>
                                         <td><?php echo $pasien['nama']; ?></td>
                                         <td><?php echo $pasien['kota']; ?></td>
-                                        <td>
-                                            <a href="<?php echo site_url('detail_pasien/index/' . $pasien['nik']); ?>" class="badge bg-info">
-                                                <i class="fas fa-eye"></i> Lihat
-                                            </a>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>

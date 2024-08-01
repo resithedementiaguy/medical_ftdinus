@@ -67,13 +67,13 @@
 
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'analisis_darah') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('analisis_darah'); ?>" class="sidebar-link">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <i class="bi bi-heart-pulse-fill"></i>
                                 <span>Analisis Darah</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'penduduk') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('penduduk'); ?>" class="sidebar-link">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <i class="bi bi-people-fill"></i>
                                 <span>Penduduk</span>
                             </a>
                         </li>

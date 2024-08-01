@@ -1,10 +1,11 @@
 <footer>
-    <div class="footer clearfix mb-0 text-muted">
-        <div class="float-end">
-            <p>2023 &copy; FT UDINUS</p>
+    <div class="footer clearfix mb-0 text-muted" style="text-align: center;">
+        <div>
+            <p>2024 &copy; Universitas Dian Nuswantoro</p>
         </div>
     </div>
 </footer>
+
 </div>
 </div>
 <script src="assets/static/js/components/dark.js"></script>
