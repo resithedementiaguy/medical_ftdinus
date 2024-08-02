@@ -17,7 +17,7 @@ class Analisis_darah extends CI_Controller
         $this->load->view('partials/footer');
     }
 
-    public function get_nama()
+    public function get_nama_by_nik()
     {
         $nik = $this->input->post('nik');
         $nama = $this->Mod_darah->get_nama_by_nik($nik);

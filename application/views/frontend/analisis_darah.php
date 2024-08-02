@@ -41,7 +41,7 @@
                                                 <select class="form-select" id="nik" name="nik">
                                                     <option value="" selected hidden>Pilih NIK</option>
                                                     <?php foreach ($ktp as $data) : ?>
-                                                        <option value="<?= $data->nik ?>"><?= $data->nik ?></option>
+                                                        <option value="<?= $data->nik ?>" <?= set_select('nik', $data->nik) ?>><?= $data->nik ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </fieldset>
@@ -51,7 +51,7 @@
                                             <label for="nama">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly>
+                                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly value="<?= set_value('nama') ?>">
                                         </div>
 
                                         <div>
@@ -59,15 +59,15 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="basicSelect">Nama Alat</label>
+                                            <label for="alat">Nama Alat</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="alat">
+                                                <select class="form-select" id="alat" name="alat">
                                                     <option value="" selected hidden>Pilih Alat</option>
                                                     <option value="suntik">Suntik</option>
-                                                    <option value="ultraSound">Ultra Sound</option>
-                                                    <option value="superBright">Super Bright</option>
+                                                    <option value="ultraSound">Ultrasound</option>
+                                                    <option value="superBright">SuperBright</option>
                                                     <option value="magnetik">Magnetik</option>
                                                 </select>
                                             </fieldset>
@@ -326,10 +326,130 @@
     </section>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Informasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Semua data berhasil ditambahkan!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
+    // Tampilkan nama pada Select NIK
+    $(document).ready(function() {
+        $('#nik').change(function() {
+            var selectedNik = $(this).val();
+            if (selectedNik) {
+                $.ajax({
+                    url: '<?php echo base_url('analisis_darah/get_nama_by_nik'); ?>',
+                    type: 'POST',
+                    data: {
+                        nik: selectedNik
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response) {
+                            $('#nama').val(response);
+                        } else {
+                            $('#nama').val('');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Terjadi kesalahan: ' + error);
+                    }
+                });
+            } else {
+                $('#nama').val('');
+            }
+        });
+
+        $('#analisisForm').submit(function(event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+            var selectedNik = $('#nik').val();
+            var selectedNama = $('#nama').val();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Menampilkan modal data berhasil ditambahkan
+                    $('#successModal').modal('show');
+
+                    // Cek apakah tidak ada opsi tersisa
+                    if ($('#alat option').length === 0) {
+                        // Menambahkan delay sebelum refresh agar modal dapat ditampilkan
+                        setTimeout(function() {
+                            $('#successModal').modal('hide'); // Sembunyikan modal
+                            location.reload(); // Segarkan halaman
+                        }, 2000); // Delay 2 detik
+                    } else {
+                        // Jika masih ada opsi, reset form dan sembunyikan fields
+                        var selectedAlat = $('#alat').val();
+
+                        // Remove the selected option
+                        $('#alat option[value="' + selectedAlat + '"]').remove();
+
+                        // Clear the fields after saving
+                        $('#analisisForm')[0].reset();
+                        $('#nik').val(selectedNik);
+                        $('#nama').val(selectedNama);
+
+                        // Hide the fields for the selected alat
+                        if (selectedAlat) {
+                            $('#' + selectedAlat + 'Fields').hide();
+                        }
+
+                        toggleFields();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan: ' + error);
+                }
+            });
+        });
+    });
+
+    // Tampilkan Select Alat hidden
+    document.addEventListener('DOMContentLoaded', function() {
+        const alatSelect = document.getElementById('alat');
+        const suntikFields = document.getElementById('suntikFields');
+        const ultraSoundFields = document.getElementById('ultraSoundFields');
+        const superBrightFields = document.getElementById('superBrightFields');
+        const magnetikFields = document.getElementById('magnetikFields');
+
+        function toggleFields() {
+            const selectedAlat = alatSelect.value;
+
+            suntikFields.style.display = selectedAlat === 'suntik' ? 'block' : 'none';
+            ultraSoundFields.style.display = selectedAlat === 'ultraSound' ? 'block' : 'none';
+            superBrightFields.style.display = selectedAlat === 'superBright' ? 'block' : 'none';
+            magnetikFields.style.display = selectedAlat === 'magnetik' ? 'block' : 'none';
+        }
+
+        alatSelect.addEventListener('change', toggleFields);
+
+        // Initialize the fields on page load
+        toggleFields();
+    });
+
+    // Tampilkan Field Alat hidden
     document.addEventListener("DOMContentLoaded", function() {
         var form = document.getElementById('analisisForm');
-        var alatSelect = document.getElementById('basicSelect');
+        var alatSelect = document.getElementById('alat');
 
         alatSelect.addEventListener('change', function() {
             var selectedValue = alatSelect.value;
@@ -347,25 +467,5 @@
 
         // Tampilkan field yang sesuai saat halaman dimuat
         alatSelect.dispatchEvent(new Event('change'));
-
-        // Tampilkan NIK dan nama menggunakan Ajax
-        $('#nik').change(function() {
-            var nik = $(this).val();
-            if (nik != "") {
-                $.ajax({
-                    url: '<?= base_url("Analisis_darah/get_nama") ?>',
-                    method: 'POST',
-                    data: {
-                        nik: nik
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#nama').val(response ? response.nama : '');
-                    }
-                });
-            } else {
-                $('#nama').val('');
-            }
-        });
     });
 </script>

@@ -30,6 +30,7 @@ class Pasien extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+
     public function get_ultrasound($id)
     {
         $ultrasound = $this->Mod_pasien->get_ultrasound_id($id);

@@ -10,7 +10,6 @@ class Mod_darah extends CI_Model
         $this->load->database();
     }
 
-    // Ambil semua data program studi dengan relasi ke tiga tabel
     public function get_penduduk()
     {
         $query = $this->db->get('ktp');
@@ -19,12 +18,16 @@ class Mod_darah extends CI_Model
 
     public function get_nama_by_nik($nik)
     {
+        $this->db->select('nama');
+        $this->db->from('ktp');
         $this->db->where('nik', $nik);
-        $query = $this->db->get('ktp');
-        return $query->row();
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->row()->nama;
+        }
+        return null;
     }
 
-    // Tambah data program studi
     public function add_suntik($data)
     {
         return $this->db->insert('suntik', $data);
@@ -43,17 +46,5 @@ class Mod_darah extends CI_Model
     public function add_magnetik($data)
     {
         return $this->db->insert('magnetik', $data);
-    }
-    // Update data program studi
-    public function update_program_studi($id, $data)
-    {
-        $this->db->where('idx_skf', $id);
-        return $this->db->update('srm_skf', $data);
-    }
-
-    // Hapus data program studi
-    public function delete_program_studi($id)
-    {
-        return $this->db->delete('srm_skf', array('idx_skf' => $id));
     }
 }
