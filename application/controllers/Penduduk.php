@@ -58,6 +58,4 @@ class Penduduk extends CI_Controller
             redirect('penduduk');
         }
     }
-
-    
 }

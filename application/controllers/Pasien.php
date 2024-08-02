@@ -29,4 +29,22 @@ class Pasien extends CI_Controller
         $this->load->view('frontend/detail_pasien', $data);
         $this->load->view('partials/footer');
     }
+
+    public function get_ultrasound($id)
+    {
+        $ultrasound = $this->Mod_pasien->get_ultrasound_id($id);
+        echo json_encode($ultrasound);
+    }
+
+    public function get_superbright($id)
+    {
+        $superbright = $this->Mod_pasien->get_superbright_id($id);
+        echo json_encode($superbright);
+    }
+
+    public function get_magnetik($id)
+    {
+        $magnetik = $this->Mod_pasien->get_magnetik_id($id);
+        echo json_encode($magnetik);
+    }
 }

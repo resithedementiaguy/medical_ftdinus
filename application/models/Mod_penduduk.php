@@ -48,7 +48,7 @@ class Mod_penduduk extends CI_Model
         return $result->num_rows() > 0 ? $result->result() : [];
     }
 
-    // Tambah data program studi
+    // Tambah data penduduk
     public function add_penduduk($data)
     {
         return $this->db->insert('ktp', $data);
