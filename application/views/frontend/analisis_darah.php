@@ -389,13 +389,14 @@
                     // Menampilkan modal data berhasil ditambahkan
                     $('#successModal').modal('show');
 
-                    // Cek apakah tidak ada opsi tersisa
-                    if ($('#alat option').length === 0) {
-                        // Menambahkan delay sebelum refresh agar modal dapat ditampilkan
+                    console.log('Jumlah opsi di #alat:', $('#alat option').length);
+
+                    // Cek apakah tidak ada opsi tersisa (default = 2 di console.log)
+                    if ($('#alat option').length === 2) {
                         setTimeout(function() {
-                            $('#successModal').modal('hide'); // Sembunyikan modal
-                            location.reload(); // Segarkan halaman
-                        }, 2000); // Delay 2 detik
+                            $('#successModal').modal('hide');
+                            location.reload();
+                        }, 2000);
                     } else {
                         // Jika masih ada opsi, reset form dan sembunyikan fields
                         var selectedAlat = $('#alat').val();
