@@ -18,11 +18,35 @@ class Mod_penduduk extends CI_Model
     }
 
     public function get_nama_by_nik($nik)
-    {
-        $this->db->where('nik', $nik);
-        $query = $this->db->get('ktp');
-        return $query->row();
-    }
+{
+    $this->db->where('nik', $nik);
+    $query = $this->db->get('ktp');
+    return $query->num_rows() > 0 ? $query->result() : [];
+}
+
+public function get_suntik_by_nik($nik)
+{
+    $result = $this->db->where('nik', $nik)->get('suntik');
+    return $result->num_rows() > 0 ? $result->result() : [];
+}
+
+public function get_ultrasound_by_nik($nik)
+{
+    $result = $this->db->where('nik', $nik)->get('ultrasound');
+    return $result->num_rows() > 0 ? $result->result() : [];
+}
+
+public function get_superbright_by_nik($nik)
+{
+    $result = $this->db->where('nik', $nik)->get('superbright');
+    return $result->num_rows() > 0 ? $result->result() : [];
+}
+
+public function get_magnetik_by_nik($nik)
+{
+    $result = $this->db->where('nik', $nik)->get('magnetik');
+    return $result->num_rows() > 0 ? $result->result() : [];
+}
 
     // Tambah data program studi
     public function add_penduduk($data)
