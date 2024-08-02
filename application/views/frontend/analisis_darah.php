@@ -253,7 +253,7 @@
                                                 <label for="mag1">Sinyal Magnetik 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                <textarea class="form-control" id="mag1" name="mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="mag2">Sinyal Magnetik 2</label>

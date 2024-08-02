@@ -10,7 +10,6 @@ class Mod_pasien extends CI_Model
 
     public function get_all_pasien()
     {
-        // Subquery to check existence of nik in other tables
         $this->db->select('nik, nama, kota');
         $this->db->from('ktp');
         $this->db->where('nik IN (SELECT nik FROM suntik UNION SELECT nik FROM ultrasound UNION SELECT nik FROM superbright UNION SELECT nik FROM magnetik)', NULL, FALSE);
@@ -27,6 +26,15 @@ class Mod_pasien extends CI_Model
         return $query->row_array();
     }
 
+    public function get_suntik($nik)
+    {
+        $this->db->select('*');
+        $this->db->from('suntik');
+        $this->db->where('nik', $nik);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_ultrasound($nik)
     {
         $this->db->select('*');
@@ -36,5 +44,21 @@ class Mod_pasien extends CI_Model
         return $query->result_array();
     }
 
-    // Add similar methods for 'suntik', 'super bright', and 'magnetik' tables
+    public function get_superbright($nik)
+    {
+        $this->db->select('*');
+        $this->db->from('superbright');
+        $this->db->where('nik', $nik);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_magnetik($nik)
+    {
+        $this->db->select('*');
+        $this->db->from('magnetik');
+        $this->db->where('nik', $nik);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

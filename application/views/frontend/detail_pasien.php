@@ -21,14 +21,28 @@
                 <h5 class="card-title">Data Pasien</h5>
             </div>
             <div class="card-body">
-                <div class="data-list">
+                <div class="data-list custom-table">
                     <?php foreach ($pasien as $pasien) : ?>
-                        <p><strong>NIK:</strong> <?php echo $pasien->nik; ?></p>
-                        <p><strong>Nama Lengkap:</strong> <?php echo $pasien->nama; ?></p>
-                        <p><strong>Kota Asal:</strong> <?php echo $pasien->kota; ?></p>
+                        <div class="custom-row">
+                            <div class="custom-label">NIK</div>
+                            <div class="custom-data"><?php echo $pasien->nik; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Nama Lengkap</div>
+                            <div class="custom-data"><?php echo $pasien->nama; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Tempat Tanggal Lahir</div>
+                            <div class="custom-data"><?php echo $pasien->tempat_lahir; ?>, <?php echo $pasien->tanggal_lahir; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Kota Asal</div>
+                            <div class="custom-data"><?php echo $pasien->kota; ?></div>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -142,61 +156,61 @@
                                                                         <label for="us1">Sinyal Ultrasound 1</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly>0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.4, -0.3, -0.2, -0.1</textarea>
+                                                                        <textarea class="form-control" id="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly><?= htmlspecialchars($ultrasound->us1) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us2">Sinyal Ultrasound 2</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly>Data untuk US 2</textarea>
+                                                                        <textarea class="form-control" id="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly><?= htmlspecialchars($ultrasound->us2) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us3">Sinyal Ultrasound 3</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly>Data untuk US 3</textarea>
+                                                                        <textarea class="form-control" id="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly><?= htmlspecialchars($ultrasound->us3) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us4">Sinyal Ultrasound 4</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly>Data untuk US 4</textarea>
+                                                                        <textarea class="form-control" id="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly><?= htmlspecialchars($ultrasound->us4) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us5">Sinyal Ultrasound 5</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly>Data untuk US 5</textarea>
+                                                                        <textarea class="form-control" id="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly><?= htmlspecialchars($ultrasound->us5) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us6">Sinyal Ultrasound 6</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly>Data untuk US 6</textarea>
+                                                                        <textarea class="form-control" id="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly><?= htmlspecialchars($ultrasound->us6) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us7">Sinyal Ultrasound 7</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly>Data untuk US 7</textarea>
+                                                                        <textarea class="form-control" id="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly><?= htmlspecialchars($ultrasound->us7) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us8">Sinyal Ultrasound 8</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly>Data untuk US 8</textarea>
+                                                                        <textarea class="form-control" id="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly><?= htmlspecialchars($ultrasound->us8) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us9">Sinyal Ultrasound 9</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly>Data untuk US 9</textarea>
+                                                                        <textarea class="form-control" id="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly><?= htmlspecialchars($ultrasound->us9) ?></textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label for="us10">Sinyal Ultrasound 10</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly>Data untuk US 10</textarea>
+                                                                        <textarea class="form-control" id="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly><?= htmlspecialchars($ultrasound->us10) ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -252,72 +266,71 @@
                                                                         <label for="sb1">Data Super Bright 1</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb1" rows="5" placeholder="Data Super Bright 1" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb1" rows="5" placeholder="Data Super Bright 1" readonly><?= htmlspecialchars($superbright->sb1) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb2">Data Super Bright 2</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb2" rows="5" placeholder="Data Super Bright 2" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb2" rows="5" placeholder="Data Super Bright 2" readonly><?= htmlspecialchars($superbright->sb2) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb3">Data Super Bright 3</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb3" rows="5" placeholder="Data Super Bright 3" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb3" rows="5" placeholder="Data Super Bright 3" readonly><?= htmlspecialchars($superbright->sb3) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb4">Data Super Bright 4</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb4" rows="5" placeholder="Data Super Bright 4" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb4" rows="5" placeholder="Data Super Bright 4" readonly><?= htmlspecialchars($superbright->sb4) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb5">Data Super Bright 5</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb5" rows="5" placeholder="Data Super Bright 5" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb5" rows="5" placeholder="Data Super Bright 5" readonly><?= htmlspecialchars($superbright->sb5) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb6">Data Super Bright 6</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb6" rows="5" placeholder="Data Super Bright 6" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb6" rows="5" placeholder="Data Super Bright 6" readonly><?= htmlspecialchars($superbright->sb6) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb7">Data Super Bright 7</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb7" rows="5" placeholder="Data Super Bright 7" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb7" rows="5" placeholder="Data Super Bright 7" readonly><?= htmlspecialchars($superbright->sb7) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb8">Data Super Bright 8</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb8" rows="5" placeholder="Data Super Bright 8" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb8" rows="5" placeholder="Data Super Bright 8" readonly><?= htmlspecialchars($superbright->sb8) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb9">Data Super Bright 9</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb9" rows="5" placeholder="Data Super Bright 9" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb9" rows="5" placeholder="Data Super Bright 9" readonly><?= htmlspecialchars($superbright->sb9) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="sb10">Data Super Bright 10</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="sb10" rows="5" placeholder="Data Super Bright 10" readonly></textarea>
+                                                                        <textarea class="form-control" id="sb10" rows="5" placeholder="Data Super Bright 10" readonly><?= htmlspecialchars($superbright->sb10) ?></textarea>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -372,70 +385,70 @@
                                                                         <label for="mag1">Data Magnetik 1</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag1" rows="5" placeholder="Data Magnetik 1" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag1" rows="5" placeholder="Data Magnetik 1" readonly><?= htmlspecialchars($magnetik->mag1) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag2">Data Magnetik 2</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag2" rows="5" placeholder="Data Magnetik 2" readonly><?= htmlspecialchars($magnetik->mag2) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag3">Data Magnetik 3</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag3" rows="5" placeholder="Data Magnetik 3" readonly><?= htmlspecialchars($magnetik->mag3) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag4">Data Magnetik 4</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag4" rows="5" placeholder="Data Magnetik 4" readonly><?= htmlspecialchars($magnetik->mag4) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag5">Data Magnetik 5</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag5" rows="5" placeholder="Data Magnetik 5" readonly><?= htmlspecialchars($magnetik->mag5) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag6">Data Magnetik 6</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag6" rows="5" placeholder="Data Magnetik 6" readonly><?= htmlspecialchars($magnetik->mag6) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag7">Data Magnetik 7</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag7" rows="5" placeholder="Data Magnetik 7" readonly><?= htmlspecialchars($magnetik->mag7) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag8">Data Magnetik 8</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag8" rows="5" placeholder="Data Magnetik 8" readonly><?= htmlspecialchars($magnetik->mag8) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag9">Data Magnetik 9</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag9" rows="5" placeholder="Data Magnetik 9" readonly><?= htmlspecialchars($magnetik->mag9) ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <label for="mag10">Data Magnetik 10</label>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control" id="mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                        <textarea class="form-control" id="mag10" rows="5" placeholder="Data Magnetik 10" readonly><?= htmlspecialchars($magnetik->mag10) ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -454,6 +467,31 @@
         </div>
     </section>
 </div>
+
+<style>
+    .custom-table {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .custom-row {
+        display: flex;
+        padding: 10px 0;
+    }
+
+    .custom-row:last-child {
+        border-bottom: none;
+    }
+
+    .custom-label {
+        font-weight: bold;
+        width: 150px;
+    }
+
+    .custom-data {
+        flex: 1;
+    }
+</style>
 
 <script>
     document.getElementById('basicSelect').addEventListener('change', function() {
