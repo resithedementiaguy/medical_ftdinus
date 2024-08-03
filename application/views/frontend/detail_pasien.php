@@ -96,6 +96,7 @@
                                                             <th>SPO2</th>
                                                             <th>Kolesterol</th>
                                                             <th>Asam Urat</th>
+                                                            <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -107,6 +108,17 @@
                                                                 <td><?= $suntik->spo2 ?></td>
                                                                 <td><?= $suntik->kolesterol ?></td>
                                                                 <td><?= $suntik->asam_urat ?></td>
+                                                                <td>
+                                                                    <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
+                                                                        <i class="fas fa-eye"></i> Lihat
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
+                                                                        <i class="fas fa-edit"></i> Edit
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-danger border-0 delete-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
+                                                                        <i class="fas fa-trash"></i> Hapus
+                                                                    </button>
+                                                                </td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
@@ -119,32 +131,34 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($ultrasound as $ultrasound) : ?>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?= formatDateTime($ultrasound->ins_time) ?></td>
-                                                            <td>
-                                                                <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat
-                                                                </button>
-                                                                <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
-                                                                    <i class="fas fa-edit"></i> Edit
-                                                                </button>
-                                                                <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
-                                                                    <i class="fas fa-trash"></i> Hapus
-                                                                </button>
-                                                            </td>
+                                                            <th>Tanggal Periksa</th>
+                                                            <th>Aksi</th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($ultrasound as $ultrasound) : ?>
+                                                            <tr>
+                                                                <td><?= formatDateTime($ultrasound->ins_time) ?></td>
+                                                                <td>
+                                                                    <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                        <i class="fas fa-eye"></i> Lihat
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                        <i class="fas fa-edit"></i> Edit
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                        <i class="fas fa-trash"></i> Hapus
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <!-- Detail Modal Ultrasound -->
@@ -235,26 +249,34 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Super Bright</h6>
                                             </div>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($superbright as $sb) : ?>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?= formatDateTime($sb->ins_time) ?></td>
-                                                            <td>
-                                                                <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat
-                                                                </button>
-                                                            </td>
+                                                            <th>Tanggal Periksa</th>
+                                                            <th>Aksi</th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($superbright as $sb) : ?>
+                                                            <tr>
+                                                                <td><?= formatDateTime($sb->ins_time) ?></td>
+                                                                <td>
+                                                                    <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                        <i class="fas fa-eye"></i> Lihat
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-warning border-0 edit-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                        <i class="fas fa-edit"></i> Edit
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-danger border-0 delete-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                        <i class="fas fa-trash"></i> Hapus
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <!-- Detail Modal Super Bright -->
@@ -354,26 +376,34 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Magnetik</h6>
                                             </div>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($magnetik as $mag) : ?>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?= formatDateTime($mag->ins_time) ?></td>
-                                                            <td>
-                                                                <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat
-                                                                </button>
-                                                            </td>
+                                                            <th>Tanggal Periksa</th>
+                                                            <th>Aksi</th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($magnetik as $mag) : ?>
+                                                            <tr>
+                                                                <td><?= formatDateTime($mag->ins_time) ?></td>
+                                                                <td>
+                                                                    <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                        <i class="fas fa-eye"></i> Lihat
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                        <i class="fas fa-edit"></i> Edit
+                                                                    </button>
+                                                                    <button type="button" class="badge bg-danger border-0 delete-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                        <i class="fas fa-trash"></i> Hapus
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <!-- Detail Modal Magnetik -->
