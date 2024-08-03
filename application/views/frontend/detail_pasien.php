@@ -2,8 +2,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Hasil Periksa Pasien</h3>
-                <p class="text-subtitle text-muted">Hasil detail periksa pasien</p>
+                <h3>Riwayat Periksa Pasien</h3>
+                <p class="text-subtitle text-muted">Riwayat detail periksa pasien</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -19,10 +19,10 @@
 
     <section class="section">
         <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Data Pasien</h5>
-            </div>
             <div class="card-body">
+                <div>
+                    <h5 class="h5 mb-4">Data Pasien</h5>
+                </div>
                 <div class="data-list custom-table">
                     <?php foreach ($pasien as $pasien) : ?>
                         <div class="custom-row">
@@ -35,11 +35,11 @@
                         </div>
                         <div class="custom-row">
                             <div class="custom-label">Tempat Tanggal Lahir</div>
-                            <div class="custom-data"><?php echo $pasien->tempat_lahir; ?>, <?php echo $pasien->tanggal_lahir; ?></div>
+                            <div class="custom-data"><?php echo $pasien->tempat_lahir; ?>, <?php echo formatDate($pasien->tanggal_lahir); ?></div>
                         </div>
                         <div class="custom-row">
-                            <div class="custom-label">Kota Asal</div>
-                            <div class="custom-data"><?php echo $pasien->kota; ?></div>
+                            <div class="custom-label">Alamat</div>
+                            <div class="custom-data"><?php echo $pasien->kelurahan; ?>, <?php echo $pasien->kecamatan; ?>, <?php echo $pasien->kota; ?></div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -539,34 +539,6 @@
     }
 </style>
 
-<!-- Format Waktu -->
-<?php
-function formatDateTime($datetime)
-{
-    $date = new DateTime($datetime);
-    $months = [
-        1 => 'Januari',
-        2 => 'Februari',
-        3 => 'Maret',
-        4 => 'April',
-        5 => 'Mei',
-        6 => 'Juni',
-        7 => 'Juli',
-        8 => 'Agustus',
-        9 => 'September',
-        10 => 'Oktober',
-        11 => 'November',
-        12 => 'Desember'
-    ];
-    $day = $date->format('d');
-    $month = $months[(int)$date->format('m')];
-    $year = $date->format('Y');
-    $time = $date->format('H:i:s');
-
-    return "{$day} {$month} {$year}, {$time} WIB";
-}
-?>
-
 <script>
     document.getElementById('basicSelect').addEventListener('change', function() {
         var alat = this.value;
@@ -648,3 +620,36 @@ function formatDateTime($datetime)
         });
     });
 </script>
+
+<?php
+// Format Tanggal dan Waktu
+function formatDateTime($datetime)
+{
+    $date = new DateTime($datetime);
+    $months = [
+        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
+        7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+    ];
+    $day = $date->format('d');
+    $month = $months[(int)$date->format('m')];
+    $year = $date->format('Y');
+    $time = $date->format('H:i:s');
+
+    return "{$day} {$month} {$year}, {$time} WIB";
+}
+
+// Format Tanggal
+function formatDate($datetime)
+{
+    $date = new DateTime($datetime);
+    $months = [
+        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei',
+        6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+    ];
+    $day = $date->format('d');
+    $month = $months[(int)$date->format('m')];
+    $year = $date->format('Y');
+
+    return "{$day} {$month} {$year}";
+}
+?>
