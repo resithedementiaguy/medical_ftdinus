@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Form Penduduk</h3>
-                <p class="text-subtitle text-muted">Silahkan isi form di bawah untuk menambahkan penduduk</p>
+                <p class="text-subtitle text-muted">Silahkan isi form di bawah sesuai dengan KTP</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Analisis Darah</li>
+                        <li class="breadcrumb-item active" aria-current="page">Penduduk</li>
                     </ol>
                 </nav>
             </div>
@@ -82,13 +82,6 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="alamat">Alamat</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
-                                        </div>
-
-                                        <div class="col-md-4">
                                             <label for="status_perkawinan">Status Perkawinan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
@@ -99,6 +92,17 @@
                                                 <option value="Cerai Hidup">Cerai Hidup</option>
                                                 <option value="Cerai Mati">Cerai Mati</option>
                                             </select>
+                                        </div>
+
+                                        <div>
+                                            <h5 class="h5 mt-5 mb-4">Informasi Alamat</h5>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="alamat">Alamat</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
                                         </div>
 
                                         <div class="col-md-4">

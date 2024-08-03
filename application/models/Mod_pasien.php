@@ -75,4 +75,11 @@ class Mod_pasien extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_magnetik_id($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('magnetik');
+        return $query->row();
+    }
 }

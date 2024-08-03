@@ -54,8 +54,6 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'dashboard') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('dashboard'); ?>" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
@@ -63,7 +61,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-title">Form Medical</li>
+                        <li class="sidebar-title">Medical</li>
 
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'analisis_darah') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('analisis_darah'); ?>" class="sidebar-link">
@@ -71,16 +69,19 @@
                                 <span>Analisis Darah</span>
                             </a>
                         </li>
-                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'penduduk') ? 'active' : ''; ?>">
-                            <a href="<?php echo site_url('penduduk'); ?>" class="sidebar-link">
-                                <i class="bi bi-people-fill"></i>
-                                <span>Penduduk</span>
-                            </a>
-                        </li>
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'pasien') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('pasien'); ?>" class="sidebar-link">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Pasien</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-title">Penduduk</li>
+
+                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'penduduk') ? 'active' : ''; ?>">
+                            <a href="<?php echo site_url('penduduk'); ?>" class="sidebar-link">
+                                <i class="bi bi-people-fill"></i>
+                                <span>Penduduk</span>
                             </a>
                         </li>
                     </ul>
