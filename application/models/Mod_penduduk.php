@@ -53,17 +53,4 @@ class Mod_penduduk extends CI_Model
     {
         return $this->db->insert('ktp', $data);
     }
-
-    // Update data program studi
-    /*public function update_program_studi($id, $data)
-    {
-        $this->db->where('idx_skf', $id);
-        return $this->db->update('srm_skf', $data);
-    }
-
-    // Hapus data program studi
-    public function delete_program_studi($id)
-    {
-        return $this->db->delete('srm_skf', array('idx_skf' => $id));
-    }*/
 }

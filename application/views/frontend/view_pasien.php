@@ -31,6 +31,7 @@
                                 <th>No</th>
                                 <th>NIK</th>
                                 <th>Nama Lengkap</th>
+                                <th>Tanggal Lahir</th>
                                 <th>Kota Asal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -45,9 +46,10 @@
                                             <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>"><?php echo $pasien['nik']; ?></a>
                                         </td>
                                         <td><?php echo $pasien['nama']; ?></td>
+                                        <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
                                         <td><?php echo $pasien['kota']; ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>" class="badge bg-info">
+                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['id']); ?>" class="badge bg-info">
                                                 <i class="fas fa-eye"></i> Lihat
                                             </a>
                                         </td>
@@ -64,8 +66,6 @@
             </div>
         </div>
     </section>
-
-
 </div>
 
 <script>
@@ -111,3 +111,20 @@
         });
     });
 </script>
+
+<?php
+// Format Tanggal
+function formatDate($datetime)
+{
+    $date = new DateTime($datetime);
+    $months = [
+        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei',
+        6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+    ];
+    $day = $date->format('d');
+    $month = $months[(int)$date->format('m')];
+    $year = $date->format('Y');
+
+    return "{$day} {$month} {$year}";
+}
+?>

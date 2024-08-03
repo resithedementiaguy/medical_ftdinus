@@ -24,27 +24,24 @@
                     <h5 class="h5 mb-4">Data Pasien</h5>
                 </div>
                 <div class="data-list custom-table">
-                    <?php foreach ($pasien as $pasien) : ?>
-                        <div class="custom-row">
-                            <div class="custom-label">NIK</div>
-                            <div class="custom-data"><?php echo $pasien->nik; ?></div>
-                        </div>
-                        <div class="custom-row">
-                            <div class="custom-label">Nama Lengkap</div>
-                            <div class="custom-data"><?php echo $pasien->nama; ?></div>
-                        </div>
-                        <div class="custom-row">
-                            <div class="custom-label">Tempat Tanggal Lahir</div>
-                            <div class="custom-data"><?php echo $pasien->tempat_lahir; ?>, <?php echo formatDate($pasien->tanggal_lahir); ?></div>
-                        </div>
-                        <div class="custom-row">
-                            <div class="custom-label">Alamat</div>
-                            <div class="custom-data"><?php echo $pasien->kelurahan; ?>, <?php echo $pasien->kecamatan; ?>, <?php echo $pasien->kota; ?></div>
-                        </div>
-                    <?php endforeach; ?>
+                    <div class="custom-row">
+                        <div class="custom-label">NIK</div>
+                        <div class="custom-data"><?php echo $pasien['nik']; ?></div>
+                    </div>
+                    <div class="custom-row">
+                        <div class="custom-label">Nama Lengkap</div>
+                        <div class="custom-data"><?php echo $pasien['nama']; ?></div>
+                    </div>
+                    <div class="custom-row">
+                        <div class="custom-label">Tempat Tanggal Lahir</div>
+                        <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
+                    </div>
+                    <div class="custom-row">
+                        <div class="custom-label">Alamat</div>
+                        <div class="custom-data"><?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </section>
 
