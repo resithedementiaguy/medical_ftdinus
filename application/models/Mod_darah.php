@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mod_darah extends CI_Model
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -28,23 +27,53 @@ class Mod_darah extends CI_Model
         return null;
     }
 
+    public function add_patient($nik)
+    {
+        // Insert new patient data into the pasien table
+        $this->db->insert('pasien', array('nik' => $nik));
+        // Retrieve the newly inserted patient's ID
+        return $this->db->insert_id();
+    }
+
+    public function get_patient_id_by_nik($nik)
+    {
+        $this->db->select('id');
+        $this->db->from('pasien');
+        $this->db->where('nik', $nik);
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result ? $result->id : null;
+    }
+
     public function add_suntik($data)
     {
-        return $this->db->insert('suntik', $data);
+        $this->db->trans_start(); // Start transaction
+        $this->db->insert('suntik', $data);
+        $success = $this->db->trans_complete(); // Complete transaction
+        return $success; // Return status of the transaction
     }
 
     public function add_ultrasound($data)
     {
-        return $this->db->insert('ultrasound', $data);
+        $this->db->trans_start(); // Start transaction
+        $this->db->insert('ultrasound', $data);
+        $success = $this->db->trans_complete(); // Complete transaction
+        return $success; // Return status of the transaction
     }
 
     public function add_superbright($data)
     {
-        return $this->db->insert('superbright', $data);
+        $this->db->trans_start(); // Start transaction
+        $this->db->insert('superbright', $data);
+        $success = $this->db->trans_complete(); // Complete transaction
+        return $success; // Return status of the transaction
     }
 
     public function add_magnetik($data)
     {
-        return $this->db->insert('magnetik', $data);
+        $this->db->trans_start(); // Start transaction
+        $this->db->insert('magnetik', $data);
+        $success = $this->db->trans_complete(); // Complete transaction
+        return $success; // Return status of the transaction
     }
 }

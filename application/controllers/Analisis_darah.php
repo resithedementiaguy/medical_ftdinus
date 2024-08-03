@@ -7,6 +7,7 @@ class Analisis_darah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mod_darah');
+        $this->load->library('session'); // Load session library
     }
 
     public function index()
@@ -30,6 +31,9 @@ class Analisis_darah extends CI_Controller
         $this->load->library('form_validation');
 
         $alat = $this->input->post('alat');
+        $nik = $this->input->post('nik');
+
+        // Validate the input
         $this->form_validation->set_rules('nik', 'NIK', 'required');
 
         if ($alat == 'suntik') {
@@ -38,13 +42,34 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('spo2', 'SPO2', 'required');
             $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
             $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
+        } elseif ($alat == 'ultraSound') {
+            $this->form_validation->set_rules('us1', 'US1', 'required');
+            // Add other ultrasound fields validation here
+        } elseif ($alat == 'superBright') {
+            $this->form_validation->set_rules('sb1', 'SB1', 'required');
+            // Add other superbright fields validation here
+        } elseif ($alat == 'magnetik') {
+            $this->form_validation->set_rules('mag1', 'Mag1', 'required');
+            // Add other magnetik fields validation here
         }
 
         if ($this->form_validation->run() === FALSE) {
-            // Jika validasi gagal, kembalikan ke form dengan error
+            // If validation fails, return to the form with errors
             $this->index();
         } else {
-            $data = array('nik' => $this->input->post('nik'));
+            // Check if we already have a patient ID in session
+            if (!$this->session->userdata('patient_id')) {
+                // Insert the patient data into the pasien table and get the new ID
+                $id_pasien = $this->Mod_darah->add_patient($nik);
+                // Save the patient ID in session
+                $this->session->set_userdata('patient_id', $id_pasien);
+            } else {
+                // Use the patient ID from session
+                $id_pasien = $this->session->userdata('patient_id');
+            }
+
+            // Prepare data for equipment insertion
+            $data = array('id_pasien' => $id_pasien);
 
             if ($alat == 'suntik') {
                 $data += array(
@@ -99,7 +124,19 @@ class Analisis_darah extends CI_Controller
                 $this->Mod_darah->add_magnetik($data);
             }
 
+            // If all equipment forms have been filled, clear the session
+            if ($this->input->post('completed') == 'yes') {
+                $this->session->unset_userdata('patient_id');
+            }
+
+            // Redirect to the analisis_darah page
             redirect('analisis_darah');
         }
+    }
+
+    public function clear_session_id()
+    {
+        $this->session->unset_userdata('patient_id');
+        echo json_encode(['status' => 'success']);
     }
 }
