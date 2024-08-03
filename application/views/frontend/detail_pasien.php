@@ -86,30 +86,32 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Suntik</h6>
                                             </div>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Glukosa</th>
-                                                        <th>HB</th>
-                                                        <th>SPO2</th>
-                                                        <th>Kolesterol</th>
-                                                        <th>Asam Urat</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($suntik as $suntik) : ?>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?= $suntik->ins_time ?></td>
-                                                            <td><?= $suntik->glukosa ?></td>
-                                                            <td><?= $suntik->hb ?></td>
-                                                            <td><?= $suntik->spo2 ?></td>
-                                                            <td><?= $suntik->kolesterol ?></td>
-                                                            <td><?= $suntik->asam_urat ?></td>
+                                                            <th>Tanggal Periksa</th>
+                                                            <th>Glukosa</th>
+                                                            <th>HB</th>
+                                                            <th>SPO2</th>
+                                                            <th>Kolesterol</th>
+                                                            <th>Asam Urat</th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($suntik as $suntik) : ?>
+                                                            <tr>
+                                                                <td><?= formatDateTime($suntik->ins_time) ?></td>
+                                                                <td><?= $suntik->glukosa ?></td>
+                                                                <td><?= $suntik->hb ?></td>
+                                                                <td><?= $suntik->spo2 ?></td>
+                                                                <td><?= $suntik->kolesterol ?></td>
+                                                                <td><?= $suntik->asam_urat ?></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <!-- Table untuk Ultrasound -->
@@ -127,10 +129,16 @@
                                                 <tbody>
                                                     <?php foreach ($ultrasound as $ultrasound) : ?>
                                                         <tr>
-                                                            <td><?= $ultrasound->ins_time ?></td>
+                                                            <td><?= formatDateTime($ultrasound->ins_time) ?></td>
                                                             <td>
                                                                 <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat Ultrasound
+                                                                    <i class="fas fa-eye"></i> Lihat
+                                                                </button>
+                                                                <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                    <i class="fas fa-edit"></i> Edit
+                                                                </button>
+                                                                <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                    <i class="fas fa-trash"></i> Hapus
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -237,10 +245,10 @@
                                                 <tbody>
                                                     <?php foreach ($superbright as $sb) : ?>
                                                         <tr>
-                                                            <td><?= $sb->ins_time ?></td>
+                                                            <td><?= formatDateTime($sb->ins_time) ?></td>
                                                             <td>
                                                                 <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat Super Bright
+                                                                    <i class="fas fa-eye"></i> Lihat
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -356,10 +364,10 @@
                                                 <tbody>
                                                     <?php foreach ($magnetik as $mag) : ?>
                                                         <tr>
-                                                            <td><?= $mag->ins_time ?></td>
+                                                            <td><?= formatDateTime($mag->ins_time) ?></td>
                                                             <td>
                                                                 <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                    <i class="fas fa-eye"></i> Lihat Magnetik
+                                                                    <i class="fas fa-eye"></i> Lihat
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -500,6 +508,34 @@
         }
     }
 </style>
+
+<!-- Format Waktu -->
+<?php
+function formatDateTime($datetime)
+{
+    $date = new DateTime($datetime);
+    $months = [
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
+    ];
+    $day = $date->format('d');
+    $month = $months[(int)$date->format('m')];
+    $year = $date->format('Y');
+    $time = $date->format('H:i:s');
+
+    return "{$day} {$month} {$year}, {$time} WIB";
+}
+?>
 
 <script>
     document.getElementById('basicSelect').addEventListener('change', function() {
