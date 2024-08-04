@@ -97,22 +97,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($suntik as $suntik) : ?>
+                                                        <?php foreach ($suntik as $item) : ?>
                                                             <tr>
-                                                                <td><?= formatDateTime($suntik->ins_time) ?></td>
-                                                                <td><?= $suntik->glukosa ?></td>
-                                                                <td><?= $suntik->hb ?></td>
-                                                                <td><?= $suntik->spo2 ?></td>
-                                                                <td><?= $suntik->kolesterol ?></td>
-                                                                <td><?= $suntik->asam_urat ?></td>
+                                                                <td><?= formatDateTime($item->ins_time) ?></td>
+                                                                <td><?= $item->glukosa ?></td>
+                                                                <td><?= $item->hb ?></td>
+                                                                <td><?= $item->spo2 ?></td>
+                                                                <td><?= $item->kolesterol ?></td>
+                                                                <td><?= $item->asam_urat ?></td>
                                                                 <td>
-                                                                    <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
-                                                                        <i class="fas fa-eye"></i> Lihat
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
+                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $item->id ?>">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $suntik->id ?>">
+                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $item->id ?>">
                                                                         <i class="fas fa-trash"></i> Hapus
                                                                     </button>
                                                                 </td>

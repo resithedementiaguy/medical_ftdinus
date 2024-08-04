@@ -14,19 +14,20 @@ class Pasien extends CI_Controller
     {
         $data['pasien_list'] = $this->Mod_pasien->get_all_pasien();
         $this->load->view('partials/header');
-        $this->load->view('frontend/view_pasien', $data);
+        $this->load->view('frontend/pasien/view_pasien', $data);
         $this->load->view('partials/footer');
     }
 
-    public function detail($id)
+    public function detail($nik)
     {
-        $data['pasien'] = $this->Mod_pasien->get_pasien_detail($id);
-        $data['ultrasound'] = $this->Mod_pasien->get_ultrasound($id);
-        $data['suntik'] = $this->Mod_pasien->get_suntik($id);
-        $data['superbright'] = $this->Mod_pasien->get_superbright($id);
-        $data['magnetik'] = $this->Mod_pasien->get_magnetik($id);
+        $data['pasien'] = $this->Mod_pasien->get_pasien_detail($nik);
+        $data['suntik'] = $this->Mod_pasien->get_suntik($nik);
+        $data['ultrasound'] = $this->Mod_pasien->get_ultrasound($nik);
+        $data['superbright'] = $this->Mod_pasien->get_superbright($nik);
+        $data['magnetik'] = $this->Mod_pasien->get_magnetik($nik);
+
         $this->load->view('partials/header');
-        $this->load->view('frontend/detail_pasien', $data);
+        $this->load->view('frontend/pasien/detail_pasien', $data);
         $this->load->view('partials/footer');
     }
 

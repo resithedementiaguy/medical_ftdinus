@@ -12,7 +12,7 @@ class Penduduk extends CI_Controller
     public function index()
     {
         $this->load->view('partials/header');
-        $this->load->view('frontend/penduduk');
+        $this->load->view('frontend/penduduk/add_penduduk');
         $this->load->view('partials/footer');
     }
 

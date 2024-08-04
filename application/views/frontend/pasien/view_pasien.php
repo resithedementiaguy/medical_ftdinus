@@ -49,7 +49,7 @@
                                         <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
                                         <td><?php echo $pasien['kota']; ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['id']); ?>" class="badge bg-info">
+                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>" class="badge bg-info">
                                                 <i class="fas fa-eye"></i> Lihat
                                             </a>
                                         </td>
