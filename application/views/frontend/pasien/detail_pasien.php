@@ -97,19 +97,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($suntik as $item) : ?>
+                                                        <?php foreach ($suntik as $suntik) : ?>
                                                             <tr>
-                                                                <td><?= formatDateTime($item->ins_time) ?></td>
-                                                                <td><?= $item->glukosa ?></td>
-                                                                <td><?= $item->hb ?></td>
-                                                                <td><?= $item->spo2 ?></td>
-                                                                <td><?= $item->kolesterol ?></td>
-                                                                <td><?= $item->asam_urat ?></td>
+                                                                <td><?= formatDateTime($st->ins_time) ?></td>
+                                                                <td><?= $st->glukosa ?></td>
+                                                                <td><?= $st->hb ?></td>
+                                                                <td><?= $st->spo2 ?></td>
+                                                                <td><?= $st->kolesterol ?></td>
+                                                                <td><?= $st->asam_urat ?></td>
                                                                 <td>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $item->id ?>">
+                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $st->id ?>">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $item->id ?>">
+                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $st->id ?>">
                                                                         <i class="fas fa-trash"></i> Hapus
                                                                     </button>
                                                                 </td>
@@ -134,17 +134,17 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($ultrasound as $ultrasound) : ?>
+                                                        <?php foreach ($ultrasound as $us) : ?>
                                                             <tr>
-                                                                <td><?= formatDateTime($ultrasound->ins_time) ?></td>
+                                                                <td><?= formatDateTime($us->ins_time) ?></td>
                                                                 <td>
-                                                                    <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                    <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
                                                                         <i class="fas fa-eye"></i> Lihat
                                                                     </button>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                    <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $ultrasound->id ?>">
+                                                                    <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
                                                                         <i class="fas fa-trash"></i> Hapus
                                                                     </button>
                                                                 </td>
@@ -161,14 +161,11 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="ultraSoundModalTitle">Detail Ultrasound</h5>
-                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                            <i data-feather="x"></i>
-                                                        </button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="form-body">
                                                             <div class="row">
-                                                                <!-- Fields untuk Ultrasound -->
                                                                 <div id="ultraSoundFields">
                                                                     <div class="col">
                                                                         <label for="us1"><strong>Data Ultrasound 1</strong></label>
@@ -279,8 +276,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="superBrightModalTitle">Detail Super Bright</h5>
-                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                            <i data-feather="x"></i>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
@@ -406,8 +402,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="MagnetikModalTitle">Detail Magnetik</h5>
-                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                            <i data-feather="x"></i>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
@@ -551,16 +546,25 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $('#us1').val(data.us1);
-                    $('#us2').val(data.us2);
-                    $('#us3').val(data.us3);
-                    $('#us4').val(data.us4);
-                    $('#us5').val(data.us5);
-                    $('#us6').val(data.us6);
-                    $('#us7').val(data.us7);
-                    $('#us8').val(data.us8);
-                    $('#us9').val(data.us9);
-                    $('#us10').val(data.us10);
+                    console.log(data);
+                    if (data) {
+                        $('#us1').val(data.us1);
+                        $('#us2').val(data.us2);
+                        $('#us3').val(data.us3);
+                        $('#us4').val(data.us4);
+                        $('#us5').val(data.us5);
+                        $('#us6').val(data.us6);
+                        $('#us7').val(data.us7);
+                        $('#us8').val(data.us8);
+                        $('#us9').val(data.us9);
+                        $('#us10').val(data.us10);
+                        $('#ultraSoundModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
                 }
             });
         });
@@ -575,16 +579,25 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $('#sb1').val(data.sb1);
-                    $('#sb2').val(data.sb2);
-                    $('#sb3').val(data.sb3);
-                    $('#sb4').val(data.sb4);
-                    $('#sb5').val(data.sb5);
-                    $('#sb6').val(data.sb6);
-                    $('#sb7').val(data.sb7);
-                    $('#sb8').val(data.sb8);
-                    $('#sb9').val(data.sb9);
-                    $('#sb10').val(data.sb10);
+                    console.log(data);
+                    if (data) {
+                        $('#sb1').val(data.sb1);
+                        $('#sb2').val(data.sb2);
+                        $('#sb3').val(data.sb3);
+                        $('#sb4').val(data.sb4);
+                        $('#sb5').val(data.sb5);
+                        $('#sb6').val(data.sb6);
+                        $('#sb7').val(data.sb7);
+                        $('#sb8').val(data.sb8);
+                        $('#sb9').val(data.sb9);
+                        $('#sb10').val(data.sb10);
+                        $('#superBrightModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
                 }
             });
         });
@@ -599,16 +612,25 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $('#mag1').val(data.mag1);
-                    $('#mag2').val(data.mag2);
-                    $('#mag3').val(data.mag3);
-                    $('#mag4').val(data.mag4);
-                    $('#mag5').val(data.mag5);
-                    $('#mag6').val(data.mag6);
-                    $('#mag7').val(data.mag7);
-                    $('#mag8').val(data.mag8);
-                    $('#mag9').val(data.mag9);
-                    $('#mag10').val(data.mag10);
+                    console.log(data);
+                    if (data) {
+                        $('#mag1').val(data.mag1);
+                        $('#mag2').val(data.mag2);
+                        $('#mag3').val(data.mag3);
+                        $('#mag4').val(data.mag4);
+                        $('#mag5').val(data.mag5);
+                        $('#mag6').val(data.mag6);
+                        $('#mag7').val(data.mag7);
+                        $('#mag8').val(data.mag8);
+                        $('#mag9').val(data.mag9);
+                        $('#mag10').val(data.mag10);
+                        $('#MagnetikModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
                 }
             });
         });

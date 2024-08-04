@@ -68,4 +68,31 @@ class Mod_pasien extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function get_ultrasound_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('ultrasound');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_superbright_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('superbright');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_magnetik_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('magnetik');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

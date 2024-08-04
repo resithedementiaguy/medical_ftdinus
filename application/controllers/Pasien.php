@@ -35,18 +35,21 @@ class Pasien extends CI_Controller
     public function get_ultrasound($id)
     {
         $ultrasound = $this->Mod_pasien->get_ultrasound_id($id);
+        header('Content-Type: application/json');
         echo json_encode($ultrasound);
     }
 
     public function get_superbright($id)
     {
         $superbright = $this->Mod_pasien->get_superbright_id($id);
+        header('Content-Type: application/json');
         echo json_encode($superbright);
     }
 
     public function get_magnetik($id)
     {
         $magnetik = $this->Mod_pasien->get_magnetik_id($id);
+        header('Content-Type: application/json');
         echo json_encode($magnetik);
     }
 }
