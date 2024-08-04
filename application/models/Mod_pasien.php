@@ -8,6 +8,7 @@ class Mod_pasien extends CI_Model
         parent::__construct();
     }
 
+    // Function Pasien
     public function get_all_pasien()
     {
         $this->db->select('ktp.*, pasien.id');
@@ -29,6 +30,7 @@ class Mod_pasien extends CI_Model
         return $query->row_array();
     }
 
+    // Function Suntik
     public function get_suntik($nik)
     {
         $this->db->select('suntik.*, pasien.id as pasien_id, pasien.nik');
@@ -39,31 +41,27 @@ class Mod_pasien extends CI_Model
         return $query->result();
     }
 
+    public function get_suntik_by_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('suntik');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_suntik($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('suntik', $data);
+    }
+
+    // Function Ultrasound
     public function get_ultrasound($nik)
     {
         $this->db->select('ultrasound.*, pasien.id as pasien_id, pasien.nik');
         $this->db->from('pasien');
         $this->db->join('ultrasound', 'ultrasound.id_pasien = pasien.id', 'left');
-        $this->db->where('pasien.nik', $nik);
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function get_superbright($nik)
-    {
-        $this->db->select('superbright.*, pasien.id as pasien_id, pasien.nik');
-        $this->db->from('pasien');
-        $this->db->join('superbright', 'superbright.id_pasien = pasien.id', 'left');
-        $this->db->where('pasien.nik', $nik);
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function get_magnetik($nik)
-    {
-        $this->db->select('magnetik.*, pasien.id as pasien_id, pasien.nik');
-        $this->db->from('pasien');
-        $this->db->join('magnetik', 'magnetik.id_pasien = pasien.id', 'left');
         $this->db->where('pasien.nik', $nik);
         $query = $this->db->get();
         return $query->result();
@@ -78,6 +76,17 @@ class Mod_pasien extends CI_Model
         return $query->row_array();
     }
 
+    // Function Super Bright
+    public function get_superbright($nik)
+    {
+        $this->db->select('superbright.*, pasien.id as pasien_id, pasien.nik');
+        $this->db->from('pasien');
+        $this->db->join('superbright', 'superbright.id_pasien = pasien.id', 'left');
+        $this->db->where('pasien.nik', $nik);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function get_superbright_id($id)
     {
         $this->db->select('*');
@@ -85,6 +94,17 @@ class Mod_pasien extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    // Function Magnetik
+    public function get_magnetik($nik)
+    {
+        $this->db->select('magnetik.*, pasien.id as pasien_id, pasien.nik');
+        $this->db->from('pasien');
+        $this->db->join('magnetik', 'magnetik.id_pasien = pasien.id', 'left');
+        $this->db->where('pasien.nik', $nik);
+        $query = $this->db->get();
+        return $query->result();
     }
 
     public function get_magnetik_id($id)

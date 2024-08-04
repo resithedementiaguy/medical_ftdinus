@@ -99,17 +99,17 @@
                                                     <tbody>
                                                         <?php foreach ($suntik as $suntik) : ?>
                                                             <tr>
-                                                                <td><?= formatDateTime($st->ins_time) ?></td>
-                                                                <td><?= $st->glukosa ?></td>
-                                                                <td><?= $st->hb ?></td>
-                                                                <td><?= $st->spo2 ?></td>
-                                                                <td><?= $st->kolesterol ?></td>
-                                                                <td><?= $st->asam_urat ?></td>
+                                                                <td><?= formatDateTime($suntik->ins_time) ?></td>
+                                                                <td><?= $suntik->glukosa ?></td>
+                                                                <td><?= $suntik->hb ?></td>
+                                                                <td><?= $suntik->spo2 ?></td>
+                                                                <td><?= $suntik->kolesterol ?></td>
+                                                                <td><?= $suntik->asam_urat ?></td>
                                                                 <td>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $st->id ?>">
+                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $st->id ?>">
+                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
                                                                         <i class="fas fa-trash"></i> Hapus
                                                                     </button>
                                                                 </td>
@@ -117,6 +117,68 @@
                                                         <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- Detail Modal Suntik -->
+                                        <div class="modal fade" id="SuntikModal" tabindex="-1" role="dialog" aria-labelledby="SuntikModalTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="SuntikModalTitle">Detail Ultrasound</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form class="form form-horizontal" id="analisisForm" action="<?= base_url('pasien/update_suntik') ?>" method="POST">
+                                                        <div class="modal-body">
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                    <div id="SuntikFields">
+                                                                        <div class="col-md-4">
+                                                                            <label for="glukosa">Glukosa</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa">
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="hb">HB</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <input type="text" id="hb" class="form-control" name="hb" placeholder="Masukkan HB">
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="spo2">SPO2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2">
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="kolesterol">Kolesterol</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol">
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="asam_urat">Asam Urat</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                                <span class="d-none d-sm-block">Batal</span>
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                                <span class="d-none d-sm-block">Simpan</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -535,6 +597,63 @@
         document.getElementById('ultraSoundFields').style.display = alat === 'ultraSound' ? 'block' : 'none';
         document.getElementById('superBrightFields').style.display = alat === 'superBright' ? 'block' : 'none';
         document.getElementById('magnetikFields').style.display = alat === 'magnetik' ? 'block' : 'none';
+    });
+
+    // Edit Suntik
+    $(document).ready(function() {
+        // Ketika tombol edit diklik
+        $('.edit-suntik-btn').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('Pasien/get_suntik/') ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data) {
+                        $('#glukosa').val(data.glukosa);
+                        $('#hb').val(data.hb);
+                        $('#spo2').val(data.spo2);
+                        $('#kolesterol').val(data.kolesterol);
+                        $('#asam_urat').val(data.asam_urat);
+
+                        $('#analisisForm').attr('action', '<?= base_url('Pasien/update_suntik/') ?>' + id);
+
+                        $('#SuntikModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+        });
+
+        $('#analisisForm').on('submit', function(e) {
+            e.preventDefault(); // Mencegah submit default
+
+            var formData = $(this).serialize();
+            var actionUrl = $(this).attr('action');
+
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        $('#SuntikModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                }
+            });
+        });
     });
 
     // Ultrasound

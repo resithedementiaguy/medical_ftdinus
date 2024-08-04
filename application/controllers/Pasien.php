@@ -31,6 +31,38 @@ class Pasien extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    // get suntik
+    public function get_suntik($id)
+    {
+        $this->load->model('Mod_pasien');
+        $suntik = $this->Mod_pasien->get_suntik_by_id($id);
+        header('Content-Type: application/json');
+        echo json_encode($suntik);
+    }
+
+    public function update_suntik($id)
+    {
+        $this->load->model('Mod_pasien');
+
+        // data dari POST
+        $data = array(
+            'glukosa'    => $this->input->post('glukosa'),
+            'hb'         => $this->input->post('hb'),
+            'spo2'       => $this->input->post('spo2'),
+            'kolesterol' => $this->input->post('kolesterol'),
+            'asam_urat'  => $this->input->post('asam_urat')
+        );
+
+        $updated = $this->Mod_pasien->update_suntik($id, $data);
+
+        if ($updated) {
+            // Kirim JSON respons dengan status sukses
+            echo json_encode(array('status' => 'success', 'message' => 'Data berhasil diperbarui.'));
+        } else {
+            // Kirim JSON respons dengan status gagal
+            echo json_encode(array('status' => 'error', 'message' => 'Terjadi kesalahan saat memperbarui data.'));
+        }
+    }
 
     public function get_ultrasound($id)
     {
