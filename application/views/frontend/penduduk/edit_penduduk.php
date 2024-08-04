@@ -2,14 +2,15 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Tambah Penduduk</h3>
-                <p class="text-subtitle text-muted">Silahkan isi form di bawah sesuai dengan KTP</p>
+                <h3>Form Edit Penduduk</h3>
+                <p class="text-subtitle text-muted">Silahkan untuk edit form di bawah sesuai dengan KTP</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Penduduk</li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('pasien') ?>">Pasien</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Penduduk</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +28,7 @@
                                     <?= validation_errors() ?>
                                 </div>
                             <?php endif; ?>
-                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('penduduk/add') ?>" method="POST">
+                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('penduduk/update/' . $penduduk['id']) ?>" method="POST">
                                 <div class="form-body">
                                     <div class="row">
                                         <div>
@@ -37,28 +38,28 @@
                                             <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="nik" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan">
+                                            <input type="text" id="nik" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan" value="<?php echo htmlspecialchars($penduduk['nik'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="nama">Nama Lengkap</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap">
+                                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?php echo htmlspecialchars($penduduk['nama'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="tempat_lahir" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
+                                            <input type="text" id="tempat_lahir" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" value="<?php echo htmlspecialchars($penduduk['tempat_lahir'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="tanggal_lahir">Tanggal Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir">
+                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" value="<?php echo htmlspecialchars($penduduk['tanggal_lahir'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
@@ -68,13 +69,13 @@
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <div class="form-check">
-                                                        <input type="radio" id="jenis_kelamin_l" class="form-check-input" name="jenis_kelamin" value="L">
+                                                        <input type="radio" id="jenis_kelamin_l" class="form-check-input" name="jenis_kelamin" value="L" <?php echo (isset($penduduk['jenis_kelamin']) && $penduduk['jenis_kelamin'] === 'L') ? 'checked' : ''; ?>>
                                                         <label class="form-check-label" for="jenis_kelamin_l">Laki-laki</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="form-check">
-                                                        <input type="radio" id="jenis_kelamin_p" class="form-check-input" name="jenis_kelamin" value="P">
+                                                        <input type="radio" id="jenis_kelamin_p" class="form-check-input" name="jenis_kelamin" value="P" <?php echo (isset($penduduk['jenis_kelamin']) && $penduduk['jenis_kelamin'] === 'P') ? 'checked' : ''; ?>>
                                                         <label class="form-check-label" for="jenis_kelamin_p">Perempuan</label>
                                                     </div>
                                                 </div>
@@ -87,10 +88,10 @@
                                         <div class="col-md-8 form-group">
                                             <select id="status_perkawinan" class="form-select" name="status_perkawinan">
                                                 <option value="" selected hidden>Pilih Status Perkawinan</option>
-                                                <option value="Belum Menikah">Belum Menikah</option>
-                                                <option value="Menikah">Menikah</option>
-                                                <option value="Cerai Hidup">Cerai Hidup</option>
-                                                <option value="Cerai Mati">Cerai Mati</option>
+                                                <option value="Belum Menikah" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Belum Menikah') ? 'selected' : ''; ?>>Belum Menikah</option>
+                                                <option value="Menikah" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Menikah') ? 'selected' : ''; ?>>Menikah</option>
+                                                <option value="Cerai Hidup" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Cerai Hidup') ? 'selected' : ''; ?>>Cerai Hidup</option>
+                                                <option value="Cerai Mati" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Cerai Mati') ? 'selected' : ''; ?>>Cerai Mati</option>
                                             </select>
                                         </div>
 
@@ -102,56 +103,56 @@
                                             <label for="alamat">Alamat</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
+                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($penduduk['alamat'], ENT_QUOTES, 'UTF-8'); ?></textarea>
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="rt">RT</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT">
+                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT" value="<?php echo htmlspecialchars($penduduk['rt'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="rw">RW</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW">
+                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW" value="<?php echo htmlspecialchars($penduduk['rw'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kelurahan">Kelurahan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan">
+                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan" value="<?php echo htmlspecialchars($penduduk['kelurahan'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kecamatan">Kecamatan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan">
+                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan" value="<?php echo htmlspecialchars($penduduk['kecamatan'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kota">Kota</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota">
+                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota" value="<?php echo htmlspecialchars($penduduk['kota'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="provinsi">Provinsi</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi">
+                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" value="<?php echo htmlspecialchars($penduduk['provinsi'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kode_pos">Kode Pos</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kode_pos" class="form-control" name="kode_pos" placeholder="Kode Pos">
+                                            <input type="text" id="kode_pos" class="form-control" name="kode_pos" placeholder="Kode Pos" value="<?php echo htmlspecialchars($penduduk['kode_pos'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -167,47 +168,3 @@
         </div>
     </section>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById('analisisForm');
-        var alatSelect = document.getElementById('basicSelect');
-
-        alatSelect.addEventListener('change', function() {
-            var selectedValue = alatSelect.value;
-
-            // Menampilkan field sesuai dengan pilihan alat
-            var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
-            fields.forEach(function(field) {
-                document.getElementById(field).style.display = "none";
-            });
-
-            if (selectedValue) {
-                document.getElementById(selectedValue + "Fields").style.display = "block";
-            }
-        });
-
-        // Tampilkan field yang sesuai saat halaman dimuat
-        alatSelect.dispatchEvent(new Event('change'));
-
-        // Tampilkan NIK dan nama menggunakan Ajax
-        $('#nik').change(function() {
-            var nik = $(this).val();
-            if (nik != "") {
-                $.ajax({
-                    url: '<?= base_url("Analisis_darah/get_nama") ?>',
-                    method: 'POST',
-                    data: {
-                        nik: nik
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#nama').val(response ? response.nama : '');
-                    }
-                });
-            } else {
-                $('#nama').val('');
-            }
-        });
-    });
-</script>

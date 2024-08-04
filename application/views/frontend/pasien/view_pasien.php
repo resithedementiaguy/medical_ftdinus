@@ -41,7 +41,7 @@
                                 <?php $no = 1;
                                 foreach ($pasien_list as $pasien) : ?>
                                     <tr>
-                                        <td><?php echo $no++; ?></td>
+                                        <td class="py-3"><?php echo $no++; ?></td>
                                         <td>
                                             <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>"><?php echo $pasien['nik']; ?></a>
                                         </td>
@@ -49,7 +49,7 @@
                                         <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
                                         <td><?php echo $pasien['kota']; ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>" class="badge bg-info">
+                                            <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>" class="badge bg-success">
                                                 <i class="fas fa-eye"></i> Lihat
                                             </a>
                                         </td>
@@ -57,7 +57,7 @@
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="5">Tidak ada data pasien.</td>
+                                    <td colspan="6">Tidak ada data pasien.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

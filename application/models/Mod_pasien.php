@@ -11,9 +11,9 @@ class Mod_pasien extends CI_Model
     // Function Pasien
     public function get_all_pasien()
     {
-        $this->db->select('ktp.*, pasien.id');
+        $this->db->select('ktp.*, pasien.nik AS pasien_nik');
         $this->db->from('ktp');
-        $this->db->join('pasien', 'ktp.nik = pasien.nik', 'inner');
+        $this->db->join('pasien', 'ktp.nik = pasien.nik', 'left');
         $this->db->group_by('ktp.nik');
         $query = $this->db->get();
         return $query->result_array();
@@ -21,10 +21,10 @@ class Mod_pasien extends CI_Model
 
     public function get_pasien_detail($nik)
     {
-        $this->db->select('pasien.id as pasien_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.kelurahan, ktp.kecamatan, ktp.kota');
-        $this->db->from('pasien');
-        $this->db->join('ktp', 'pasien.nik = ktp.nik', 'left');
-        $this->db->where('pasien.nik', $nik);
+        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.kelurahan, ktp.kecamatan, ktp.kota');
+        $this->db->from('ktp');
+        $this->db->join('pasien', 'pasien.nik = ktp.nik', 'left');
+        $this->db->where('ktp.nik', $nik);
         $query = $this->db->get();
 
         return $query->row_array();

@@ -20,25 +20,41 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <div>
-                    <h5 class="h5 mb-4">Data Pasien</h5>
+                <div class="row">
+                    <div class="col d-flex justify-content-start">
+                        <h5 class="h5 mb-4">Data Pasien</h5>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <div>
+                            <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal">
+                                <i class="fas fa-eye"></i> Lihat
+                            </button>
+                            <a href="<?php echo site_url('penduduk/edit/' . $pasien['ktp_id']); ?>" class="badge bg-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="data-list custom-table">
-                    <div class="custom-row">
-                        <div class="custom-label">NIK</div>
-                        <div class="custom-data"><?php echo $pasien['nik']; ?></div>
-                    </div>
-                    <div class="custom-row">
-                        <div class="custom-label">Nama Lengkap</div>
-                        <div class="custom-data"><?php echo $pasien['nama']; ?></div>
-                    </div>
-                    <div class="custom-row">
-                        <div class="custom-label">Tempat Tanggal Lahir</div>
-                        <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
-                    </div>
-                    <div class="custom-row">
-                        <div class="custom-label">Alamat</div>
-                        <div class="custom-data"><?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="data-list custom-table">
+                            <div class="custom-row">
+                                <div class="custom-label">NIK</div>
+                                <div class="custom-data"><?php echo $pasien['nik']; ?></div>
+                            </div>
+                            <div class="custom-row">
+                                <div class="custom-label">Nama Lengkap</div>
+                                <div class="custom-data"><?php echo $pasien['nama']; ?></div>
+                            </div>
+                            <div class="custom-row">
+                                <div class="custom-label">Tempat Tanggal Lahir</div>
+                                <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
+                            </div>
+                            <div class="custom-row">
+                                <div class="custom-label">Alamat</div>
+                                <div class="custom-data"><?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,495 +67,491 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <?php if (validation_errors()) : ?>
-                                <div class="alert alert-danger">
-                                    <?= validation_errors() ?>
-                                </div>
-                            <?php endif; ?>
-                            <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add') ?>" method="POST">
-                                <div class="form-body">
-                                    <div class="row">
-                                        <div>
-                                            <h5 class="h5 mb-4">Riwayat Periksa</h5>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="basicSelect">Nama Alat</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="alat">
-                                                    <option value="" selected hidden>Pilih Alat</option>
-                                                    <option value="suntik">Suntik</option>
-                                                    <option value="ultraSound">Ultra Sound</option>
-                                                    <option value="superBright">Super Bright</option>
-                                                    <option value="magnetik">Magnetik</option>
-                                                </select>
-                                            </fieldset>
-                                        </div>
-
-                                        <!-- Table untuk Suntik -->
-                                        <div id="suntikFields" style="display: none;">
-                                            <div>
-                                                <h6 class="h6 mt-4 mb-4">Suntik</h6>
+                            <div>
+                                <h5 class="h5 mb-4">Riwayat Periksa</h5>
+                            </div>
+                            <?php if (!empty($pasien['pasien_nik'])) : ?>
+                                <form class="form form-horizontal" id="analisisForm" action="<?= base_url('analisis_darah/add') ?>" method="POST">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="basicSelect">Nama Alat</label>
                                             </div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal Periksa</th>
-                                                            <th>Glukosa</th>
-                                                            <th>HB</th>
-                                                            <th>SPO2</th>
-                                                            <th>Kolesterol</th>
-                                                            <th>Asam Urat</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($suntik as $suntik) : ?>
+                                            <div class="col-md-8 form-group">
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="basicSelect" name="alat">
+                                                        <option value="" selected hidden>Pilih Alat</option>
+                                                        <option value="suntik">Suntik</option>
+                                                        <option value="ultraSound">Ultra Sound</option>
+                                                        <option value="superBright">Super Bright</option>
+                                                        <option value="magnetik">Magnetik</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+
+                                            <!-- Table untuk Suntik -->
+                                            <div id="suntikFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Suntik</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
                                                             <tr>
-                                                                <td><?= formatDateTime($suntik->ins_time) ?></td>
-                                                                <td><?= $suntik->glukosa ?></td>
-                                                                <td><?= $suntik->hb ?></td>
-                                                                <td><?= $suntik->spo2 ?></td>
-                                                                <td><?= $suntik->kolesterol ?></td>
-                                                                <td><?= $suntik->asam_urat ?></td>
-                                                                <td>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
-                                                                        <i class="fas fa-trash"></i> Hapus
-                                                                    </button>
-                                                                </td>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Glukosa</th>
+                                                                <th>HB</th>
+                                                                <th>SPO2</th>
+                                                                <th>Kolesterol</th>
+                                                                <th>Asam Urat</th>
+                                                                <th>Aksi</th>
                                                             </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($suntik as $suntik) : ?>
+                                                                <tr>
+                                                                    <td><?= formatDateTime($suntik->ins_time) ?></td>
+                                                                    <td><?= $suntik->glukosa ?></td>
+                                                                    <td><?= $suntik->hb ?></td>
+                                                                    <td><?= $suntik->spo2 ?></td>
+                                                                    <td><?= $suntik->kolesterol ?></td>
+                                                                    <td><?= $suntik->asam_urat ?></td>
+                                                                    <td>
+                                                                        <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
+                                                                            <i class="fas fa-edit"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-danger border-0 delete-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
+                                                                            <i class="fas fa-trash"></i> Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Detail Modal Suntik -->
-                                        <div class="modal fade" id="SuntikModal" tabindex="-1" role="dialog" aria-labelledby="SuntikModalTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="SuntikModalTitle">Detail Ultrasound</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <!-- Detail Modal Suntik -->
+                                            <div class="modal fade" id="SuntikModal" tabindex="-1" role="dialog" aria-labelledby="SuntikModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="SuntikModalTitle">Detail Ultrasound</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form class="form form-horizontal" id="analisisForm" action="<?= base_url('pasien/update_suntik') ?>" method="POST">
+                                                            <div class="modal-body">
+                                                                <div class="form-body">
+                                                                    <div class="row">
+                                                                        <div id="SuntikFields">
+                                                                            <div class="col-md-4">
+                                                                                <label for="glukosa">Glukosa</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="hb">HB</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="hb" class="form-control" name="hb" placeholder="Masukkan HB">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="spo2">SPO2</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="kolesterol">Kolesterol</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol">
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="asam_urat">Asam Urat</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Batal</span>
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Simpan</span>
+                                                                </button>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <form class="form form-horizontal" id="analisisForm" action="<?= base_url('pasien/update_suntik') ?>" method="POST">
+                                                </div>
+                                            </div>
+
+                                            <!-- Table untuk Ultrasound -->
+                                            <div id="ultraSoundFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($ultrasound as $us) : ?>
+                                                                <tr>
+                                                                    <td><?= formatDateTime($us->ins_time) ?></td>
+                                                                    <td>
+                                                                        <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
+                                                                            <i class="fas fa-eye"></i> Lihat
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
+                                                                            <i class="fas fa-edit"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
+                                                                            <i class="fas fa-trash"></i> Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Detail Modal Ultrasound -->
+                                            <div class="modal fade" id="ultraSoundModal" tabindex="-1" role="dialog" aria-labelledby="ultraSoundModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ultraSoundModalTitle">Detail Ultrasound</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
                                                         <div class="modal-body">
                                                             <div class="form-body">
                                                                 <div class="row">
-                                                                    <div id="SuntikFields">
-                                                                        <div class="col-md-4">
-                                                                            <label for="glukosa">Glukosa</label>
+                                                                    <div id="ultraSoundFields">
+                                                                        <div class="col">
+                                                                            <label for="us1"><strong>Data Ultrasound 1</strong></label>
                                                                         </div>
-                                                                        <div class="col form-group">
-                                                                            <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa">
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us1" rows="5" placeholder="Data Ultrasound 1" readonly></textarea>
                                                                         </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="hb">HB</label>
+                                                                        <div class="col">
+                                                                            <label for="us2"><strong>Data Ultrasound 2</strong></label>
                                                                         </div>
-                                                                        <div class="col form-group">
-                                                                            <input type="text" id="hb" class="form-control" name="hb" placeholder="Masukkan HB">
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us2" rows="5" placeholder="Data Ultrasound 2" readonly></textarea>
                                                                         </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="spo2">SPO2</label>
+                                                                        <div class="col">
+                                                                            <label for="us3"><strong>Data Ultrasound 3</strong></label>
                                                                         </div>
-                                                                        <div class="col form-group">
-                                                                            <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2">
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us3" rows="5" placeholder="Data Ultrasound 3" readonly></textarea>
                                                                         </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="kolesterol">Kolesterol</label>
+                                                                        <div class="col">
+                                                                            <label for="us4"><strong>Data Ultrasound 4</strong></label>
                                                                         </div>
-                                                                        <div class="col form-group">
-                                                                            <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol">
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us4" rows="5" placeholder="Data Ultrasound 4" readonly></textarea>
                                                                         </div>
-                                                                        <div class="col-md-4">
-                                                                            <label for="asam_urat">Asam Urat</label>
+                                                                        <div class="col">
+                                                                            <label for="us5"><strong>Data Ultrasound 5</strong></label>
                                                                         </div>
-                                                                        <div class="col form-group">
-                                                                            <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us5" rows="5" placeholder="Data Ultrasound 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="us6"><strong>Data Ultrasound 6</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us6" rows="5" placeholder="Data Ultrasound 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="us7"><strong>Data Ultrasound 7</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us7" rows="5" placeholder="Data Ultrasound 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="us8"><strong>Data Ultrasound 8</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us8" rows="5" placeholder="Data Ultrasound 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="us9"><strong>Data Ultrasound 9</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us9" rows="5" placeholder="Data Ultrasound 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="us10"><strong>Data Ultrasound 10</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="us10" rows="5" placeholder="Data Ultrasound 10" readonly></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer d-flex justify-content-between">
-                                                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                                <i class="bx bx-x d-block d-sm-none"></i>
-                                                                <span class="d-none d-sm-block">Batal</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Table untuk Super Bright -->
+                                            <div id="superBrightFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Super Bright</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($superbright as $sb) : ?>
+                                                                <tr>
+                                                                    <td><?= formatDateTime($sb->ins_time) ?></td>
+                                                                    <td>
+                                                                        <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                            <i class="fas fa-eye"></i> Lihat
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-warning border-0 edit-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                            <i class="fas fa-edit"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-danger border-0 delete-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                            <i class="fas fa-trash"></i> Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Detail Modal Super Bright -->
+                                            <div class="modal fade" id="superBrightModal" tabindex="-1" role="dialog" aria-labelledby="superBrightModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="superBrightModalTitle">Detail Super Bright</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                             </button>
-                                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-                                                                <i class="bx bx-check d-block d-sm-none"></i>
-                                                                <span class="d-none d-sm-block">Simpan</span>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                    <!-- Fields untuk Super Bright -->
+                                                                    <div id="superBrightFieldsDetail">
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb1"><strong>Data Super Bright 1</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb1" rows="5" placeholder="Data Super Bright 1" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb2"><strong>Data Super Bright 2</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb2" rows="5" placeholder="Data Super Bright 2" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb3"><strong>Data Super Bright 3</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb3" rows="5" placeholder="Data Super Bright 3" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb4"><strong>Data Super Bright 4</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb4" rows="5" placeholder="Data Super Bright 4" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb5"><strong>Data Super Bright 5</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb5" rows="5" placeholder="Data Super Bright 5" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb6"><strong>Data Super Bright 6</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb6" rows="5" placeholder="Data Super Bright 6" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb7"><strong>Data Super Bright 7</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb7" rows="5" placeholder="Data Super Bright 7" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb8"><strong>Data Super Bright 8</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb8" rows="5" placeholder="Data Super Bright 8" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb9"><strong>Data Super Bright 9</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb9" rows="5" placeholder="Data Super Bright 9" readonly></textarea>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <label for="sb10"><strong>Data Super Bright 10</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="sb10" rows="5" placeholder="Data Super Bright 10" readonly></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Table untuk Magnetik -->
+                                            <div id="magnetikFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Magnetik</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($magnetik as $mag) : ?>
+                                                                <tr>
+                                                                    <td><?= formatDateTime($mag->ins_time) ?></td>
+                                                                    <td>
+                                                                        <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                            <i class="fas fa-eye"></i> Lihat
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                            <i class="fas fa-edit"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" class="badge bg-danger border-0 delete-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                            <i class="fas fa-trash"></i> Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Detail Modal Magnetik -->
+                                            <div class="modal fade" id="MagnetikModal" tabindex="-1" role="dialog" aria-labelledby="MagnetikModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="MagnetikModalTitle">Detail Magnetik</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                             </button>
                                                         </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                    <!-- Fields untuk Magnetik -->
+                                                                    <div id="magnetikFieldsDetail">
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag1" rows="5" placeholder="Data Magnetik 1" readonly></textarea>
+                                                                        </div>
 
-                                        <!-- Table untuk Ultrasound -->
-                                        <div id="ultraSoundFields" style="display: none;">
-                                            <div>
-                                                <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal Periksa</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($ultrasound as $us) : ?>
-                                                            <tr>
-                                                                <td><?= formatDateTime($us->ins_time) ?></td>
-                                                                <td>
-                                                                    <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
-                                                                        <i class="fas fa-eye"></i> Lihat
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
-                                                                        <i class="fas fa-trash"></i> Hapus
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                        </div>
 
-                                        <!-- Detail Modal Ultrasound -->
-                                        <div class="modal fade" id="ultraSoundModal" tabindex="-1" role="dialog" aria-labelledby="ultraSoundModalTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ultraSoundModalTitle">Detail Ultrasound</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="form-body">
-                                                            <div class="row">
-                                                                <div id="ultraSoundFields">
-                                                                    <div class="col">
-                                                                        <label for="us1"><strong>Data Ultrasound 1</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us1" rows="5" placeholder="Data Ultrasound 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us2"><strong>Data Ultrasound 2</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us2" rows="5" placeholder="Data Ultrasound 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us3"><strong>Data Ultrasound 3</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us3" rows="5" placeholder="Data Ultrasound 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us4"><strong>Data Ultrasound 4</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us4" rows="5" placeholder="Data Ultrasound 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us5"><strong>Data Ultrasound 5</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us5" rows="5" placeholder="Data Ultrasound 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us6"><strong>Data Ultrasound 6</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us6" rows="5" placeholder="Data Ultrasound 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us7"><strong>Data Ultrasound 7</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us7" rows="5" placeholder="Data Ultrasound 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us8"><strong>Data Ultrasound 8</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us8" rows="5" placeholder="Data Ultrasound 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us9"><strong>Data Ultrasound 9</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us9" rows="5" placeholder="Data Ultrasound 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="us10"><strong>Data Ultrasound 10</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="us10" rows="5" placeholder="Data Ultrasound 10" readonly></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                        </div>
 
-                                        <!-- Table untuk Super Bright -->
-                                        <div id="superBrightFields" style="display: none;">
-                                            <div>
-                                                <h6 class="h6 mt-4 mb-4">Super Bright</h6>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal Periksa</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($superbright as $sb) : ?>
-                                                            <tr>
-                                                                <td><?= formatDateTime($sb->ins_time) ?></td>
-                                                                <td>
-                                                                    <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                        <i class="fas fa-eye"></i> Lihat
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                        <i class="fas fa-trash"></i> Hapus
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                        </div>
 
-                                        <!-- Detail Modal Super Bright -->
-                                        <div class="modal fade" id="superBrightModal" tabindex="-1" role="dialog" aria-labelledby="superBrightModalTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="superBrightModalTitle">Detail Super Bright</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="form-body">
-                                                            <div class="row">
-                                                                <!-- Fields untuk Super Bright -->
-                                                                <div id="superBrightFieldsDetail">
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb1"><strong>Data Super Bright 1</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb1" rows="5" placeholder="Data Super Bright 1" readonly></textarea>
-                                                                    </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                        </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb2"><strong>Data Super Bright 2</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb2" rows="5" placeholder="Data Super Bright 2" readonly></textarea>
-                                                                    </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                        </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb3"><strong>Data Super Bright 3</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb3" rows="5" placeholder="Data Super Bright 3" readonly></textarea>
-                                                                    </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                        </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb4"><strong>Data Super Bright 4</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb4" rows="5" placeholder="Data Super Bright 4" readonly></textarea>
-                                                                    </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                        </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb5"><strong>Data Super Bright 5</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb5" rows="5" placeholder="Data Super Bright 5" readonly></textarea>
-                                                                    </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                        </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb6"><strong>Data Super Bright 6</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb6" rows="5" placeholder="Data Super Bright 6" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb7"><strong>Data Super Bright 7</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb7" rows="5" placeholder="Data Super Bright 7" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb8"><strong>Data Super Bright 8</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb8" rows="5" placeholder="Data Super Bright 8" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb9"><strong>Data Super Bright 9</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb9" rows="5" placeholder="Data Super Bright 9" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="sb10"><strong>Data Super Bright 10</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="sb10" rows="5" placeholder="Data Super Bright 10" readonly></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Table untuk Magnetik -->
-                                        <div id="magnetikFields" style="display: none;">
-                                            <div>
-                                                <h6 class="h6 mt-4 mb-4">Magnetik</h6>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal Periksa</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($magnetik as $mag) : ?>
-                                                            <tr>
-                                                                <td><?= formatDateTime($mag->ins_time) ?></td>
-                                                                <td>
-                                                                    <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                        <i class="fas fa-eye"></i> Lihat
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </button>
-                                                                    <button type="button" class="badge bg-danger border-0 delete-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                        <i class="fas fa-trash"></i> Hapus
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <!-- Detail Modal Magnetik -->
-                                        <div class="modal fade" id="MagnetikModal" tabindex="-1" role="dialog" aria-labelledby="MagnetikModalTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="MagnetikModalTitle">Detail Magnetik</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="form-body">
-                                                            <div class="row">
-                                                                <!-- Fields untuk Magnetik -->
-                                                                <div id="magnetikFieldsDetail">
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag1" rows="5" placeholder="Data Magnetik 1" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                    </div>
-                                                                    <div class="col mb-3">
-                                                                        <textarea class="form-control" id="mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                        <div class="col-md-12">
+                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -549,8 +561,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                </form>
+                            <?php else : ?>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-5 text-center">
+                                        <div class="alert alert-light-warning">
+                                            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i></h4>
+                                            <p>Pasien belum pernah periksa!</p>
+                                            <p>Silahkan untuk periksa pasien terlebih dahulu.</p>
+                                        </div>
+                                        <a href="<?= base_url('analisis_darah') ?>" class="btn btn-primary me-1 mb-1 px-5">Periksa Pasien</a>
+                                    </div>
                                 </div>
-                            </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
