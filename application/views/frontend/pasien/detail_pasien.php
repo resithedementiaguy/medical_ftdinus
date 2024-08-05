@@ -17,9 +17,6 @@
         </div>
     </div>
 
-
-
-    
     <section class="section">
         <div class="card">
             <div class="card-body">
@@ -29,39 +26,60 @@
                     </div>
                     <div class="col d-flex justify-content-end">
                         <div>
-                            <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal">
-                                <i class="fas fa-eye"></i> Lihat
-                            </button>
                             <a href="<?php echo site_url('penduduk/edit/' . $pasien['ktp_id']); ?>" class="badge bg-warning">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
+                    <div class="col custom-table">
+                        <div class="custom-row">
+                            <div class="custom-label">NIK</div>
+                            <div class="custom-data"><?php echo $pasien['nik']; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Nama Lengkap</div>
+                            <div class="custom-data"><?php echo $pasien['nama']; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Jenis Kelamin</div>
+                            <div class="custom-data">
+                                <?php
+                                if ($pasien['jenis_kelamin'] === 'L') {
+                                    echo 'Laki-laki';
+                                } elseif ($pasien['jenis_kelamin'] === 'P') {
+                                    echo 'Perempuan';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Tempat Tanggal Lahir</div>
+                            <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
+                        </div>
+                    </div>
                     <div class="col">
-                        <div class="data-list custom-table">
-                            <div class="custom-row">
-                                <div class="custom-label">NIK</div>
-                                <div class="custom-data"><?php echo $pasien['nik']; ?></div>
-                            </div>
-                            <div class="custom-row">
-                                <div class="custom-label">Nama Lengkap</div>
-                                <div class="custom-data"><?php echo $pasien['nama']; ?></div>
-                            </div>
-                            <div class="custom-row">
-                                <div class="custom-label">Tempat Tanggal Lahir</div>
-                                <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
-                            </div>
-                            <div class="custom-row">
-                                <div class="custom-label">Alamat</div>
-                                <div class="custom-data"><?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
-                            </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Alamat</div>
+                            <div class="custom-data"><?php echo $pasien['alamat']; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Kelurahan/Desa</div>
+                            <div class="custom-data"><?php echo $pasien['kelurahan']; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Kecamatan</div>
+                            <div class="custom-data"><?php echo $pasien['kecamatan']; ?></div>
+                        </div>
+                        <div class="custom-row">
+                            <div class="custom-label">Kota</div>
+                            <div class="custom-data"><?php echo $pasien['kota']; ?></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <section id="basic-horizontal-layouts">

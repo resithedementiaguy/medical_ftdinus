@@ -21,7 +21,7 @@ class Mod_pasien extends CI_Model
 
     public function get_pasien_detail($nik)
     {
-        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.kelurahan, ktp.kecamatan, ktp.kota');
+        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.jenis_kelamin, ktp.kelurahan, ktp.kecamatan, ktp.kota');
         $this->db->from('ktp');
         $this->db->join('pasien', 'pasien.nik = ktp.nik', 'left');
         $this->db->where('ktp.nik', $nik);
