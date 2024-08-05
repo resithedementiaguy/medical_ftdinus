@@ -67,6 +67,12 @@ class Mod_pasien extends CI_Model
         return $query->result();
     }
 
+    public function update_ultrasound($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('ultrasound', $data);
+    }
+
     public function get_ultrasound_id($id)
     {
         $this->db->select('*');
@@ -87,6 +93,12 @@ class Mod_pasien extends CI_Model
         return $query->result();
     }
 
+    public function update_superbright($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('superbright', $data);
+    }
+
     public function get_superbright_id($id)
     {
         $this->db->select('*');
@@ -105,6 +117,12 @@ class Mod_pasien extends CI_Model
         $this->db->where('pasien.nik', $nik);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function update_magnetik($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('magnetik', $data);
     }
 
     public function get_magnetik_id($id)
