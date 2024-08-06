@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mod_darah extends CI_Model
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -28,23 +27,33 @@ class Mod_darah extends CI_Model
         return null;
     }
 
+    public function add_pasien($nik)
+    {
+        $this->db->insert('pasien', array('nik' => $nik));
+        return $this->db->insert_id();
+    }
+
     public function add_suntik($data)
     {
-        return $this->db->insert('suntik', $data);
+        $this->db->insert('suntik', $data);
+        return $this->db->affected_rows() > 0;
     }
 
     public function add_ultrasound($data)
     {
-        return $this->db->insert('ultrasound', $data);
+        $this->db->insert('ultrasound', $data);
+        return $this->db->affected_rows() > 0;
     }
 
     public function add_superbright($data)
     {
-        return $this->db->insert('superbright', $data);
+        $this->db->insert('superbright', $data);
+        return $this->db->affected_rows() > 0;
     }
 
     public function add_magnetik($data)
     {
-        return $this->db->insert('magnetik', $data);
+        $this->db->insert('magnetik', $data);
+        return $this->db->affected_rows() > 0;
     }
 }

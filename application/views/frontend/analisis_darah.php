@@ -78,6 +78,9 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Suntik</h6>
                                             </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                            </div>
                                             <div class="col-md-4">
                                                 <label for="glukosa">Glukosa</label>
                                             </div>
@@ -312,8 +315,8 @@
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-light-secondary me-3 mb-1 px-5">Lewati</button>
                                             <button type="submit" class="btn btn-primary me-1 mb-1 px-5">Simpan</button>
-                                            <!-- <button type="reset" class="btn btn-light-secondary me-1 mb-1 px-5">Selesai</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -326,8 +329,26 @@
     </section>
 </div>
 
-<!-- Modal  -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<!-- Modal pilih nik dan alat -->
+<div class="modal modal-borderless fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Peringatan Simpan!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Pilih NIK dan alat terlebih dahulu sebelum simpan data.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal berhasil  -->
+<div class="modal modal-borderless fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -338,31 +359,27 @@
                 Data alat berhasil ditambahkan!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lanjut</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Tampilkan nama pada Select NIK
     $(document).ready(function() {
+        // Function for getting name based on selected NIK
         $('#nik').change(function() {
             var selectedNik = $(this).val();
             if (selectedNik) {
                 $.ajax({
-                    url: '<?php echo base_url('analisis_darah/get_nama_by_nik'); ?>',
+                    url: '<?= base_url('analisis_darah/get_nama_by_nik'); ?>',
                     type: 'POST',
                     data: {
                         nik: selectedNik
                     },
                     dataType: 'json',
                     success: function(response) {
-                        if (response) {
-                            $('#nama').val(response);
-                        } else {
-                            $('#nama').val('');
-                        }
+                        $('#nama').val(response ? response : '');
                     },
                     error: function(xhr, status, error) {
                         alert('Terjadi kesalahan: ' + error);
@@ -373,49 +390,52 @@
             }
         });
 
+        // Function for form submission
         $('#analisisForm').submit(function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent the default form submission
 
-            var formData = $(this).serialize();
             var selectedNik = $('#nik').val();
             var selectedNama = $('#nama').val();
+            var selectedAlat = $('#alat').val();
+
+            if (selectedNik === "" || selectedAlat === "") {
+                $('#errorModal').modal('show');
+                return;
+            }
+
+            var formData = $(this).serialize();
 
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    // Menampilkan modal data berhasil ditambahkan
                     $('#successModal').modal('show');
 
                     console.log('Jumlah opsi di #alat:', $('#alat option').length);
 
-                    // Cek apakah tidak ada opsi tersisa (default = 2 di console.log)
+                    // Check if there are only default options left
                     if ($('#alat option').length === 2) {
-                        $('#successModal').modal('show');
-
-                        // Event listener untuk modal saat diklik
-                        $('#successModal').on('click', function() {
-                            location.reload();
+                        // Show success modal
+                        $('#successModal').on('hide.bs.modal', function() {
+                            $.ajax({
+                                url: '<?php echo site_url('analisis_darah/clear_session_id'); ?>',
+                                type: 'POST',
+                                success: function(response) {
+                                    location.reload();
+                                }
+                            });
                         });
                     } else {
-                        // Jika masih ada opsi, reset form dan sembunyikan fields
-                        var selectedAlat = $('#alat').val();
-
-                        // Remove the selected option
-                        $('#alat option[value="' + selectedAlat + '"]').remove();
-
-                        // Clear the fields after saving
+                        // Remove selected option and reset form
+                        $('#alat option:selected').remove();
                         $('#analisisForm')[0].reset();
                         $('#nik').val(selectedNik);
                         $('#nama').val(selectedNama);
+                        $('#nama').val($('#nama').val());
 
-                        // Hide the fields for the selected alat
-                        if (selectedAlat) {
-                            $('#' + selectedAlat + 'Fields').hide();
-                        }
-
-                        toggleFields();
+                        // Hide fields related to the selected alat
+                        $('#' + selectedAlat + 'Fields').hide();
                     }
                 },
                 error: function(xhr, status, error) {
@@ -425,7 +445,7 @@
         });
     });
 
-    // Tampilkan Select Alat hidden
+    // Function select alat sembunyi
     document.addEventListener('DOMContentLoaded', function() {
         const alatSelect = document.getElementById('alat');
         const suntikFields = document.getElementById('suntikFields');
@@ -448,7 +468,7 @@
         toggleFields();
     });
 
-    // Tampilkan Field Alat hidden
+    // Function field alat sembunyi
     document.addEventListener("DOMContentLoaded", function() {
         var form = document.getElementById('analisisForm');
         var alatSelect = document.getElementById('alat');

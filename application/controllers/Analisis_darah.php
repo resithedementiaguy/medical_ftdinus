@@ -7,6 +7,9 @@ class Analisis_darah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mod_darah');
+        $this->load->library('session');
+        $this->load->library('form_validation');
+        $this->load->helper('form');
     }
 
     public function index()
@@ -26,10 +29,10 @@ class Analisis_darah extends CI_Controller
 
     public function add()
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
         $alat = $this->input->post('alat');
+        $nik = $this->input->post('nik');
+
+        // Validate the input
         $this->form_validation->set_rules('nik', 'NIK', 'required');
 
         if ($alat == 'suntik') {
@@ -38,13 +41,62 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('spo2', 'SPO2', 'required');
             $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
             $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
+        } elseif ($alat == 'ultraSound') {
+            $this->form_validation->set_rules('us1', 'US1', 'required');
+            $this->form_validation->set_rules('us2', 'US2', 'required');
+            $this->form_validation->set_rules('us3', 'US3', 'required');
+            $this->form_validation->set_rules('us4', 'US4', 'required');
+            $this->form_validation->set_rules('us5', 'US5', 'required');
+            $this->form_validation->set_rules('us6', 'US6', 'required');
+            $this->form_validation->set_rules('us7', 'US7', 'required');
+            $this->form_validation->set_rules('us8', 'US8', 'required');
+            $this->form_validation->set_rules('us9', 'US9', 'required');
+            $this->form_validation->set_rules('us10', 'US10', 'required');
+        } elseif ($alat == 'superBright') {
+            $this->form_validation->set_rules('sb1', 'SB1', 'required');
+            $this->form_validation->set_rules('sb2', 'SB2', 'required');
+            $this->form_validation->set_rules('sb3', 'SB3', 'required');
+            $this->form_validation->set_rules('sb4', 'SB4', 'required');
+            $this->form_validation->set_rules('sb5', 'SB5', 'required');
+            $this->form_validation->set_rules('sb6', 'SB6', 'required');
+            $this->form_validation->set_rules('sb7', 'SB7', 'required');
+            $this->form_validation->set_rules('sb8', 'SB8', 'required');
+            $this->form_validation->set_rules('sb9', 'SB9', 'required');
+            $this->form_validation->set_rules('sb10', 'SB10', 'required');
+        } elseif ($alat == 'magnetik') {
+            $this->form_validation->set_rules('mag1', 'Mag1', 'required');
+            $this->form_validation->set_rules('mag2', 'Mag2', 'required');
+            $this->form_validation->set_rules('mag3', 'Mag3', 'required');
+            $this->form_validation->set_rules('mag4', 'Mag4', 'required');
+            $this->form_validation->set_rules('mag5', 'Mag5', 'required');
+            $this->form_validation->set_rules('mag6', 'Mag6', 'required');
+            $this->form_validation->set_rules('mag7', 'Mag7', 'required');
+            $this->form_validation->set_rules('mag8', 'Mag8', 'required');
+            $this->form_validation->set_rules('mag9', 'Mag9', 'required');
+            $this->form_validation->set_rules('mag10', 'Mag10', 'required');
         }
 
         if ($this->form_validation->run() === FALSE) {
-            // Jika validasi gagal, kembalikan ke form dengan error
             $this->index();
         } else {
-            $data = array('nik' => $this->input->post('nik'));
+            // Check if we already have a pasien ID in session
+            if (!$this->session->userdata('pasien_id')) {
+                // Insert the pasien data into the pasien table and get the new ID
+                $id_pasien = $this->Mod_darah->add_pasien($nik);
+                // Save the pasien ID in session
+                $this->session->set_userdata('pasien_id', $id_pasien);
+            } else {
+                // Use the pasien ID from session
+                $id_pasien = $this->session->userdata('pasien_id');
+            }
+
+            date_default_timezone_set('Asia/Jakarta');
+            $ins_time=date('Y-m-d H:i:s', time());
+
+            $data = array(
+                'id_pasien' => $id_pasien,
+                'ins_time'  => $ins_time
+            );
 
             if ($alat == 'suntik') {
                 $data += array(
@@ -99,7 +151,17 @@ class Analisis_darah extends CI_Controller
                 $this->Mod_darah->add_magnetik($data);
             }
 
+            if ($this->input->post('completed') == 'yes') {
+                $this->session->unset_userdata('pasien_id');
+            }
+
             redirect('analisis_darah');
         }
+    }
+
+    public function clear_session_id()
+    {
+        $this->session->unset_userdata('pasien_id');
+        echo json_encode(['status' => 'success']);
     }
 }
