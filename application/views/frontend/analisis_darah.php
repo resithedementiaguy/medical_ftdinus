@@ -78,9 +78,7 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Suntik</h6>
                                             </div>
-                                            <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
-                                            </div>
+                                            
                                             <div class="col-md-4">
                                                 <label for="glukosa">Glukosa</label>
                                             </div>
@@ -118,65 +116,68 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" id="fetchData" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                            </div>
                                             <div class="col-md-4">
                                                 <label for="us1">Sinyal Ultrasound 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us2">Sinyal Ultrasound 2</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us3">Sinyal Ultrasound 3</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us4">Sinyal Ultrasound 4</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us5">Sinyal Ultrasound 5</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us6">Sinyal Ultrasound 6</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us7">Sinyal Ultrasound 7</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us8">Sinyal Ultrasound 8</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us9">Sinyal Ultrasound 9</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us10">Sinyal Ultrasound 10</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly></textarea>
                                             </div>
                                         </div>
 
@@ -184,6 +185,9 @@
                                         <div id="superBrightFields" style="display: none;">
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Super Bright</h6>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="sb1">Sinyal Super Bright 1</label>
@@ -251,6 +255,9 @@
                                         <div id="magnetikFields" style="display: none;">
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Magnetik</h6>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="mag1">Sinyal Magnetik 1</label>
@@ -489,5 +496,42 @@
 
         // Tampilkan field yang sesuai saat halaman dimuat
         alatSelect.dispatchEvent(new Event('change'));
+    });
+
+    $(document).ready(function() {
+        $('#fetchData').click(function() {
+            var id_pasien = $('#nik').val(); // Ambil ID Pasien berdasarkan NIK yang dipilih
+            
+            if (id_pasien) {
+                $.ajax({
+                    url: '<?= base_url('analisis_darah/get_ultrasound_data') ?>',
+                    type: 'POST',
+                    data: { id_pasien: id_pasien },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.error) {
+                            alert(response.error);
+                        } else {
+                            // Update textarea dengan data yang diterima
+                            $('#us1').val(response.us1 || ''); 
+                            $('#us2').val(response.us2 || '');
+                            $('#us3').val(response.us3 || '');
+                            $('#us4').val(response.us4 || '');
+                            $('#us5').val(response.us5 || '');
+                            $('#us6').val(response.us6 || '');
+                            $('#us7').val(response.us7 || '');
+                            $('#us8').val(response.us8 || '');
+                            $('#us9').val(response.us9 || '');
+                            $('#us10').val(response.us10 || '');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat mengambil data.');
+                    }
+                });
+            } else {
+                alert('Silakan pilih NIK terlebih dahulu.');
+            }
+        });
     });
 </script>

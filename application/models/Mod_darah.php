@@ -56,4 +56,13 @@ class Mod_darah extends CI_Model
         $this->db->insert('magnetik', $data);
         return $this->db->affected_rows() > 0;
     }
+
+    public function get_ultrasound_data_by_pasien($id_pasien)
+    {
+        $this->db->select('*');
+        $this->db->from('ultrasound');
+        $this->db->where('id_pasien', $id_pasien);
+        $query = $this->db->get();
+        return $query->row_array(); // Mengembalikan data dalam bentuk array
+    }
 }

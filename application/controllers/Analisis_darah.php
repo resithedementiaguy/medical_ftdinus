@@ -164,4 +164,16 @@ class Analisis_darah extends CI_Controller
         $this->session->unset_userdata('pasien_id');
         echo json_encode(['status' => 'success']);
     }
+
+    public function get_ultrasound_data()
+{
+    $id_pasien = $this->input->post('id_pasien');
+
+    if ($id_pasien) {
+        $ultrasound_data = $this->Mod_darah->get_ultrasound_data_by_pasien($id_pasien);
+        echo json_encode($ultrasound_data);
+    } else {
+        echo json_encode(['error' => 'ID Pasien tidak ditemukan']);
+    }
+}
 }
