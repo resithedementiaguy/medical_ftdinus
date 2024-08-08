@@ -117,7 +117,7 @@
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="button" id="fetchData" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                                <button type="button" id="ultraSoundBtn" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us1">Sinyal Ultrasound 1</label>
@@ -129,55 +129,55 @@
                                                 <label for="us2">Sinyal Ultrasound 2</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us3">Sinyal Ultrasound 3</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us4">Sinyal Ultrasound 4</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us5">Sinyal Ultrasound 5</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us6">Sinyal Ultrasound 6</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us7">Sinyal Ultrasound 7</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us8">Sinyal Ultrasound 8</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us9">Sinyal Ultrasound 9</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us10">Sinyal Ultrasound 10</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly></textarea>
                                             </div>
                                         </div>
 
@@ -514,7 +514,7 @@
                                             <div class="col form-group">
                                                 <textarea class="form-control" id="sel_mag10" name="sel_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly>72,74 29,30 34,35</textarea>
                                             </div>
-                                            
+
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -789,5 +789,30 @@
                 alert('Silakan pilih NIK terlebih dahulu.');
             }
         });
+    });
+
+    document.getElementById('ultraSoundBtn').addEventListener('click', function() {
+        var ultrasoundId = 1;
+
+        // Ambil data_us dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_ultrasound_data/' + ultrasoundId)
+            .then(response => response.json())
+            .then(data_us => {
+                // Mengisi nilai textarea dengan data dari data_us
+                document.getElementById('us1').value = data_us.us1 || '';
+                document.getElementById('us2').value = data_us.us2 || '';
+                document.getElementById('us3').value = data_us.us3 || '';
+                document.getElementById('us4').value = data_us.us4 || '';
+                document.getElementById('us5').value = data_us.us5 || '';
+                document.getElementById('us6').value = data_us.us6 || '';
+                document.getElementById('us7').value = data_us.us7 || '';
+                document.getElementById('us8').value = data_us.us8 || '';
+                document.getElementById('us9').value = data_us.us9 || '';
+                document.getElementById('us10').value = data_us.us10 || '';
+
+                // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
+                document.getElementById('ultraSoundFields').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
     });
 </script>

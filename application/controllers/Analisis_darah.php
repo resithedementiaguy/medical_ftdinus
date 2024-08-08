@@ -7,6 +7,7 @@ class Analisis_darah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mod_darah');
+        $this->load->model('Ultrasound_model');
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -18,27 +19,6 @@ class Analisis_darah extends CI_Controller
         $this->load->view('partials/header');
         $this->load->view('frontend/analisis_darah', $data);
         $this->load->view('partials/footer');
-    }
-
-    public function send_data()
-    {
-        $value = $this->input->post('value');
-        log_message('info', 'Data received: ' . $value);  // Logging data received
-        if ($value !== NULL) {
-            // Simpan data di sesi
-            $data = $this->session->userdata('data') ?? [];
-            $data[] = $value;
-            $this->session->set_userdata('data', $data);
-            log_message('info', 'Data stored in session: ' . json_encode($data));  // Logging data stored in session
-        }
-    }
-
-    public function get_data()
-    {
-        // Ambil data dari sesi
-        $data = $this->session->userdata('data') ?? [];
-        log_message('info', 'Data sent: ' . json_encode($data));  // Logging data sent
-        echo json_encode($data);
     }
 
     public function get_nama_by_nik()
@@ -85,7 +65,6 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('sb9', 'SB9', 'required');
             $this->form_validation->set_rules('sb10', 'SB10', 'required');
         } elseif ($alat == 'magnetik') {
-            
         }
 
         if ($this->form_validation->run() === FALSE) {
@@ -208,15 +187,12 @@ class Analisis_darah extends CI_Controller
         echo json_encode(['status' => 'success']);
     }
 
-    public function get_ultrasound_data()
+    public function get_ultrasound_data($id)
     {
-        $id_pasien = $this->input->post('id_pasien');
+        // Ambil data ultrasound berdasarkan ID
+        $data_us = $this->Ultrasound_model->get_ultrasound($id);
 
-        if ($id_pasien) {
-            $ultrasound_data = $this->Mod_darah->get_ultrasound_data_by_pasien($id_pasien);
-            echo json_encode($ultrasound_data);
-        } else {
-            echo json_encode(['error' => 'ID Pasien tidak ditemukan']);
-        }
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_us);
     }
 }

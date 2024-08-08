@@ -11,7 +11,7 @@ class Ultrasound_model extends CI_Model
 
     public function get_ultrasound($id)
     {
-        $query = $this->db->get_where('ultrasound', array('id' => $id));
+        $query = $this->db->get_where('data_us', array('id' => $id));
         return $query->row_array();
     }
 
