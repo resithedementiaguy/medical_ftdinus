@@ -20,6 +20,27 @@ class Analisis_darah extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    public function send_data()
+    {
+        $value = $this->input->post('value');
+        log_message('info', 'Data received: ' . $value);  // Logging data received
+        if ($value !== NULL) {
+            // Simpan data di sesi
+            $data = $this->session->userdata('data') ?? [];
+            $data[] = $value;
+            $this->session->set_userdata('data', $data);
+            log_message('info', 'Data stored in session: ' . json_encode($data));  // Logging data stored in session
+        }
+    }
+
+    public function get_data()
+    {
+        // Ambil data dari sesi
+        $data = $this->session->userdata('data') ?? [];
+        log_message('info', 'Data sent: ' . json_encode($data));  // Logging data sent
+        echo json_encode($data);
+    }
+
     public function get_nama_by_nik()
     {
         $nik = $this->input->post('nik');
@@ -91,7 +112,7 @@ class Analisis_darah extends CI_Controller
             }
 
             date_default_timezone_set('Asia/Jakarta');
-            $ins_time=date('Y-m-d H:i:s', time());
+            $ins_time = date('Y-m-d H:i:s', time());
 
             $data = array(
                 'id_pasien' => $id_pasien,

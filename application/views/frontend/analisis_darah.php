@@ -78,7 +78,7 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Suntik</h6>
                                             </div>
-                                            
+
                                             <div class="col-md-4">
                                                 <label for="glukosa">Glukosa</label>
                                             </div>
@@ -123,7 +123,7 @@
                                                 <label for="us1">Sinyal Ultrasound 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly>19,21 27,28 09,11</textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us2">Sinyal Ultrasound 2</label>
@@ -392,6 +392,21 @@
 </div>
 
 <script>
+    async function fetchData() {
+        try {
+            const response = await fetch('http://localhost/medical_ftdinus/analisis_darah/get_data');
+            const data = await response.json();
+            const textarea = document.getElementById('us1');
+            textarea.value = data.join('\n');
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    setInterval(fetchData, 1000);
+</script>
+
+<script>
     $(document).ready(function() {
         // Function for getting name based on selected NIK
         $('#nik').change(function() {
@@ -454,7 +469,7 @@
                         });
                     } else {
                         // Remove selected option and reset form
-                        $('#alat option:selected'). remove();
+                        $('#alat option:selected').remove();
                         $('#analisisForm')[0].reset();
                         $('#nik').val(selectedNik);
                         $('#nama').val(selectedNama);
@@ -544,19 +559,21 @@
     $(document).ready(function() {
         $('#fetchData').click(function() {
             var id_pasien = $('#nik').val(); // Ambil ID Pasien berdasarkan NIK yang dipilih
-            
+
             if (id_pasien) {
                 $.ajax({
                     url: '<?= base_url('analisis_darah/get_ultrasound_data') ?>',
                     type: 'POST',
-                    data: { id_pasien: id_pasien },
+                    data: {
+                        id_pasien: id_pasien
+                    },
                     dataType: 'json',
                     success: function(response) {
                         if (response.error) {
                             alert(response.error);
                         } else {
                             // Update textarea dengan data yang diterima
-                            $('#us1').val(response.us1 || ''); 
+                            $('#us1').val(response.us1 || '');
                             $('#us2').val(response.us2 || '');
                             $('#us3').val(response.us3 || '');
                             $('#us4').val(response.us4 || '');

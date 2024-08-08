@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -50,5 +50,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dashboard';
+
+$route['api/ultrasound/create']['post'] = 'api_ultrasound/create';
+$route['api/ultrasound/(:num)']['get'] = 'api_ultrasound/get/$1';
+$route['api/ultrasound/(:num)']['put'] = 'api_ultrasound/update/$1';
+$route['api/ultrasound/(:num)']['delete'] = 'api_ultrasound/delete/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
