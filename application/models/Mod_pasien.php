@@ -274,4 +274,47 @@ class Mod_pasien extends CI_Model
     
         return $result;
     }
+
+    public function get_periksa_mingguan() {
+        $query = "
+            SELECT 
+                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
+                COUNT(*) as total, 
+                'Suntik' as type 
+            FROM suntik 
+            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
+            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
+            GROUP BY day
+            UNION ALL
+            SELECT 
+                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
+                COUNT(*) as total, 
+                'Ultrasound' as type 
+            FROM ultrasound 
+            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
+            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
+            GROUP BY day
+            UNION ALL
+            SELECT 
+                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
+                COUNT(*) as total, 
+                'Superbright' as type 
+            FROM superbright 
+            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
+            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
+            GROUP BY day
+            UNION ALL
+            SELECT 
+                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
+                COUNT(*) as total, 
+                'Magnetik' as type 
+            FROM magnetik 
+            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
+            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
+            GROUP BY day
+        ";
+
+        $result = $this->db->query($query);
+        return $result->result();
+    }
 }
