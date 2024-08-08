@@ -44,10 +44,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Periksa per bulan</h4>
+                            <h4>Jumlah Periksa Minggu Ini</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart"></div>
+                            <canvas id="periksaMingguanChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -252,89 +252,86 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var options = {
-            series: [{
-                name: 'Inflation',
-                data: [23, 31, 40, 10, 40, 36, 32, 23, 14, 8, 52, 21]
-            }],
-            chart: {
-                height: 350,
-                type: 'bar',
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 5,
-                    dataLabels: {
-                        position: 'top',
-                    },
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function(val) {
-                    return val;
-                },
-                offsetY: -20,
-                style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                }
-            },
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById("periksaMingguanChart").getContext("2d");
 
-            xaxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                position: 'top',
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                },
-                crosshairs: {
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            colorFrom: '#D8E3F0',
-                            colorTo: '#BED1E6',
-                            stops: [0, 100],
-                            opacityFrom: 0.4,
-                            opacityTo: 0.5,
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true,
-                }
-            },
-            yaxis: {
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false,
-                },
-                labels: {
-                    show: false,
-                    formatter: function(val) {
-                        return val + "%";
-                    }
-                }
+        // Data dari PHP ke JavaScript
+        var periksaMingguan = <?= json_encode($periksa_mingguan) ?>;
 
-            },
-            title: {
-                text: 'Data pasien yang periksa beberapa bulan, 2024',
-                floating: true,
-                offsetY: 330,
-                align: 'center',
-                style: {
-                    color: '#444'
+        // Inisialisasi data per hari dalam minggu
+        var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        var suntikData = Array(7).fill(0);
+        var ultrasoundData = Array(7).fill(0);
+        var superbrightData = Array(7).fill(0);
+        var magnetikData = Array(7).fill(0);
+
+        // Olah data untuk Chart.js
+        periksaMingguan.forEach(function(item) {
+            var dayIndex = daysOfWeek.indexOf(item.day);
+            if (dayIndex !== -1) {
+                switch(item.type) {
+                    case 'Suntik':
+                        suntikData[dayIndex] = item.total;
+                        break;
+                    case 'Ultrasound':
+                        ultrasoundData[dayIndex] = item.total;
+                        break;
+                    case 'Superbright':
+                        superbrightData[dayIndex] = item.total;
+                        break;
+                    case 'Magnetik':
+                        magnetikData[dayIndex] = item.total;
+                        break;
                 }
             }
-        };
+        });
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        // Membuat grafik bar
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: daysOfWeek,
+                datasets: [
+                    {
+                        label: 'Suntik',
+                        data: suntikData,
+                        backgroundColor: '#FF6384',
+                    },
+                    {
+                        label: 'Ultrasound',
+                        data: ultrasoundData,
+                        backgroundColor: '#36A2EB',
+                    },
+                    {
+                        label: 'Superbright',
+                        data: superbrightData,
+                        backgroundColor: '#FFCE56',
+                    },
+                    {
+                        label: 'Magnetik',
+                        data: magnetikData,
+                        backgroundColor: '#4BC0C0',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                var label = tooltipItem.dataset.label;
+                                var value = tooltipItem.raw;
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     });
 
     document.addEventListener("DOMContentLoaded", function () {

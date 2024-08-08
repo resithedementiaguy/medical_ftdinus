@@ -23,6 +23,8 @@ class Dashboard extends CI_Controller
         $data['total_pasien'] = $this->Mod_pasien->get_total_pasien();
         $data['total_pemeriksaan'] = $this->Mod_pasien->get_total_pemeriksaan();
         $data['pasien'] = $this->Mod_pasien->get_pasien_dashboard();
+        // Data per minggu
+        $data['periksa_mingguan'] = $this->Mod_pasien->get_periksa_mingguan();
         $this->load->view('partials/header');
         $this->load->view('frontend/dashboard',$data);
         $this->load->view('partials/footer');

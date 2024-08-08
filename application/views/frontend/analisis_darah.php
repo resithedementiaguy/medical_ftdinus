@@ -123,61 +123,61 @@
                                                 <label for="us1">Sinyal Ultrasound 1</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly></textarea>
+                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us2">Sinyal Ultrasound 2</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly></textarea>
+                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us3">Sinyal Ultrasound 3</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly></textarea>
+                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us4">Sinyal Ultrasound 4</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly></textarea>
+                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us5">Sinyal Ultrasound 5</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly></textarea>
+                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us6">Sinyal Ultrasound 6</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly></textarea>
+                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us7">Sinyal Ultrasound 7</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly></textarea>
+                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us8">Sinyal Ultrasound 8</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly></textarea>
+                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us9">Sinyal Ultrasound 9</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly></textarea>
+                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us10">Sinyal Ultrasound 10</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly></textarea>
+                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly>19,21 27,28 09,11</textarea>
                                             </div>
                                         </div>
 
@@ -322,7 +322,7 @@
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="button" class="btn btn-light-secondary me-3 mb-1 px-5">Lewati</button>
+                                            <button type="button" id="lewatiButton" class="btn btn-light-secondary me-3 mb-1 px-5">Lewati</button>
                                             <button type="submit" class="btn btn-primary me-1 mb-1 px-5">Simpan</button>
                                         </div>
                                     </div>
@@ -334,6 +334,25 @@
             </div>
         </div>
     </section>
+</div>
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="lewatiModal" tabindex="-1" aria-labelledby="lewatiModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lewatiModalLabel">Konfirmasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin melewati input data?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="confirmLewatiButton">Ya, Lewati</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal pilih nik dan alat -->
@@ -435,7 +454,7 @@
                         });
                     } else {
                         // Remove selected option and reset form
-                        $('#alat option:selected').remove();
+                        $('#alat option:selected'). remove();
                         $('#analisisForm')[0].reset();
                         $('#nik').val(selectedNik);
                         $('#nama').val(selectedNama);
@@ -444,6 +463,30 @@
                         // Hide fields related to the selected alat
                         $('#' + selectedAlat + 'Fields').hide();
                     }
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan: ' + error);
+                }
+            });
+        });
+
+        // Handle "Lewati" button click
+        $('#lewatiButton').click(function() {
+            $('#lewatiModal').modal('show');
+        });
+
+        // Handle confirm "Lewati" button click in modal
+        $('#confirmLewatiButton').click(function() {
+            $.ajax({
+                url: '<?= base_url('analisis_darah/clear_session_id'); ?>',
+                type: 'POST',
+                success: function(response) {
+                    // Reset the form and re-enable all options
+                    $('#analisisForm')[0].reset();
+                    $('#alat option').prop('disabled', false).show();
+                    $('#suntikFields, #ultraSoundFields, #superBrightFields, #magnetikFields').hide();
+                    // Reload the page to refresh all AJAX functions
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     alert('Terjadi kesalahan: ' + error);
