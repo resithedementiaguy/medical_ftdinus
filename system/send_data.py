@@ -3,7 +3,7 @@ import random
 import time
 
 # URL endpoint Anda
-url = 'http://localhost/medical_ftdinus/api_ultrasound/create'
+url = 'http://localhost/medical_ftdinus/api_ultrasound/update/1'
 
 # Fungsi untuk mengirim data ke API
 def send_data_to_api(data):
@@ -29,7 +29,6 @@ us10 = us_asli[2700:3000] + ['#']
 
 # Menggabungkan data menjadi JSON
 data = {
-    'id_pasien': '123456',
     'ins_time': time.strftime("%Y-%m-%d %H:%M:%S"),
     'us1': us1,
     'us2': us2,
