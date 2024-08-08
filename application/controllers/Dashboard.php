@@ -16,10 +16,10 @@ class Dashboard extends CI_Controller
         $data['ultrasound'] = $this->Mod_pasien->get_ultrasound_dashboard();
         $data['superbright'] = $this->Mod_pasien->get_superbright_dashboard();
         $data['magnetik'] = $this->Mod_pasien->get_magnetik_dashboard();
-        $data['total_suntik'] = count($data['suntik']);
-        $data['total_ultrasound'] = count($data['ultrasound']);
-        $data['total_superbright'] = count($data['superbright']);
-        $data['total_magnetik'] = count($data['magnetik']);
+        $data['total_suntik'] = $this->Mod_pasien->count_suntik_dashboard();
+        $data['total_ultrasound'] = $this->Mod_pasien->count_ultrasound_dashboard();
+        $data['total_superbright'] = $this->Mod_pasien->count_superbright_dashboard();
+        $data['total_magnetik'] = $this->Mod_pasien->count_magnetik_dashboard();
         $data['total_pasien'] = $this->Mod_pasien->get_total_pasien();
         $data['total_pemeriksaan'] = $this->Mod_pasien->get_total_pemeriksaan();
         $data['pasien'] = $this->Mod_pasien->get_pasien_dashboard();

@@ -64,16 +64,7 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('sb9', 'SB9', 'required');
             $this->form_validation->set_rules('sb10', 'SB10', 'required');
         } elseif ($alat == 'magnetik') {
-            $this->form_validation->set_rules('mag1', 'Mag1', 'required');
-            $this->form_validation->set_rules('mag2', 'Mag2', 'required');
-            $this->form_validation->set_rules('mag3', 'Mag3', 'required');
-            $this->form_validation->set_rules('mag4', 'Mag4', 'required');
-            $this->form_validation->set_rules('mag5', 'Mag5', 'required');
-            $this->form_validation->set_rules('mag6', 'Mag6', 'required');
-            $this->form_validation->set_rules('mag7', 'Mag7', 'required');
-            $this->form_validation->set_rules('mag8', 'Mag8', 'required');
-            $this->form_validation->set_rules('mag9', 'Mag9', 'required');
-            $this->form_validation->set_rules('mag10', 'Mag10', 'required');
+            
         }
 
         if ($this->form_validation->run() === FALSE) {
@@ -137,16 +128,47 @@ class Analisis_darah extends CI_Controller
                 $this->Mod_darah->add_superbright($data);
             } elseif ($alat == 'magnetik') {
                 $data += array(
-                    'mag1' => $this->input->post('mag1'),
-                    'mag2' => $this->input->post('mag2'),
-                    'mag3' => $this->input->post('mag3'),
-                    'mag4' => $this->input->post('mag4'),
-                    'mag5' => $this->input->post('mag5'),
-                    'mag6' => $this->input->post('mag6'),
-                    'mag7' => $this->input->post('mag7'),
-                    'mag8' => $this->input->post('mag8'),
-                    'mag9' => $this->input->post('mag9'),
-                    'mag10' => $this->input->post('mag10')
+                    'jtg_mag1' => $this->input->post('jtg_mag1'),
+                    'jtg_mag2' => $this->input->post('jtg_mag2'),
+                    'jtg_mag3' => $this->input->post('jtg_mag3'),
+                    'jtg_mag4' => $this->input->post('jtg_mag4'),
+                    'jtg_mag5' => $this->input->post('jtg_mag5'),
+                    'jtg_mag6' => $this->input->post('jtg_mag6'),
+                    'jtg_mag7' => $this->input->post('jtg_mag7'),
+                    'jtg_mag8' => $this->input->post('jtg_mag8'),
+                    'jtg_mag9' => $this->input->post('jtg_mag9'),
+                    'jtg_mag10' => $this->input->post('jtg_mag10'),
+                    'srf_mag1' => $this->input->post('srf_mag1'),
+                    'srf_mag2' => $this->input->post('srf_mag2'),
+                    'srf_mag3' => $this->input->post('srf_mag3'),
+                    'srf_mag4' => $this->input->post('srf_mag4'),
+                    'srf_mag5' => $this->input->post('srf_mag5'),
+                    'srf_mag6' => $this->input->post('srf_mag6'),
+                    'srf_mag7' => $this->input->post('srf_mag7'),
+                    'srf_mag8' => $this->input->post('srf_mag8'),
+                    'srf_mag9' => $this->input->post('srf_mag9'),
+                    'srf_mag10' => $this->input->post('srf_mag10'),
+                    'drh_mag1' => $this->input->post('drh_mag1'),
+                    'drh_mag2' => $this->input->post('drh_mag2'),
+                    'drh_mag3' => $this->input->post('drh_mag3'),
+                    'drh_mag4' => $this->input->post('drh_mag4'),
+                    'drh_mag5' => $this->input->post('drh_mag5'),
+                    'drh_mag6' => $this->input->post('drh_mag6'),
+                    'drh_mag7' => $this->input->post('drh_mag7'),
+                    'drh_mag8' => $this->input->post('drh_mag8'),
+                    'drh_mag9' => $this->input->post('drh_mag9'),
+                    'drh_mag10' => $this->input->post('drh_mag10'),
+                    'sel_mag1' => $this->input->post('sel_mag1'),
+                    'sel_mag2' => $this->input->post('sel_mag2'),
+                    'sel_mag3' => $this->input->post('sel_mag3'),
+                    'sel_mag4' => $this->input->post('sel_mag4'),
+                    'sel_mag5' => $this->input->post('sel_mag5'),
+                    'sel_mag6' => $this->input->post('sel_mag6'),
+                    'sel_mag7' => $this->input->post('sel_mag7'),
+                    'sel_mag8' => $this->input->post('sel_mag8'),
+                    'sel_mag9' => $this->input->post('sel_mag9'),
+                    'sel_mag10' => $this->input->post('sel_mag10'),
+
                 );
                 $this->Mod_darah->add_magnetik($data);
             }
