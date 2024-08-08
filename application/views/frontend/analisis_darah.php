@@ -118,6 +118,9 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                            </div>
                                             <div class="col-md-4">
                                                 <label for="us1">Sinyal Ultrasound 1</label>
                                             </div>
