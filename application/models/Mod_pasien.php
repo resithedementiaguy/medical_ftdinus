@@ -137,4 +137,145 @@ class Mod_pasien extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_suntik_dashboard() {
+        // Select fields
+        $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(suntik.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        
+        // Join tables
+        $this->db->from('suntik');
+        $this->db->join('pasien', 'suntik.id_pasien = pasien.id');
+        $this->db->join('ktp', 'pasien.nik = ktp.nik');
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        // Limit the number of results
+        $this->db->limit(3);
+        
+
+        // Execute query
+        $query = $this->db->get();
+        
+        // Return results
+        return $query->result();
+    }
+
+    public function get_ultrasound_dashboard() {
+        // Select fields
+        $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(ultrasound.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        
+        // Join tables
+        $this->db->from('ultrasound');
+        $this->db->join('pasien', 'ultrasound.id_pasien = pasien.id');
+        $this->db->join('ktp', 'pasien.nik = ktp.nik');
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        // Limit the number of results
+        $this->db->limit(3);
+        
+
+        // Execute query
+        $query = $this->db->get();
+        
+        // Return results
+        return $query->result();
+    }
+
+    public function get_superbright_dashboard() {
+        // Select fields
+        $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(superbright.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        
+        // Join tables
+        $this->db->from('superbright');
+        $this->db->join('pasien', 'superbright.id_pasien = pasien.id');
+        $this->db->join('ktp', 'pasien.nik = ktp.nik');
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        // Limit the number of results
+        $this->db->limit(3);
+        
+
+        // Execute query
+        $query = $this->db->get();
+        
+        // Return results
+        return $query->result();
+    }
+
+    public function get_magnetik_dashboard() {
+        // Select fields
+        $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(magnetik.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        
+        // Join tables
+        $this->db->from('magnetik');
+        $this->db->join('pasien', 'magnetik.id_pasien = pasien.id');
+        $this->db->join('ktp', 'pasien.nik = ktp.nik');
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        // Limit the number of results
+        $this->db->limit(3);
+        
+
+        // Execute query
+        $query = $this->db->get();
+        
+        // Return results
+        return $query->result();
+    }
+
+    public function get_pasien_dashboard()
+    {
+        $this->db->select('*');
+        $this->db->from('ktp');
+        $this->db->order_by('id', 'DESC'); // Urutkan berdasarkan id secara descending
+        $this->db->limit(3); // Tambahkan limit disini
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_total_pemeriksaan() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_suntik');
+        $query_suntik = $this->db->get('suntik');
+        $total_suntik = $query_suntik->row()->total_suntik;
+
+        // Get total count from ultrasound table
+        $this->db->select('COUNT(*) as total_ultrasound');
+        $query_ultrasound = $this->db->get('ultrasound');
+        $total_ultrasound = $query_ultrasound->row()->total_ultrasound;
+
+        // Get total count from superbright table
+        $this->db->select('COUNT(*) as total_superbright');
+        $query_superbright = $this->db->get('superbright');
+        $total_superbright = $query_superbright->row()->total_superbright;
+
+        // Get total count from magnetik table
+        $this->db->select('COUNT(*) as total_magnetik');
+        $query_magnetik = $this->db->get('magnetik');
+        $total_magnetik = $query_magnetik->row()->total_magnetik;
+
+        // Calculate total
+        $total_pemeriksaan = $total_suntik + $total_ultrasound + $total_superbright + $total_magnetik;
+
+        // Return the total
+        return $total_pemeriksaan;
+    }
+
+    public function get_total_pasien() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_pasien');
+        $query_pasien = $this->db->get('ktp');
+        $total_pasien = $query_pasien->row()->total_pasien;
+
+        // Return the total
+        return $total_pasien;
+    }
+
+    public function get_pemeriksaan_counts() {
+        $result = [];
+    
+        $tables = ['suntik', 'ultrasound', 'superbright', 'magnetik'];
+        foreach ($tables as $table) {
+            $this->db->select('COUNT(*) as count');
+            $query = $this->db->get($table);
+            $result[$table] = $query->row()->count;
+        }
+    
+        return $result;
+    }
 }
