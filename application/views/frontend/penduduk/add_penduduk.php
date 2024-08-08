@@ -48,6 +48,34 @@
                                         </div>
 
                                         <div class="col-md-4">
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="no_hp">Nomor HP</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="no_hp" class="form-control" name="no_hp" placeholder="Nomor HP">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="tinggi">Tinggi</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="berat">Berat</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat">
+                                        </div>
+
+                                        <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
@@ -79,19 +107,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="status_perkawinan">Status Perkawinan</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <select id="status_perkawinan" class="form-select" name="status_perkawinan">
-                                                <option value="" selected hidden>Pilih Status Perkawinan</option>
-                                                <option value="Belum Menikah">Belum Menikah</option>
-                                                <option value="Menikah">Menikah</option>
-                                                <option value="Cerai Hidup">Cerai Hidup</option>
-                                                <option value="Cerai Mati">Cerai Mati</option>
-                                            </select>
                                         </div>
 
                                         <div>
@@ -145,13 +160,6 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi">
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="kode_pos">Kode Pos</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="kode_pos" class="form-control" name="kode_pos" placeholder="Kode Pos">
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">

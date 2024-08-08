@@ -86,7 +86,6 @@ class Pasien extends CI_Controller
             'us8'       => $this->input->post('us8'),
             'us9'       => $this->input->post('us9'),
             'us10'      => $this->input->post('us10')
-
         );
 
         $updated = $this->Mod_pasien->update_ultrasound($id, $data);
@@ -121,8 +120,6 @@ class Pasien extends CI_Controller
             'sb8'       => $this->input->post('sb8'),
             'sb9'       => $this->input->post('sb9'),
             'sb10'      => $this->input->post('sb10')
-
-
         );
 
         $updated = $this->Mod_pasien->update_superbright($id, $data);
@@ -157,7 +154,6 @@ class Pasien extends CI_Controller
             'mag8'       => $this->input->post('mag8'),
             'mag9'       => $this->input->post('mag9'),
             'mag10'      => $this->input->post('mag10')
-
         );
 
         $updated = $this->Mod_pasien->update_magnetik($id, $data);

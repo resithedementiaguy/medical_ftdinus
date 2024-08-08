@@ -9,7 +9,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('pasien') ?>">Pasien</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('pasien/detail/' . $penduduk['nik']) ?>">Pasien</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit Penduduk</li>
                     </ol>
                 </nav>
@@ -49,6 +49,34 @@
                                         </div>
 
                                         <div class="col-md-4">
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="<?php echo htmlspecialchars($penduduk['email'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="no_hp">Nomor HP</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="no_hp" class="form-control" name="no_hp" placeholder="Nomor HP" value="<?php echo htmlspecialchars($penduduk['no_hp'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="tinggi">Tinggi</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi" value="<?php echo htmlspecialchars($penduduk['tinggi'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="berat">Berat</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat" value="<?php echo htmlspecialchars($penduduk['berat'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        </div>
+
+                                        <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
@@ -80,19 +108,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="status_perkawinan">Status Perkawinan</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <select id="status_perkawinan" class="form-select" name="status_perkawinan">
-                                                <option value="" selected hidden>Pilih Status Perkawinan</option>
-                                                <option value="Belum Menikah" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Belum Menikah') ? 'selected' : ''; ?>>Belum Menikah</option>
-                                                <option value="Menikah" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Menikah') ? 'selected' : ''; ?>>Menikah</option>
-                                                <option value="Cerai Hidup" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Cerai Hidup') ? 'selected' : ''; ?>>Cerai Hidup</option>
-                                                <option value="Cerai Mati" <?php echo (isset($penduduk['status_perkawinan']) && $penduduk['status_perkawinan'] === 'Cerai Mati') ? 'selected' : ''; ?>>Cerai Mati</option>
-                                            </select>
                                         </div>
 
                                         <div>
@@ -146,13 +161,6 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" value="<?php echo htmlspecialchars($penduduk['provinsi'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="kode_pos">Kode Pos</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="kode_pos" class="form-control" name="kode_pos" placeholder="Kode Pos" value="<?php echo htmlspecialchars($penduduk['kode_pos'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">

@@ -150,7 +150,6 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
-
         // Execute query
         $query = $this->db->get();
         
@@ -170,7 +169,6 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
-
         // Execute query
         $query = $this->db->get();
         
@@ -190,7 +188,6 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
-
         // Execute query
         $query = $this->db->get();
         
@@ -210,7 +207,6 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
-
         // Execute query
         $query = $this->db->get();
         
