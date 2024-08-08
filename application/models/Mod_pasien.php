@@ -150,11 +150,23 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
+
         // Execute query
         $query = $this->db->get();
         
         // Return results
         return $query->result();
+    }
+
+    public function count_suntik_dashboard() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_suntik');
+        $query_pasien = $this->db->get('suntik');
+        $total_pasien = $query_pasien->row()->total_suntik;
+
+        // Return the total
+        return $total_pasien;
+        
     }
 
     public function get_ultrasound_dashboard() {
@@ -169,11 +181,23 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
+
         // Execute query
         $query = $this->db->get();
         
         // Return results
         return $query->result();
+    }
+
+    public function count_ultrasound_dashboard() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_ultrasound');
+        $query_pasien = $this->db->get('ultrasound');
+        $total_pasien = $query_pasien->row()->total_ultrasound;
+
+        // Return the total
+        return $total_pasien;
+        
     }
 
     public function get_superbright_dashboard() {
@@ -188,11 +212,23 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
+
         // Execute query
         $query = $this->db->get();
         
         // Return results
         return $query->result();
+    }
+
+    public function count_superbright_dashboard() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_superbright');
+        $query_pasien = $this->db->get('superbright');
+        $total_pasien = $query_pasien->row()->total_superbright;
+
+        // Return the total
+        return $total_pasien;
+        
     }
 
     public function get_magnetik_dashboard() {
@@ -207,11 +243,23 @@ class Mod_pasien extends CI_Model
         // Limit the number of results
         $this->db->limit(3);
         
+
         // Execute query
         $query = $this->db->get();
         
         // Return results
         return $query->result();
+    }
+
+    public function count_magnetik_dashboard() {
+        // Get total count from suntik table
+        $this->db->select('COUNT(*) as total_magnetik');
+        $query_pasien = $this->db->get('magnetik');
+        $total_pasien = $query_pasien->row()->total_magnetik;
+
+        // Return the total
+        return $total_pasien;
+        
     }
 
     public function get_pasien_dashboard()
