@@ -10,12 +10,8 @@ class EmailController extends CI_Controller
         $this->load->library('PHPMailer_lib');
     }
 
-    public function send_email()
+    public function send_email($to, $subject, $body)
     {
-        $to = 'maulanalevi98@gmail.com';
-        $subject = 'Here is the subject';
-        $body = 'This is the HTML message body <b>in bold!</b>';
-
         $result = $this->phpmailer_lib->send_email($to, $subject, $body);
         echo $result;
     }

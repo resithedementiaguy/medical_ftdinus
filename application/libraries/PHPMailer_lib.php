@@ -20,15 +20,15 @@ class PHPMailer_lib
         try {
             // Server settings
             $this->mail->isSMTP();
-            $this->mail->Host       = 'smtp.example.com'; // Ganti dengan SMTP server Anda
+            $this->mail->Host       = 'smtp.gmail.com';
             $this->mail->SMTPAuth   = true;
-            $this->mail->Username   = 'alemaulana09@gmail.com'; // Ganti dengan email Anda
-            $this->mail->Password   = 'rachman0910'; // Ganti dengan password email Anda
+            $this->mail->Username   = 'regmax469@gmail.com'; // Ganti dengan email Anda
+            $this->mail->Password   = 'jonojini'; // Ganti dengan password email Anda
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $this->mail->Port       = 587;
 
             // Recipients
-            $this->mail->setFrom('maulanalevi98@gmail.com', 'Mailer');
+            $this->mail->setFrom('regmax469@gmail.com', 'Alfaturachman');
             $this->mail->addAddress($to);
 
             // Content
