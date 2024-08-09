@@ -6,8 +6,20 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Mod_auth');
         $this->load->model('Mod_penduduk');
         $this->load->model('Mod_pasien');
+        $this->load->library('session'); // Load session library
+        $this->check_login(); // Ensure user is logged in
+    }
+
+    private function check_login()
+    {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            // Redirect to login page if not logged in
+            redirect('auth');
+        }
     }
 
     public function index()
@@ -26,8 +38,9 @@ class Dashboard extends CI_Controller
         $data['pasien'] = $this->Mod_pasien->get_pasien_dashboard();
         // Data per minggu
         $data['periksa_mingguan'] = $this->Mod_pasien->get_periksa_mingguan();
-        $this->load->view('partials/header',$data);
-        $this->load->view('frontend/dashboard',$data);
+
+        $this->load->view('partials/header', $data);
+        $this->load->view('frontend/dashboard', $data);
         $this->load->view('partials/footer');
     }
 }

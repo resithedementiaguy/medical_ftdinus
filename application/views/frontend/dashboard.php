@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Periksa</h6>
-                                    <h6 class="font-extrabold mb-0"><?=$total_pemeriksaan ?></h6>
+                                    <h6 class="font-extrabold mb-0"><?= $total_pemeriksaan ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Pasien</h6>
-                                    <h6 class="font-extrabold mb-0"><?=$total_pasien?></h6>
+                                    <h6 class="font-extrabold mb-0"><?= $total_pasien ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -71,21 +71,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($suntik as $s):?>
-                                        <tr>
-                                            <td class="col-2">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="font-bold mb-0"><?=$s->nama?></p>
-                                                </div>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0"><?=$s->nik?></p>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0 nowrap"><?= formatDateTime($s->ins_time_datetime) ?></p>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach;?>
+                                        <?php foreach ($suntik as $s): ?>
+                                            <tr>
+                                                <td class="col-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="font-bold mb-0"><?= $s->nama ?></p>
+                                                    </div>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0"><?= $s->nik ?></p>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0 nowrap"><?= formatDateTime($s->ins_time_datetime) ?></p>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -110,21 +110,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($ultrasound as $us):?>
-                                        <tr>
-                                            <td class="col-2">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="font-bold mb-0"><?=$us->nama?></p>
-                                                </div>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0"><?=$us->nik?></p>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0 nowrap"><?= formatDateTime($us->ins_time_datetime) ?></p>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach;?>
+                                        <?php foreach ($ultrasound as $us): ?>
+                                            <tr>
+                                                <td class="col-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="font-bold mb-0"><?= $us->nama ?></p>
+                                                    </div>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0"><?= $us->nik ?></p>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0 nowrap"><?= formatDateTime($us->ins_time_datetime) ?></p>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -149,21 +149,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($superbright as $sb):?>
-                                        <tr>
-                                            <td class="col-2">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="font-bold mb-0"><?=$sb->nama?></p>
-                                                </div>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0"><?=$sb->nik?></p>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0 nowrap"><?= formatDateTime($sb->ins_time_datetime) ?></p>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach;?>
+                                        <?php foreach ($superbright as $sb): ?>
+                                            <tr>
+                                                <td class="col-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="font-bold mb-0"><?= $sb->nama ?></p>
+                                                    </div>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0"><?= $sb->nik ?></p>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0 nowrap"><?= formatDateTime($sb->ins_time_datetime) ?></p>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -188,21 +188,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($magnetik as $mag):?>
-                                        <tr>
-                                            <td class="col-2">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="font-bold mb-0"><?=$mag->nama?></p>
-                                                </div>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0"><?=$mag->nik?></p>
-                                            </td>
-                                            <td class="col-4">
-                                                <p class="mb-0 nowrap"><?= formatDateTime($mag->ins_time_datetime) ?></p>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach;?>
+                                        <?php foreach ($magnetik as $mag): ?>
+                                            <tr>
+                                                <td class="col-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="font-bold mb-0"><?= $mag->nama ?></p>
+                                                    </div>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0"><?= $mag->nik ?></p>
+                                                </td>
+                                                <td class="col-4">
+                                                    <p class="mb-0 nowrap"><?= formatDateTime($mag->ins_time_datetime) ?></p>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -225,18 +225,18 @@
                     <h4>Pasien Terbaru</h4>
                 </div>
                 <div class="card-content pb-4">
-                    <?php foreach($pasien as $p):?>
-                    <div class="recent-message d-flex px-4 py-3">
-                        
-                        <div class="name ms-4">
-                            <h5 class="mb-1"><?= $p->nama?></h5>
-                            <h6 class="text-muted mb-0"><?= $p->nik?></h6>
+                    <?php foreach ($pasien as $p): ?>
+                        <div class="recent-message d-flex px-4 py-3">
+
+                            <div class="name ms-4">
+                                <h5 class="mb-1"><?= $p->nama ?></h5>
+                                <h6 class="text-muted mb-0"><?= $p->nik ?></h6>
+                            </div>
                         </div>
-                    </div>
-                    <?php endforeach;?>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            
+
         </div>
     </section>
 </div>
@@ -254,7 +254,7 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         var ctx = document.getElementById("periksaMingguanChart").getContext("2d");
 
         // Data dari PHP ke JavaScript
@@ -271,7 +271,7 @@
         periksaMingguan.forEach(function(item) {
             var dayIndex = daysOfWeek.indexOf(item.day);
             if (dayIndex !== -1) {
-                switch(item.type) {
+                switch (item.type) {
                     case 'Suntik':
                         suntikData[dayIndex] = item.total;
                         break;
@@ -293,8 +293,7 @@
             type: 'bar',
             data: {
                 labels: daysOfWeek,
-                datasets: [
-                    {
+                datasets: [{
                         label: 'Suntik',
                         data: suntikData,
                         backgroundColor: '#FF6384',
@@ -336,49 +335,49 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-    // Get context with jQuery - using jQuery's .get() method.
-    var ctx = document.getElementById("chart-periksa").getContext("2d");
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get context with jQuery - using jQuery's .get() method.
+        var ctx = document.getElementById("chart-periksa").getContext("2d");
 
-    // Data dari PHP ke JavaScript
-    var totalSuntik = <?=$total_suntik?>;
-    var totalUltrasound = <?=$total_ultrasound?>;
-    var totalSuperbright = <?=$total_superbright?>;
-    var totalMagnetik = <?=$total_magnetik?>;
+        // Data dari PHP ke JavaScript
+        var totalSuntik = <?= $total_suntik ?>;
+        var totalUltrasound = <?= $total_ultrasound ?>;
+        var totalSuperbright = <?= $total_superbright ?>;
+        var totalMagnetik = <?= $total_magnetik ?>;
 
-    // Data untuk Chart.js
-    var data = {
-        labels: ["Suntik", "Ultrasound", "Superbright", "Magnetik"],
-        datasets: [{
-            data: [totalSuntik, totalUltrasound, totalSuperbright, totalMagnetik],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
-        }]
-    };
+        // Data untuk Chart.js
+        var data = {
+            labels: ["Suntik", "Ultrasound", "Superbright", "Magnetik"],
+            datasets: [{
+                data: [totalSuntik, totalUltrasound, totalSuperbright, totalMagnetik],
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+                hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
+            }]
+        };
 
-    // Membuat grafik pie
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            var label = data.labels[tooltipItem.dataIndex];
-                            var value = data.datasets[0].data[tooltipItem.dataIndex];
-                            return label + ': ' + value;
+        // Membuat grafik pie
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                var label = data.labels[tooltipItem.dataIndex];
+                                var value = data.datasets[0].data[tooltipItem.dataIndex];
+                                return label + ': ' + value;
+                            }
                         }
                     }
                 }
             }
-        }
+        });
     });
-});
 </script>
 
 <?php
@@ -386,8 +385,18 @@ function formatDateTime($datetime)
 {
     $date = new DateTime($datetime);
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
-        7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
     ];
     $day = $date->format('d');
     $month = $months[(int)$date->format('m')];

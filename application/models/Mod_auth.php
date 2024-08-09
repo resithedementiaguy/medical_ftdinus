@@ -7,6 +7,7 @@ class Mod_auth extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        $this->load->library('session'); // Ensure session library is loaded
     }
 
     public function register($data)
@@ -28,10 +29,17 @@ class Mod_auth extends CI_Model
             // Log password hash comparison
             error_log("Password from database (MD5): " . $user->password);
 
-            $enc_psw= sha1('jksdhf832746aiH{}{()&(*&(*'.MD5($password).'HdfevgyDDw{}{}{;;*766&*&*');
+            $enc_psw = sha1('jksdhf832746aiH{}{()&(*&(*' . MD5($password) . 'HdfevgyDDw{}{}{;;*766&*&*');
 
             // Verify password using MD5
             if ($enc_psw === $user->password) {
+                // Set session data
+                $this->session->set_userdata([
+                    'username' => $user->username,
+                    'level_name' => $user->level,
+                    'logged_in' => TRUE
+                ]);
+
                 return [
                     'username' => $user->username,
                     'level_name' => $user->level

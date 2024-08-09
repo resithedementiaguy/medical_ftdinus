@@ -8,6 +8,17 @@ class Pasien extends CI_Controller
         parent::__construct();
         $this->load->model('Mod_penduduk');
         $this->load->model('Mod_pasien');
+        $this->load->library('session'); // Load session library
+        $this->check_login(); // Ensure user is logged in
+    }
+
+    private function check_login()
+    {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            // Redirect to login page if not logged in
+            redirect('auth');
+        }
     }
 
     public function index()

@@ -13,6 +13,17 @@ class Analisis_darah extends CI_Controller
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('form');
+        $this->load->library('session'); // Load session library
+        $this->check_login(); // Ensure user is logged in
+    }
+
+    private function check_login()
+    {
+        // Check if user is logged in
+        if (!$this->session->userdata('logged_in')) {
+            // Redirect to login page if not logged in
+            redirect('auth');
+        }
     }
 
     public function index()
@@ -225,6 +236,4 @@ class Analisis_darah extends CI_Controller
         // Kirimkan data sebagai JSON response
         echo json_encode($data_mag);
     }
-
-    
 }
