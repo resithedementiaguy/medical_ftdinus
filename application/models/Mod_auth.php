@@ -35,12 +35,14 @@ class Mod_auth extends CI_Model
             if ($enc_psw === $user->password) {
                 // Set session data
                 $this->session->set_userdata([
+                    'user_id' => $user->id,
                     'username' => $user->username,
                     'level_name' => $user->level,
                     'logged_in' => TRUE
                 ]);
 
                 return [
+                    'user_id' => $user->id,
                     'username' => $user->username,
                     'level_name' => $user->level
                 ];

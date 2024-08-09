@@ -8,27 +8,38 @@ require 'vendor/autoload.php';
 class PHPMailer_lib
 {
     protected $mail;
+    protected $CI;
 
     public function __construct()
     {
+        $this->CI = &get_instance();
         $this->mail = new PHPMailer(true);
+        $this->load_email_configuration();
+    }
+
+    private function load_email_configuration()
+    {
+        // Ambil data konfigurasi email dari database
+        $email_config = $this->CI->db->get_where('email', ['id' => 1])->row();
+
+        // Set up SMTP
         $this->mail->isSMTP();
-        $this->mail->Host       = 'smtp.gmail.com';
+        $this->mail->Host       = $email_config->host;
         $this->mail->SMTPAuth   = true;
-        $this->mail->Username   = 'unravelnest@gmail.com'; // Ganti dengan email Anda
-        $this->mail->Password   = 'yklp mejt ldda ouiq'; // Gunakan variabel lingkungan untuk password
+        $this->mail->Username   = $email_config->email;
+        $this->mail->Password   = $email_config->password;
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port       = 587;
+
+        // Set pengirim
+        $this->mail->setFrom($email_config->email, $email_config->nama_pengirim);
     }
 
     public function send_email($to, $subject, $body)
     {
         try {
-            // Recipients
-            $this->mail->setFrom('unravelnest@gmail.com', 'Alfaturachman');
             $this->mail->addAddress($to);
 
-            // Content
             $this->mail->isHTML(true);
             $this->mail->Subject = $subject;
             $this->mail->Body    = $body;

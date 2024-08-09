@@ -14,6 +14,15 @@
     <script src="<?= base_url('') ?>assets/static/js/initTheme.js"></script>
 </head>
 
+<style>
+    @media (max-width: 576px) {
+        #auth {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+</style>
+
 <body>
     <div id="auth" class="d-flex justify-content-center align-items-center bg-primary">
         <div class="row card bg-white" style="max-width: 450px; width: 100%;">
@@ -35,7 +44,7 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block shadow-lg mt-5">Login</button>
+                        <button type="submit" class="btn btn-primary btn-block shadow-sm mt-5">Login</button>
                     </form>
                     <div class="text-center mt-5 h6">
                         <p class="text-gray-600">Belum Punya Akun? <a href="<?= base_url('auth/register') ?>" class="font-bold">Register</a></p>

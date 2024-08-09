@@ -128,11 +128,11 @@
                                     <!-- <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a>
                                     </li> -->
-                                    <!-- <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
+                                    <li><a class="dropdown-item" href="<?php echo site_url('settings'); ?>"><i class="icon-mid bi bi-gear me-2"></i>
                                             Settings</a>
-                                    </li> -->
+                                    </li>
                                     <li>
-                                        <hr class="dropdown-divider">
+                                     
                                     </li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>

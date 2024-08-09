@@ -31,6 +31,7 @@ class Auth extends CI_Controller {
 
             if ($user) {
                 $this->session->set_userdata(array(
+                    'user_id' => $user['user_id'],
                     'username' => $user['username'],
                     'level_name' => $user['level_name'],
                     'logged_in' => TRUE

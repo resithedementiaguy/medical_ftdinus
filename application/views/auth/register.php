@@ -14,13 +14,22 @@
     <script src="<?= base_url('') ?>assets/static/js/initTheme.js"></script>
 </head>
 
+<style>
+    @media (max-width: 576px) {
+        #auth {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+</style>
+
 <body>
     <div id="auth" class="d-flex justify-content-center align-items-center bg-primary">
         <div class="row card bg-white" style="max-width: 450px; width: 100%;">
             <div class="col">
                 <div id="" class="m-5">
                     <h1 class="text-center">Register</h1>
-                    <p class="h6 text-center text-gray-600 mb-5">Register dahulu untuk masuk website kami.</p>
+                    <p class="h6 text-center text-gray-600 mb-5">Register dahulu untuk masuk website</p>
 
                     <form action="<?= base_url('auth/register') ?>" method="POST">
                         <div class="form-group position-relative has-icon-left mb-4">
@@ -47,7 +56,7 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block shadow-lg mt-5">Register</button>
+                        <button type="submit" class="btn btn-primary btn-block shadow-sm mt-5">Register</button>
                     </form>
                     <div class="text-center mt-5 h6">
                         <p class="text-gray-600">Sudah punya akun? <a href="<?= base_url('auth') ?>" class="font-bold">Login</a></p>

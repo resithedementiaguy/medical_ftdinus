@@ -7,11 +7,12 @@ class Penduduk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mod_penduduk');
+        $this->load->model('Mod_email');
         $this->load->library('PHPMailer_lib');
         $this->load->library('form_validation');
         $this->load->helper('form');
-        $this->load->library('session'); // Load session library
-        $this->check_login(); // Ensure user is logged in
+        $this->load->library('session');
+        $this->check_login();
     }
 
     private function check_login()
@@ -83,42 +84,21 @@ class Penduduk extends CI_Controller
             // Add the new resident to the database
             $this->Mod_penduduk->add_penduduk($data);
 
+            // Ambil subject dan body dari database
+            $data = $this->Mod_email->get_email(1);
+            $subject = $data->subject;
+            $body = $data->body;
+
             // Kirim email
             $to = $this->input->post('email');
-            $subject = "Pendaftaran Anda Berhasil";
-            $body = "<h1>Terima Kasih Telah Mendaftar</h1>
-            <p>Data Anda telah tersimpan di sistem kami. Kami sangat menghargai waktu Anda dan ingin memastikan bahwa proses pemeriksaan berjalan dengan lancar.</p>
-
-            <p>Berdasarkan data yang Anda berikan, kami telah menjadwalkan pemeriksaan Anda sebagai berikut:</p>
-
-            <ul>
-                <li><strong>Tempat:</strong> Klinik Sehat Selalu, Jl. Sehat No. 123, Jakarta</li>
-                <li><strong>Tanggal:</strong> 15 Agustus 2024</li>
-                <li><strong>Waktu:</strong> 09:00 - 11:00 WIB</li>
-            </ul>
-
-            <p>Mohon hadir tepat waktu sesuai dengan jadwal yang telah ditentukan. Jika ada perubahan atau pertanyaan lebih lanjut, silakan hubungi kami melalui email ini atau nomor telepon yang tersedia di bawah.</p>
-
-            <p>Terima kasih atas kepercayaan Anda. Kami berharap dapat memberikan pelayanan terbaik untuk Anda.</p>
-
-            <p>Salam hangat,<br>
-            Klinik Sehat Selalu</p>
-
-            <p><em>Note: Harap membawa dokumen identitas dan hasil pemeriksaan sebelumnya (jika ada) saat datang ke klinik.</em></p>";
-
             $result = $this->phpmailer_lib->send_email($to, $subject, $body);
+
             if ($result !== 'Message has been sent') {
                 echo "Error sending email: " . $result;
             } else {
                 redirect('penduduk');
             }
         }
-    }
-
-    public function send_email($to, $subject, $body)
-    {
-        $result = $this->phpmailer_lib->send_email($to, $subject, $body);
-        echo $result;
     }
 
     public function update($id)
