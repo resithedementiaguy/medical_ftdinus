@@ -130,6 +130,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach ($suntik as $suntik) : ?>
+                                                                <?php if (!empty($suntik->glukosa) || !empty($suntik->hb) || !empty($suntik->spo2)) : ?>
                                                                 <tr>
                                                                     <td><?= formatDateTime($suntik->ins_time) ?></td>
                                                                     <td><?= formatDateTime($suntik->upd_time) ?></td>
@@ -147,6 +148,7 @@
                                                                         </button>
                                                                     </td>
                                                                 </tr>
+                                                                <?php endif;?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -231,6 +233,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach ($ultrasound as $us) : ?>
+                                                                <?php if (!empty($us->ins_time) || !empty($us->upd_time)) : ?>
                                                                 <tr>
                                                                     <td><?= formatDateTime($us->ins_time) ?></td>
                                                                     <td><?= formatDateTime($us->upd_time) ?></td>
@@ -246,6 +249,7 @@
                                                                         </button>
                                                                     </td>
                                                                 </tr>
+                                                                <?php endif;?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -449,6 +453,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach ($superbright as $sb) : ?>
+                                                                <?php if (!empty($sb->ins_time) || !empty($sb->upd_time)) : ?>
                                                                 <tr>
                                                                     <td><?= formatDateTime($sb->ins_time) ?></td>
                                                                     <td><?= formatDateTime($sb->upd_time) ?></td>
@@ -464,6 +469,7 @@
                                                                         </button>
                                                                     </td>
                                                                 </tr>
+                                                                <?php endif;?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -687,6 +693,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach ($magnetik as $mag) : ?>
+                                                                <?php if (!empty($mag->ins_time) || !empty($mag->upd_time)) : ?>
                                                                 <tr>
                                                                     <td><?= formatDateTime($mag->ins_time) ?></td>
                                                                     <td><?= formatDateTime($mag->upd_time) ?></td>
@@ -702,6 +709,7 @@
                                                                         </button>
                                                                     </td>
                                                                 </tr>
+                                                                <?php endif;?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -1310,6 +1318,10 @@
 // Format Tanggal dan Waktu
 function formatDateTime($datetime)
 {
+    if (empty($datetime)) {
+        return "-"; // Atau teks lain sesuai kebutuhan
+    }
+
     $date = new DateTime($datetime);
     $months = [
         1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
@@ -1326,6 +1338,10 @@ function formatDateTime($datetime)
 // Format Tanggal
 function formatDate($datetime)
 {
+    if (empty($datetime)) {
+        return "-"; // Atau teks lain sesuai kebutuhan
+    }
+
     $date = new DateTime($datetime);
     $months = [
         1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei',

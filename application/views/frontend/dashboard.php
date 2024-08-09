@@ -4,6 +4,8 @@
 <div class="page-content">
     <section class="row">
         <div class="col-12 col-lg-9">
+            <h5>Selamat datang, <?= $this->session->userdata('username') ?></h5>
+            <br>
             <div class="row">
                 <div class="col-6 col-lg-3 col-md-6">
                     <div class="card">

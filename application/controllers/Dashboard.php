@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        $data['title'] = 'Dashboard';
         $data['suntik'] = $this->Mod_pasien->get_suntik_dashboard();
         $data['ultrasound'] = $this->Mod_pasien->get_ultrasound_dashboard();
         $data['superbright'] = $this->Mod_pasien->get_superbright_dashboard();
@@ -25,7 +26,7 @@ class Dashboard extends CI_Controller
         $data['pasien'] = $this->Mod_pasien->get_pasien_dashboard();
         // Data per minggu
         $data['periksa_mingguan'] = $this->Mod_pasien->get_periksa_mingguan();
-        $this->load->view('partials/header');
+        $this->load->view('partials/header',$data);
         $this->load->view('frontend/dashboard',$data);
         $this->load->view('partials/footer');
     }

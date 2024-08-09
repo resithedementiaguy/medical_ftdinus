@@ -8,6 +8,8 @@ class Analisis_darah extends CI_Controller
         parent::__construct();
         $this->load->model('Mod_darah');
         $this->load->model('Ultrasound_model');
+        $this->load->model('Superbright_model');
+        $this->load->model('Magnetik_model');
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -168,6 +170,16 @@ class Analisis_darah extends CI_Controller
                     'sel_mag8' => $this->input->post('sel_mag8'),
                     'sel_mag9' => $this->input->post('sel_mag9'),
                     'sel_mag10' => $this->input->post('sel_mag10'),
+                    'tgi_mag1' => $this->input->post('tgi_mag1'),
+                    'tgi_mag2' => $this->input->post('tgi_mag2'),
+                    'tgi_mag3' => $this->input->post('tgi_mag3'),
+                    'tgi_mag4' => $this->input->post('tgi_mag4'),
+                    'tgi_mag5' => $this->input->post('tgi_mag5'),
+                    'tgi_mag6' => $this->input->post('tgi_mag6'),
+                    'tgi_mag7' => $this->input->post('tgi_mag7'),
+                    'tgi_mag8' => $this->input->post('tgi_mag8'),
+                    'tgi_mag9' => $this->input->post('tgi_mag9'),
+                    'tgi_mag10' => $this->input->post('tgi_mag10'),
 
                 );
                 $this->Mod_darah->add_magnetik($data);
@@ -195,4 +207,24 @@ class Analisis_darah extends CI_Controller
         // Kirimkan data sebagai JSON response
         echo json_encode($data_us);
     }
+
+    public function get_superbright_data($id)
+    {
+        // Ambil data ultrasound berdasarkan ID
+        $data_sb = $this->Superbright_model->get_superbright($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_sb);
+    }
+
+    public function get_magnetik_data($id)
+    {
+        // Ambil data ultrasound berdasarkan ID
+        $data_mag = $this->Magnetik_model->get_magnetik($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_mag);
+    }
+
+    
 }
