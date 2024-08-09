@@ -7,28 +7,25 @@ require 'vendor/autoload.php';
 
 class PHPMailer_lib
 {
-
     protected $mail;
 
     public function __construct()
     {
         $this->mail = new PHPMailer(true);
+        $this->mail->isSMTP();
+        $this->mail->Host       = 'smtp.gmail.com';
+        $this->mail->SMTPAuth   = true;
+        $this->mail->Username   = 'unravelnest@gmail.com'; // Ganti dengan email Anda
+        $this->mail->Password   = 'yklp mejt ldda ouiq'; // Gunakan variabel lingkungan untuk password
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mail->Port       = 587;
     }
 
     public function send_email($to, $subject, $body)
     {
         try {
-            // Server settings
-            $this->mail->isSMTP();
-            $this->mail->Host       = 'smtp.gmail.com';
-            $this->mail->SMTPAuth   = true;
-            $this->mail->Username   = 'regmax469@gmail.com'; // Ganti dengan email Anda
-            $this->mail->Password   = 'jonojini'; // Ganti dengan password email Anda
-            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $this->mail->Port       = 587;
-
             // Recipients
-            $this->mail->setFrom('regmax469@gmail.com', 'Alfaturachman');
+            $this->mail->setFrom('unravelnest@gmail.com', 'Alfaturachman');
             $this->mail->addAddress($to);
 
             // Content
