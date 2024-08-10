@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('') ?>/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="<?= base_url('') ?>/assets/compiled/css/iconly.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/parsleyjs/dist/parsley.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -110,14 +111,14 @@
                             </ul>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="user-menu d-flex">
+                                    <div class="user-menu d-flex align-items-center">
                                         <div class="user-name text-end me-3">
                                             <h6 class="mb-0 text-gray-600"><?= $this->session->userdata('username') ?></h6>
                                             <p class="mb-0 text-sm text-gray-600">Administrator</p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="./assets/compiled/jpg/1.jpg">
+                                                <img src="<?= base_url('') ?>/assets/compiled/jpg/1.jpg">
                                             </div>
                                         </div>
                                     </div>

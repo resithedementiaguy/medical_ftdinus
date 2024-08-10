@@ -101,7 +101,7 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <label for="password">Password</label>
+                                                <label for="password">App Password</label>
                                             </div>
                                             <div class="col-md-9 form-group">
                                                 <input type="text" class="form-control" id="password" name="password" placeholder="Password" value="<?= set_value('password', $email->password); ?>" required>
