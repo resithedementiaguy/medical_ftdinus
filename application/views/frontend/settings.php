@@ -157,6 +157,10 @@
                     text: 'Your data has been saved.',
                     icon: 'success',
                     confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '<?= base_url('settings'); ?>'; // Redirect ke halaman yang sesuai setelah sukses
+                    }
                 });
             },
             error: function() {
@@ -177,7 +181,7 @@
             url: $(this).attr('action'),
             type: 'POST',
             data: $(this).serialize(),
-            dataType: 'json', // Specify the data type expected from the server
+            dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
                     Swal.fire({

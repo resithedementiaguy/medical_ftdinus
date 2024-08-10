@@ -77,14 +77,14 @@ class Settings extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('password1', 'Password Baru', 'trim|min_length[6]');
+        $this->form_validation->set_rules('password1', 'Password Baru', 'trim');
         $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'trim|matches[password1]');
 
         if ($this->form_validation->run() == false) {
             // Jika validasi gagal, muat kembali tampilan dengan pesan error
             $data['user'] = $this->Mod_user->get_user($id); // Mengambil data pengguna dengan ID dari parameter
             $this->load->view('partials/header');
-            $this->load->view('frontend/settings/email', $data);
+            $this->load->view('frontend/settings/profile', $data);
             $this->load->view('partials/footer');
         } else {
             // Ambil data dari form
@@ -105,7 +105,11 @@ class Settings extends CI_Controller
             }
 
             // Update data pengguna di database
-            $this->Mod_user->update_user($id, $data);
+            if ($this->Mod_user->update_user($id, $data)) {
+                $this->session->set_flashdata('success', 'Profile updated successfully.');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to update profile.');
+            }
 
             // Redirect ke halaman profil atau halaman lain yang sesuai
             redirect('settings');
