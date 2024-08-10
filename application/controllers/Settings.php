@@ -37,7 +37,7 @@ class Settings extends CI_Controller
         $this->load->view('partials/footer');
     }
 
-    public function update_email()
+    public function update_email($id)
     {
         // Set validation rules
         $this->form_validation->set_rules('host', 'Host', 'required');
@@ -48,11 +48,11 @@ class Settings extends CI_Controller
         $this->form_validation->set_rules('body', 'Body', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            // If validation fails, reload the form with validation errors
-            $this->index();
+            // If validation fails, return validation errors as JSON
+            $errors = validation_errors();
+            echo json_encode(['status' => 'error', 'message' => $errors]);
         } else {
             // Collect form data
-            $id = $this->input->post('id');
             $data = array(
                 'host' => $this->input->post('host'),
                 'email' => $this->input->post('email'),
@@ -64,14 +64,51 @@ class Settings extends CI_Controller
 
             // Update email configuration
             if ($this->Mod_email->update_email($id, $data)) {
-                // Redirect or show success message
-                $this->session->set_flashdata('success', 'Email configuration updated successfully.');
-                redirect('settings');
+                // Return success response
+                echo json_encode(['status' => 'success', 'message' => 'Email configuration updated successfully.']);
             } else {
-                // Show error message
-                $this->session->set_flashdata('error', 'Failed to update email configuration.');
-                redirect('settings');
+                // Return error response
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update email configuration.']);
             }
+        }
+    }
+
+    public function update_user($id)
+    {
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('password1', 'Password Baru', 'trim|min_length[6]');
+        $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'trim|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            // Jika validasi gagal, muat kembali tampilan dengan pesan error
+            $data['user'] = $this->Mod_user->get_user($id); // Mengambil data pengguna dengan ID dari parameter
+            $this->load->view('partials/header');
+            $this->load->view('frontend/settings/email', $data);
+            $this->load->view('partials/footer');
+        } else {
+            // Ambil data dari form
+            $username = $this->input->post('username');
+            $nama = $this->input->post('nama');
+            $password1 = $this->input->post('password1');
+            $password2 = $this->input->post('password2');
+
+            // Siapkan data untuk diupdate
+            $data = [
+                'username' => $username,
+                'nama' => $nama
+            ];
+
+            // Periksa apakah password baru diisi dan cocok
+            if (!empty($password1) && $password1 === $password2) {
+                $data['password'] = sha1('jksdhf832746aiH{}{()&(*&(*' . MD5($password1) . 'HdfevgyDDw{}{}{;;*766&*&*');
+            }
+
+            // Update data pengguna di database
+            $this->Mod_user->update_user($id, $data);
+
+            // Redirect ke halaman profil atau halaman lain yang sesuai
+            redirect('settings');
         }
     }
 }

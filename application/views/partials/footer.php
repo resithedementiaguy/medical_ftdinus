@@ -22,3 +22,7 @@
 <script src="<?= base_url('') ?>/assets/static/js/pages/form-element-select.js">
 <script src="<?= base_url('') ?>/assets/extensions/apexcharts/apexcharts.min.js"></script>
 <script src="<?= base_url('') ?>/assets/static/js/pages/dashboard.js"></script>
+<script src="<?= base_url('') ?>/assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url('') ?>/assets/static/js/pages/sweetalert2.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

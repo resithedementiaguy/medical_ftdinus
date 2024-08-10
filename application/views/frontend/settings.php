@@ -33,14 +33,14 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <form class="form form-horizontal mt-5" id="analisisForm" action="<?= base_url('settings/update') ?>" method="POST">
+                                <form class="form form-horizontal mt-5" id="profileForm" action="<?= base_url('settings/update_user/' . $user->id) ?>" method="POST">
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <h5 class="h5 mb-4">Form Edit Profile</h5>
                                             </div>
-                                            <?php echo form_open('settings/update_email'); ?>
-                                            <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+                                            <?php echo form_open('settings/update_user', ['method' => 'POST']); ?>
+                                            <input type="hidden" name="id" value="<?php echo set_value('id', $user->id); ?>" />
 
                                             <div class="col-md-3">
                                                 <label for="username">Username</label>
@@ -57,10 +57,17 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <label for="level">Level</label>
+                                                <label for="password1">Password Baru</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="text" class="form-control" id="level" name="level" value="<?php echo set_value('level', $user->level); ?>" required>
+                                                <input type="password" class="form-control" id="password1" name="password1" placeholder="Password Baru">
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label for="password2">Konfirmasi Password</label>
+                                            </div>
+                                            <div class="col-md-9 form-group">
+                                                <input type="password" class="form-control" id="password2" name="password2" placeholder="Konfirmasi Password">
                                             </div>
 
                                             <div class="col-sm-12 d-flex justify-content-end">
@@ -71,55 +78,54 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">
-                                <form class="form form-horizontal mt-5" id="analisisForm" action="<?= base_url('settings/update') ?>" method="POST">
+                                <form class="form form-horizontal mt-5" id="emailForm" action="<?= base_url('settings/update_email/' . $email->id) ?>" method="POST">
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <h5 class="h5 mb-4">Form Edit Email</h5>
                                             </div>
-                                            <?php echo form_open('settings/update_email'); ?>
-                                            <input type="hidden" name="id" value="<?php echo $email->id; ?>" />
+                                            <input type="hidden" name="id" value="<?= $email->id; ?>" />
 
                                             <div class="col-md-3">
                                                 <label for="host">Host</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="text" class="form-control" id="host" name="host" value="<?php echo set_value('host', $email->host); ?>" required>
+                                                <input type="text" class="form-control" id="host" name="host" value="<?= set_value('host', $email->host); ?>" required>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <label for="email">Email</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="email" class="form-control" id="email" name="email" value="<?php echo set_value('email', $email->email); ?>" required>
+                                                <input type="email" class="form-control" id="email" name="email" value="<?= set_value('email', $email->email); ?>" required>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <label for="password">Password</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="text" class="form-control" id="password" name="password" placeholder="Password" value="<?php echo set_value('password', $email->password); ?>" required>
+                                                <input type="text" class="form-control" id="password" name="password" placeholder="Password" value="<?= set_value('password', $email->password); ?>" required>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <label for="nama_pengirim">Nama Pengirim</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="text" class="form-control" id="nama_pengirim" name="nama_pengirim" value="<?php echo set_value('nama_pengirim', $email->nama_pengirim); ?>" required>
+                                                <input type="text" class="form-control" id="nama_pengirim" name="nama_pengirim" value="<?= set_value('nama_pengirim', $email->nama_pengirim); ?>" required>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <label for="subject">Subject</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <input type="text" class="form-control" id="subject" name="subject" value="<?php echo set_value('subject', $email->subject); ?>" required>
+                                                <input type="text" class="form-control" id="subject" name="subject" value="<?= set_value('subject', $email->subject); ?>" required>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <label for="Body">Body Email</label>
                                             </div>
                                             <div class="col-md-9 form-group">
-                                                <textarea id="Body" class="form-control" name="body" rows="10" placeholder="Body Email"><?php echo set_value('body', $email->body); ?></textarea>
+                                                <textarea id="Body" class="form-control" name="body" rows="10" placeholder="Body Email"><?= set_value('body', $email->body); ?></textarea>
                                             </div>
 
                                             <div class="col-sm-12 d-flex justify-content-end">
@@ -136,3 +142,70 @@
         </div>
     </section>
 </div>
+
+<script>
+    $('#profileForm').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Your data has been saved.',
+                    icon: 'success',
+                    confirmButtonText: 'Okay'
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonText: 'Okay'
+                });
+            }
+        });
+    });
+
+    $('#emailForm').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json', // Specify the data type expected from the server
+            success: function(response) {
+                if (response.status === 'success') {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'Okay'
+                    }).then(() => {
+                        // Optionally redirect to another page or refresh
+                        window.location.href = '<?= base_url('settings'); ?>';
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Okay'
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonText: 'Okay'
+                });
+            }
+        });
+    });
+</script>
