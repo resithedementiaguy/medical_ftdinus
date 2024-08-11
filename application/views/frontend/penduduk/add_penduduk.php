@@ -167,48 +167,6 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById('analisisForm');
-        var alatSelect = document.getElementById('basicSelect');
-
-        alatSelect.addEventListener('change', function() {
-            var selectedValue = alatSelect.value;
-
-            // Menampilkan field sesuai dengan pilihan alat
-            var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
-            fields.forEach(function(field) {
-                document.getElementById(field).style.display = "none";
-            });
-
-            if (selectedValue) {
-                document.getElementById(selectedValue + "Fields").style.display = "block";
-            }
-        });
-
-        // Tampilkan field yang sesuai saat halaman dimuat
-        alatSelect.dispatchEvent(new Event('change'));
-
-        // Tampilkan NIK dan nama menggunakan Ajax
-        $('#nik').change(function() {
-            var nik = $(this).val();
-            if (nik != "") {
-                $.ajax({
-                    url: '<?= base_url("Analisis_darah/get_nama") ?>',
-                    method: 'POST',
-                    data: {
-                        nik: nik
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#nama').val(response ? response.nama : '');
-                    }
-                });
-            } else {
-                $('#nama').val('');
-            }
-        });
-    });
-
     $('#analisisForm').on('submit', function(e) {
         e.preventDefault();
 

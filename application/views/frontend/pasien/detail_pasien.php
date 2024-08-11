@@ -91,38 +91,39 @@
                             <div>
                                 <h5 class="h5 mb-4">Riwayat Periksa</h5>
                             </div>
-                            <div class="form-body mb-5">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="basicSelect">Data Antropometri</label>
-                                    </div>
-                                    <!-- Table untuk Suntik -->
-                                    <div id="antropometri" class="mt-3">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Tinggi</th>
-                                                        <th>Berat</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($antropometri as $antro) : ?>
+                            <?php if (!empty($pasien['pasien_nik'])) : ?>
+                                <div class="form-body mb-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="basicSelect">Data Antropometri</label>
+                                        </div>
+                                        <!-- Table untuk Suntik -->
+                                        <div id="antropometri" class="mt-3">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
                                                         <tr>
-                                                            <td><?= formatDateTime($antro->ins_time_datetime) ?></td>
-                                                            <td><?= $antro->tinggi ?></td>
-                                                            <td><?= $antro->berat ?></td>
-                                                            </td>
+                                                            <th>Tanggal Periksa</th>
+                                                            <th>Tinggi</th>
+                                                            <th>Berat</th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($antropometri as $antro) : ?>
+                                                            <tr>
+                                                                <td><?= formatDateTime($antro->ins_time_datetime) ?></td>
+                                                                <td><?= $antro->tinggi ?></td>
+                                                                <td><?= $antro->berat ?></td>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php if (!empty($pasien['pasien_nik'])) : ?>
+
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
