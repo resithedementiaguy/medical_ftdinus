@@ -8,6 +8,9 @@ class Pasien extends CI_Controller
         parent::__construct();
         $this->load->model('Mod_penduduk');
         $this->load->model('Mod_pasien');
+        $this->load->model('Ultrasound_model');
+        $this->load->model('Superbright_model');
+        $this->load->model('Magnetik_model');
         $this->load->library('session'); // Load session library
         $this->check_login(); // Ensure user is logged in
     }
@@ -156,16 +159,60 @@ class Pasien extends CI_Controller
         $this->load->model('Mod_pasien');
 
         $data = array(
-            'mag1'       => $this->input->post('mag1'),
-            'mag2'       => $this->input->post('mag2'),
-            'mag3'       => $this->input->post('mag3'),
-            'mag4'       => $this->input->post('mag4'),
-            'mag5'       => $this->input->post('mag5'),
-            'mag6'       => $this->input->post('mag6'),
-            'mag7'       => $this->input->post('mag7'),
-            'mag8'       => $this->input->post('mag8'),
-            'mag9'       => $this->input->post('mag9'),
-            'mag10'      => $this->input->post('mag10')
+            'jtg_mag1'       => $this->input->post('jtg_mag1'),
+            'jtg_mag2'       => $this->input->post('jtg_mag2'),
+            'jtg_mag3'       => $this->input->post('jtg_mag3'),
+            'jtg_mag4'       => $this->input->post('jtg_mag4'),
+            'jtg_mag5'       => $this->input->post('jtg_mag5'),
+            'jtg_mag6'       => $this->input->post('jtg_mag6'),
+            'jtg_mag7'       => $this->input->post('jtg_mag7'),
+            'jtg_mag8'       => $this->input->post('jtg_mag8'),
+            'jtg_mag9'       => $this->input->post('jtg_mag9'),
+            'jtg_mag10'      => $this->input->post('jtg_mag10'),
+
+            'srf_mag1'       => $this->input->post('srf_mag1'),
+            'srf_mag2'       => $this->input->post('srf_mag2'),
+            'srf_mag3'       => $this->input->post('srf_mag3'),
+            'srf_mag4'       => $this->input->post('srf_mag4'),
+            'srf_mag5'       => $this->input->post('srf_mag5'),
+            'srf_mag6'       => $this->input->post('srf_mag6'),
+            'srf_mag7'       => $this->input->post('srf_mag7'),
+            'srf_mag8'       => $this->input->post('srf_mag8'),
+            'srf_mag9'       => $this->input->post('srf_mag9'),
+            'srf_mag10'      => $this->input->post('srf_mag10'),
+
+            'drh_mag1'       => $this->input->post('drh_mag1'),
+            'drh_mag2'       => $this->input->post('drh_mag2'),
+            'drh_mag3'       => $this->input->post('drh_mag3'),
+            'drh_mag4'       => $this->input->post('drh_mag4'),
+            'drh_mag5'       => $this->input->post('drh_mag5'),
+            'drh_mag6'       => $this->input->post('drh_mag6'),
+            'drh_mag7'       => $this->input->post('drh_mag7'),
+            'drh_mag8'       => $this->input->post('drh_mag8'),
+            'drh_mag9'       => $this->input->post('drh_mag9'),
+            'drh_mag10'      => $this->input->post('drh_mag10'),
+
+            'sel_mag1'       => $this->input->post('sel_mag1'),
+            'sel_mag2'       => $this->input->post('sel_mag2'),
+            'sel_mag3'       => $this->input->post('sel_mag3'),
+            'sel_mag4'       => $this->input->post('sel_mag4'),
+            'sel_mag5'       => $this->input->post('sel_mag5'),
+            'sel_mag6'       => $this->input->post('sel_mag6'),
+            'sel_mag7'       => $this->input->post('sel_mag7'),
+            'sel_mag8'       => $this->input->post('sel_mag8'),
+            'sel_mag9'       => $this->input->post('sel_mag9'),
+            'sel_mag10'      => $this->input->post('sel_mag10'),
+
+            'tgi_mag1'       => $this->input->post('tgi_mag1'),
+            'tgi_mag2'       => $this->input->post('tgi_mag2'),
+            'tgi_mag3'       => $this->input->post('tgi_mag3'),
+            'tgi_mag4'       => $this->input->post('tgi_mag4'),
+            'tgi_mag5'       => $this->input->post('tgi_mag5'),
+            'tgi_mag6'       => $this->input->post('tgi_mag6'),
+            'tgi_mag7'       => $this->input->post('tgi_mag7'),
+            'tgi_mag8'       => $this->input->post('tgi_mag8'),
+            'tgi_mag9'       => $this->input->post('tgi_mag9'),
+            'tgi_mag10'      => $this->input->post('tgi_mag10'),
         );
 
         $updated = $this->Mod_pasien->update_magnetik($id, $data);
@@ -175,5 +222,56 @@ class Pasien extends CI_Controller
         } else {
             echo json_encode(array('status' => 'error', 'message' => 'Terjadi kesalahan saat memperbarui data.'));
         }
+    }
+
+    public function delete_suntik($id)
+    {
+        $this->Mod_pasien->delete_suntik($id);
+        redirect('pasien');
+    }
+
+    public function delete_ultrasound($id)
+    {
+        $this->Mod_pasien->delete_ultrasound($id);
+        redirect('pasien');
+    }
+
+    public function delete_superbright($id)
+    {
+        $this->Mod_pasien->delete_superbright($id);
+        redirect('pasien');
+    }
+
+    public function delete_magnetik($id)
+    {
+        $this->Mod_pasien->delete_magnetik($id);
+        redirect('pasien');
+    }
+
+    public function get_ultrasound_data($id)
+    {
+        // Ambil data ultrasound berdasarkan ID
+        $data_us = $this->Ultrasound_model->get_ultrasound($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_us);
+    }
+
+    public function get_superbright_data($id)
+    {
+        // Ambil data ultrasound berdasarkan ID
+        $data_sb = $this->Superbright_model->get_superbright($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_sb);
+    }
+
+    public function get_magnetik_data($id)
+    {
+        // Ambil data ultrasound berdasarkan ID
+        $data_mag = $this->Magnetik_model->get_magnetik($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_mag);
     }
 }

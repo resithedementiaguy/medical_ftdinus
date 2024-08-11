@@ -37,6 +37,7 @@
                                             <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-md-8 form-group">
+                                            <input type="hidden" name="pembuat" id="pembuat" value="<?= $this->session->userdata('username') ?>">
                                             <input type="text" id="nik" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan" data-parsley-required="true" data-parsley-error-message="NIK wajib diisi!">
                                         </div>
 
@@ -72,7 +73,14 @@
                                             <label for="tanggal_lahir">Tanggal Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" data-parsley-required="true" data-parsley-error-message="Tanggal Lahir wajib diisi!">
+                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" data-parsley-required="true" data-parsley-error-message="Tanggal Lahir wajib diisi!" onchange="calculateAge()">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="tempat_lahir">Umur</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="umur" class="form-control" name="umur" placeholder="Umur" data-parsley-required="true" data-parsley-error-message="Umur wajib diisi!" readonly>
                                         </div>
 
                                         <div class="col-md-4">
@@ -215,4 +223,17 @@
             });
         }
     });
+
+    function calculateAge() {
+        var birthDate = new Date(document.getElementById('tanggal_lahir').value);
+        var today = new Date();
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        document.getElementById('umur').value = age;
+    }
 </script>

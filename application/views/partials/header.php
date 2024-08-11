@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="<?= base_url('') ?>/assets/compiled/css/app.css">
     <link rel="stylesheet" href="<?= base_url('') ?>/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="<?= base_url('') ?>/assets/compiled/css/iconly.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/parsleyjs/dist/parsley.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -98,9 +99,6 @@
             <header>
                 <nav class="navbar navbar-expand navbar-light navbar-top p-0 mb-4">
                     <div class="container-fluid">
-                        <a href="#" class="burger-btn d-block">
-                            <i class="bi bi-justify fs-3"></i>
-                        </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +109,7 @@
                             </ul>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="user-menu d-flex align-items-center">
+                                    <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
                                             <h6 class="mb-0 text-gray-600"><?= $this->session->userdata('username') ?></h6>
                                             <p class="mb-0 text-sm text-gray-600">Administrator</p>

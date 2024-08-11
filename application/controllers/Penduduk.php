@@ -75,7 +75,8 @@ class Penduduk extends CI_Controller
                 'kelurahan' => $this->input->post('kelurahan'),
                 'kecamatan' => $this->input->post('kecamatan'),
                 'kota' => $this->input->post('kota'),
-                'provinsi' => $this->input->post('provinsi')
+                'provinsi' => $this->input->post('provinsi'),
+                'pembuat' => $this->input->post('pembuat')
             );
             // Add the new resident to the database
             $this->Mod_penduduk->add_penduduk($data);

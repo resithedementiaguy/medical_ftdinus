@@ -73,7 +73,14 @@
                                             <label for="tanggal_lahir">Tanggal Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" value="<?php echo htmlspecialchars($penduduk['tanggal_lahir'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" value="<?php echo htmlspecialchars($penduduk['tanggal_lahir'], ENT_QUOTES, 'UTF-8'); ?>" onchange="calculateAge()">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="tempat_lahir">Umur</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="umur" class="form-control" name="umur" value="<?php echo htmlspecialchars($penduduk['umur'], ENT_QUOTES, 'UTF-8'); ?>" readonly>
                                         </div>
 
                                         <div class="col-md-4">
@@ -162,3 +169,67 @@
         </div>
     </section>
 </div>
+
+<script>
+    $('#analisisForm').on('submit', function(e) {
+        e.preventDefault();
+
+        // Validasi form menggunakan Parsley
+        if ($(this).parsley().isValid()) {
+            // Sembunyikan tombol simpan dan tampilkan spinner
+            $('#success').hide();
+            $('#spinner').show();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data Anda berhasil disimpan.',
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '<?= base_url('penduduk'); ?>';
+                        }
+                    });
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Kesalahan!',
+                        text: 'Ada kesalahan simpan.',
+                        icon: 'error',
+                        confirmButtonText: 'Oke'
+                    });
+
+                    // Tampilkan kembali tombol simpan dan sembunyikan spinner jika ada error
+                    $('#success').show();
+                    $('#spinner').hide();
+                }
+            });
+        } else {
+            // Tampilkan pesan peringatan jika form tidak valid
+            Swal.fire({
+                title: 'Peringatan!',
+                text: 'Form tidak boleh ada yang kosong',
+                icon: 'warning',
+                confirmButtonText: 'Oke'
+            });
+        }
+    });
+
+    function calculateAge() {
+        var birthDate = new Date(document.getElementById('tanggal_lahir').value);
+        var today = new Date();
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        document.getElementById('umur').value = age;
+    }
+</script>

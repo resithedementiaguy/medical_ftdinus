@@ -27,16 +27,5 @@ class Magnetik_model extends CI_Model
         return $this->db->delete('data_mag');
     }
 
-    public function get_magnetik_data_paginated($id, $page)
-{
-    // Misal setiap halaman menampilkan 1000 data
-    $limit = 1000;
-    $offset = ($page - 1) * $limit;
-    $this->db->limit($limit, $offset);
-    $this->db->where('id', $id);
-    $query = $this->db->get('data_mag');
-    return $query->row_array();
-}
-
 
 }

@@ -131,7 +131,8 @@
                                                 <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="button" id="ultraSoundBtn" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                                <button type="button" id="ultraSoundBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
+                                                <button type="button" id="ultraSoundBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="us1">Sinyal Ultrasound 1</label>
@@ -201,7 +202,8 @@
                                                 <h6 class="h6 mt-4 mb-4">Super Bright</h6>
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="button" id="superBrightBtn" class="btn btn-light-primary me-1 mb-1 px-5">Mulai</button>
+                                                <button type="button" id="superBrightBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
+                                                <button type="button" id="superBrightBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="sb1">Sinyal Super Bright 1</label>
@@ -272,8 +274,6 @@
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="button" id="magnetikLeftBtn" class="btn btn-light-primary me-1 mb-1 px-5">Left Hand</button>
-                                            </div>
-                                            <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="button" id="magnetikRightBtn" class="btn btn-light-primary me-1 mb-1 px-5">Right Hand</button>
                                             </div>
                                             <div>
@@ -839,7 +839,7 @@
     });
 
 
-    document.getElementById('ultraSoundBtn').addEventListener('click', function() {
+    document.getElementById('ultraSoundBtn1').addEventListener('click', function() {
         var ultrasoundId = 1;
 
         // Ambil data_us dari API (controller) menggunakan AJAX
@@ -852,11 +852,6 @@
                 document.getElementById('us3').value = data_us.us3 || '';
                 document.getElementById('us4').value = data_us.us4 || '';
                 document.getElementById('us5').value = data_us.us5 || '';
-                document.getElementById('us6').value = data_us.us6 || '';
-                document.getElementById('us7').value = data_us.us7 || '';
-                document.getElementById('us8').value = data_us.us8 || '';
-                document.getElementById('us9').value = data_us.us9 || '';
-                document.getElementById('us10').value = data_us.us10 || '';
 
                 // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
                 document.getElementById('ultraSoundFields').style.display = 'block';
@@ -864,7 +859,29 @@
             .catch(error => console.error('Error:', error));
     });
 
-    document.getElementById('superBrightBtn').addEventListener('click', function() {
+    document.getElementById('ultraSoundBtn2').addEventListener('click', function() {
+        var ultrasoundId = 1;
+
+        // Ambil data_us dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_ultrasound_data/' + ultrasoundId)
+            .then(response => response.json())
+            .then(data_us => {
+                // Mengisi nilai textarea dengan data dari data_us
+                document.getElementById('us6').value = data_us.us1 || '';
+                document.getElementById('us7').value = data_us.us2 || '';
+                document.getElementById('us8').value = data_us.us3 || '';
+                document.getElementById('us9').value = data_us.us4 || '';
+                document.getElementById('us10').value = data_us.us5 || '';
+
+                // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
+                document.getElementById('ultraSoundFields').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    
+
+    document.getElementById('superBrightBtn1').addEventListener('click', function() {
         var superbrightId = 1;
 
         // Ambil data_us dari API (controller) menggunakan AJAX
@@ -877,11 +894,26 @@
                 document.getElementById('sb3').value = data_sb.sb3 || '';
                 document.getElementById('sb4').value = data_sb.sb4 || '';
                 document.getElementById('sb5').value = data_sb.sb5 || '';
-                document.getElementById('sb6').value = data_sb.sb6 || '';
-                document.getElementById('sb7').value = data_sb.sb7 || '';
-                document.getElementById('sb8').value = data_sb.sb8 || '';
-                document.getElementById('sb9').value = data_sb.sb9 || '';
-                document.getElementById('sb10').value = data_sb.sb10 || '';
+
+                // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
+                document.getElementById('superBrightFields').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('superBrightBtn2').addEventListener('click', function() {
+        var superbrightId = 1;
+
+        // Ambil data_us dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_superbright_data/' + superbrightId)
+            .then(response => response.json())
+            .then(data_sb => {
+                // Mengisi nilai textarea dengan data dari data_sb
+                document.getElementById('sb6').value = data_sb.sb1 || '';
+                document.getElementById('sb7').value = data_sb.sb2 || '';
+                document.getElementById('sb8').value = data_sb.sb3 || '';
+                document.getElementById('sb9').value = data_sb.sb4 || '';
+                document.getElementById('sb10').value = data_sb.sb5 || '';
 
                 // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
                 document.getElementById('superBrightFields').style.display = 'block';
@@ -975,5 +1007,12 @@
                 document.getElementById('magnetikFields').style.display = 'block';
             })
             .catch(error => console.error('Error:', error));
+    });
+
+    $(document).ready(function() {
+        $('#nik').select2({
+            placeholder: "Pilih NIK",
+            allowClear: true
+        });
     });
 </script>

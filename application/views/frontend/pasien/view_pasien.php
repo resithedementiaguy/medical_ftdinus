@@ -32,7 +32,7 @@
                                 <th>NIK</th>
                                 <th>Nama Lengkap</th>
                                 <th>Tanggal Lahir</th>
-                                <th>Kota Asal</th>
+                                <th>Pembuat</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                         </td>
                                         <td><?php echo $pasien['nama']; ?></td>
                                         <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
-                                        <td><?php echo $pasien['kota']; ?></td>
+                                        <td><?php echo $pasien['pembuat']; ?></td>
                                         <td>
                                             <a href="<?php echo site_url('pasien/detail/' . $pasien['nik']); ?>" class="badge bg-success">
                                                 <i class="fas fa-eye"></i> Lihat

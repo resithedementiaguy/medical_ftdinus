@@ -11,7 +11,10 @@ class Mod_darah extends CI_Model
 
     public function get_penduduk()
     {
-        $query = $this->db->get('ktp');
+        $this->db->select('*');
+        $this->db->from('ktp');
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get();
         return $query->result();
     }
 
