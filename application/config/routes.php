@@ -56,5 +56,8 @@ $route['api/ultrasound/(:num)']['get'] = 'api_ultrasound/get/$1';
 $route['api/ultrasound/(:num)']['put'] = 'api_ultrasound/update/$1';
 $route['api/ultrasound/(:num)']['delete'] = 'api_ultrasound/delete/$1';
 
+$route['rajaongkir/get_provinces'] = 'RajaOngkirController/get_provinces';
+$route['rajaongkir/get_cities/(:num)'] = 'RajaOngkirController/get_cities/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -63,20 +63,6 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="tinggi">Tinggi</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi" value="<?php echo htmlspecialchars($penduduk['tinggi'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="berat">Berat</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat" value="<?php echo htmlspecialchars($penduduk['berat'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
-
-                                        <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">

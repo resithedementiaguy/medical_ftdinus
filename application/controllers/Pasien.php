@@ -34,6 +34,7 @@ class Pasien extends CI_Controller
         $data['penduduk'] = $this->Mod_penduduk->get_all_penduduk();
         $data['pasien_list'] = $this->Mod_pasien->get_all_pasien();
         $data['pasien'] = $this->Mod_pasien->get_pasien_detail($nik);
+        $data['antropometri'] = $this->Mod_pasien->get_antropometri($nik);
         $data['suntik'] = $this->Mod_pasien->get_suntik($nik);
         $data['ultrasound'] = $this->Mod_pasien->get_ultrasound($nik);
         $data['superbright'] = $this->Mod_pasien->get_superbright($nik);

@@ -1,7 +1,7 @@
 <footer>
     <div class="footer clearfix mb-0 text-muted" style="text-align: center;">
         <div>
-            <p>2024 &copy; Universitas Dian Nuswantoro</p>
+            <p>Copyright 2024 &copy; Universitas Dian Nuswantoro</p>
         </div>
     </div>
 </footer>

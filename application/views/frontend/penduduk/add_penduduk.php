@@ -62,20 +62,6 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="tinggi">Tinggi Badan</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi Badan" data-parsley-required="true" data-parsley-error-message="Tinggi Badan wajib diisi!">
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label for="berat">Berat Badan</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat Badan" data-parsley-required="true" data-parsley-error-message="Berat Badan wajib diisi!">
-                                        </div>
-
-                                        <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">

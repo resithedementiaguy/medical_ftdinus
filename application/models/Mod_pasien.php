@@ -21,13 +21,23 @@ class Mod_pasien extends CI_Model
 
     public function get_pasien_detail($nik)
     {
-        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.jenis_kelamin, ktp.kelurahan, ktp.kecamatan, ktp.kota');
+        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, pasien.tinggi, pasien.berat, pasien.ins_time, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.jenis_kelamin, ktp.kelurahan, ktp.kecamatan, ktp.kota');
         $this->db->from('ktp');
         $this->db->join('pasien', 'pasien.nik = ktp.nik', 'left');
         $this->db->where('ktp.nik', $nik);
         $query = $this->db->get();
 
         return $query->row_array();
+    }
+
+    public function get_antropometri($nik)
+    {
+        $this->db->select('id as pasien_id, nik, tinggi, berat, STR_TO_DATE(ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        $this->db->from('pasien');
+        $this->db->where('nik', $nik);
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        $query = $this->db->get();
+        return $query->result();
     }
 
     // Function Suntik
@@ -138,10 +148,11 @@ class Mod_pasien extends CI_Model
         return $query->row_array();
     }
 
-    public function get_suntik_dashboard() {
+    public function get_suntik_dashboard()
+    {
         // Select fields
         $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(suntik.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
-        
+
         // Join tables
         $this->db->from('suntik');
         $this->db->join('pasien', 'suntik.id_pasien = pasien.id');
@@ -149,16 +160,17 @@ class Mod_pasien extends CI_Model
         $this->db->order_by("ins_time_datetime", 'DESC');
         // Limit the number of results
         $this->db->limit(3);
-        
+
 
         // Execute query
         $query = $this->db->get();
-        
+
         // Return results
         return $query->result();
     }
 
-    public function count_suntik_dashboard() {
+    public function count_suntik_dashboard()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_suntik');
         $query_pasien = $this->db->get('suntik');
@@ -166,13 +178,13 @@ class Mod_pasien extends CI_Model
 
         // Return the total
         return $total_pasien;
-        
     }
 
-    public function get_ultrasound_dashboard() {
+    public function get_ultrasound_dashboard()
+    {
         // Select fields
         $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(ultrasound.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
-        
+
         // Join tables
         $this->db->from('ultrasound');
         $this->db->join('pasien', 'ultrasound.id_pasien = pasien.id');
@@ -180,16 +192,17 @@ class Mod_pasien extends CI_Model
         $this->db->order_by("ins_time_datetime", 'DESC');
         // Limit the number of results
         $this->db->limit(3);
-        
+
 
         // Execute query
         $query = $this->db->get();
-        
+
         // Return results
         return $query->result();
     }
 
-    public function count_ultrasound_dashboard() {
+    public function count_ultrasound_dashboard()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_ultrasound');
         $query_pasien = $this->db->get('ultrasound');
@@ -197,13 +210,13 @@ class Mod_pasien extends CI_Model
 
         // Return the total
         return $total_pasien;
-        
     }
 
-    public function get_superbright_dashboard() {
+    public function get_superbright_dashboard()
+    {
         // Select fields
         $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(superbright.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
-        
+
         // Join tables
         $this->db->from('superbright');
         $this->db->join('pasien', 'superbright.id_pasien = pasien.id');
@@ -211,16 +224,17 @@ class Mod_pasien extends CI_Model
         $this->db->order_by("ins_time_datetime", 'DESC');
         // Limit the number of results
         $this->db->limit(3);
-        
+
 
         // Execute query
         $query = $this->db->get();
-        
+
         // Return results
         return $query->result();
     }
 
-    public function count_superbright_dashboard() {
+    public function count_superbright_dashboard()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_superbright');
         $query_pasien = $this->db->get('superbright');
@@ -228,13 +242,13 @@ class Mod_pasien extends CI_Model
 
         // Return the total
         return $total_pasien;
-        
     }
 
-    public function get_magnetik_dashboard() {
+    public function get_magnetik_dashboard()
+    {
         // Select fields
         $this->db->select('ktp.nama, ktp.nik, STR_TO_DATE(magnetik.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
-        
+
         // Join tables
         $this->db->from('magnetik');
         $this->db->join('pasien', 'magnetik.id_pasien = pasien.id');
@@ -242,16 +256,17 @@ class Mod_pasien extends CI_Model
         $this->db->order_by("ins_time_datetime", 'DESC');
         // Limit the number of results
         $this->db->limit(3);
-        
+
 
         // Execute query
         $query = $this->db->get();
-        
+
         // Return results
         return $query->result();
     }
 
-    public function count_magnetik_dashboard() {
+    public function count_magnetik_dashboard()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_magnetik');
         $query_pasien = $this->db->get('magnetik');
@@ -259,7 +274,6 @@ class Mod_pasien extends CI_Model
 
         // Return the total
         return $total_pasien;
-        
     }
 
     public function get_pasien_dashboard()
@@ -272,7 +286,8 @@ class Mod_pasien extends CI_Model
         return $query->result();
     }
 
-    public function get_total_pemeriksaan() {
+    public function get_total_pemeriksaan()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_suntik');
         $query_suntik = $this->db->get('suntik');
@@ -300,7 +315,8 @@ class Mod_pasien extends CI_Model
         return $total_pemeriksaan;
     }
 
-    public function get_total_pasien() {
+    public function get_total_pasien()
+    {
         // Get total count from suntik table
         $this->db->select('COUNT(*) as total_pasien');
         $query_pasien = $this->db->get('ktp');
@@ -310,20 +326,22 @@ class Mod_pasien extends CI_Model
         return $total_pasien;
     }
 
-    public function get_pemeriksaan_counts() {
+    public function get_pemeriksaan_counts()
+    {
         $result = [];
-    
+
         $tables = ['suntik', 'ultrasound', 'superbright', 'magnetik'];
         foreach ($tables as $table) {
             $this->db->select('COUNT(*) as count');
             $query = $this->db->get($table);
             $result[$table] = $query->row()->count;
         }
-    
+
         return $result;
     }
 
-    public function get_periksa_mingguan() {
+    public function get_periksa_mingguan()
+    {
         $query = "
             SELECT 
                 DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 

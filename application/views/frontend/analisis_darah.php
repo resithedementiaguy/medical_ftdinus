@@ -54,6 +54,20 @@
                                             <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" readonly value="<?= set_value('nama') ?>">
                                         </div>
 
+                                        <div class="col-md-4">
+                                            <label for="tinggi">Tinggi Badan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi Badan" data-parsley-required="true" data-parsley-error-message="Tinggi Badan wajib diisi!">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="berat">Berat Badan</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat Badan" data-parsley-required="true" data-parsley-error-message="Berat Badan wajib diisi!">
+                                        </div>
+
                                         <div>
                                             <h5 class="h5 mt-5 mb-4">Alat Medical</h5>
                                         </div>
@@ -702,6 +716,8 @@
             var selectedNik = $('#nik').val();
             var selectedNama = $('#nama').val();
             var selectedAlat = $('#alat').val();
+            var tinggi = $('#tinggi').val();
+            var berat = $('#berat').val();
 
             if (selectedNik === "" || selectedAlat === "") {
                 $('#errorModal').modal('show');
@@ -738,6 +754,8 @@
                         $('#nik').val(selectedNik);
                         $('#nama').val(selectedNama);
                         $('#nama').val($('#nama').val());
+                        $('#tinggi').val(tinggi);
+                        $('#berat').val(berat);
 
                         // Hide fields related to the selected alat
                         $('#' + selectedAlat + 'Fields').hide();

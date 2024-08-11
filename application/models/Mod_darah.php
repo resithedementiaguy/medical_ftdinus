@@ -27,9 +27,9 @@ class Mod_darah extends CI_Model
         return null;
     }
 
-    public function add_pasien($nik)
+    public function add_pasien($data)
     {
-        $this->db->insert('pasien', array('nik' => $nik));
+        $this->db->insert('pasien', $data);
         return $this->db->insert_id();
     }
 

@@ -45,9 +45,13 @@ class Analisis_darah extends CI_Controller
     {
         $alat = $this->input->post('alat');
         $nik = $this->input->post('nik');
+        $tinggi = $this->input->post('tinggi');
+        $berat = $this->input->post('berat');
 
         // Validate the input
         $this->form_validation->set_rules('nik', 'NIK', 'required');
+        $this->form_validation->set_rules('tinggi', 'Tinggi', 'required');
+        $this->form_validation->set_rules('berat', 'Berat', 'required');
 
         if ($alat == 'suntik') {
             $this->form_validation->set_rules('glukosa', 'Glukosa', 'required');
@@ -86,7 +90,11 @@ class Analisis_darah extends CI_Controller
             // Check if we already have a pasien ID in session
             if (!$this->session->userdata('pasien_id')) {
                 // Insert the pasien data into the pasien table and get the new ID
-                $id_pasien = $this->Mod_darah->add_pasien($nik);
+                $id_pasien = $this->Mod_darah->add_pasien([
+                    'nik' => $nik,
+                    'tinggi' => $tinggi,
+                    'berat' => $berat,
+                ]);
                 // Save the pasien ID in session
                 $this->session->set_userdata('pasien_id', $id_pasien);
             } else {

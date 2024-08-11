@@ -110,8 +110,6 @@ class Penduduk extends CI_Controller
         $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('no_hp', 'Nomor HP', 'required');
-        $this->form_validation->set_rules('tinggi', 'Tinggi', 'required');
-        $this->form_validation->set_rules('berat', 'Berat', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         $this->form_validation->set_rules('rt', 'RT', 'required');
         $this->form_validation->set_rules('rw', 'RW', 'required');
@@ -132,8 +130,6 @@ class Penduduk extends CI_Controller
                 'tanggal_lahir' => $this->input->post('tanggal_lahir'),
                 'email' => $this->input->post('email'),
                 'no_hp' => $this->input->post('no_hp'),
-                'tinggi' => $this->input->post('tinggi'),
-                'berat' => $this->input->post('berat'),
                 'alamat' => $this->input->post('alamat'),
                 'rt' => $this->input->post('rt'),
                 'rw' => $this->input->post('rw'),
