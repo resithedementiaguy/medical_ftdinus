@@ -74,9 +74,11 @@ class Penduduk extends CI_Controller
                 'rw' => $this->input->post('rw'),
                 'kelurahan' => $this->input->post('kelurahan'),
                 'kecamatan' => $this->input->post('kecamatan'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                 'kota' => $this->input->post('kota'),
                 'provinsi' => $this->input->post('provinsi'),
-                'pembuat' => $this->input->post('pembuat')
+                'pembuat' => $this->input->post('pembuat'),
+                'umur' => $this->input->post('umur')
             );
             // Add the new resident to the database
             $this->Mod_penduduk->add_penduduk($data);
@@ -132,11 +134,13 @@ class Penduduk extends CI_Controller
                 'rw' => $this->input->post('rw'),
                 'kelurahan' => $this->input->post('kelurahan'),
                 'kecamatan' => $this->input->post('kecamatan'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                 'kota' => $this->input->post('kota'),
-                'provinsi' => $this->input->post('provinsi')
+                'provinsi' => $this->input->post('provinsi'),
+                'umur' => $this->input->post('umur')
             );
             $this->Mod_penduduk->update_penduduk($id, $data);
-            redirect('penduduk/edit/' . $id);
+            redirect('pasien');
         }
     }
 }

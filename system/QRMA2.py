@@ -5,11 +5,11 @@ import string
 import serial
 
 # URL endpoint Anda
-url = 'http://localhost/medical_ftdinus/api_magnetik/update/1'
+url = 'http://cemti.org/api_magnetik/update/1'
 
 # Konfigurasi Serial
 ser = serial.Serial(
-    port='COM7',  # Ganti sesuai dengan port ESP32 Anda
+    port='COM6',  # Ganti sesuai dengan port ESP32 Anda
     baudrate=9600,
     timeout=1
 )

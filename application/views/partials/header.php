@@ -97,6 +97,9 @@
 
         <div id="main">
             <header>
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
                 <nav class="navbar navbar-expand navbar-light navbar-top p-0 mb-4">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
