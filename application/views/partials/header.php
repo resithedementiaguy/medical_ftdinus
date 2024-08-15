@@ -81,6 +81,12 @@
                                 <span>Pasien</span>
                             </a>
                         </li>
+                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'komparasi') ? 'active' : ''; ?>">
+                            <a href="<?php echo site_url('komparasi'); ?>" class="sidebar-link">
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>Analisis Komparasi</span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-title">Penduduk</li>
 

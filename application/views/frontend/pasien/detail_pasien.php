@@ -56,19 +56,20 @@
                             </div>
                         </div>
                         <div class="custom-row">
-                            <div class="custom-label">Alamat</div>
-                            <div class="custom-data"><?php echo $pasien['alamat'] ?>, <?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?></div>
-                        </div>
-                        
-                    </div>
-                    <div class="col">
-                        <div class="custom-row">
                             <div class="custom-label">Tempat Tanggal Lahir</div>
                             <div class="custom-data"><?php echo $pasien['tempat_lahir']; ?>, <?php echo formatDate($pasien['tanggal_lahir']); ?></div>
                         </div>
                         <div class="custom-row">
-                            <div class="custom-label">Kota</div>
-                            <div class="custom-data"><?php echo $pasien['kota']; ?></div>
+                            <div class="custom-label">Umur</div>
+                            <div class="custom-data"><?php echo $pasien['umur'] ?> tahun</div>
+                        </div>
+                        
+                    </div>
+                    <div class="col">
+                        
+                        <div class="custom-row">
+                            <div class="custom-label">Alamat</div>
+                            <div class="custom-data"><?php echo $pasien['alamat'] ?>, <?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
                         </div>
                         <div class="custom-row">
                             <div class="custom-label">Email</div>

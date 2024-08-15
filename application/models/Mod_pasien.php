@@ -21,7 +21,7 @@ class Mod_pasien extends CI_Model
 
     public function get_pasien_detail($nik)
     {
-        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.jenis_kelamin, ktp.kelurahan, ktp.kecamatan, ktp.kota, ktp.email, ktp.no_hp, pasien.tinggi, pasien.berat');
+        $this->db->select('pasien.id as pasien_id, pasien.nik AS pasien_nik, ktp.id as ktp_id, ktp.nik, ktp.nama, ktp.alamat, ktp.tempat_lahir, ktp.tanggal_lahir, ktp.jenis_kelamin, ktp.kelurahan, ktp.kecamatan, ktp.kota, ktp.email, ktp.no_hp, pasien.tinggi, pasien.berat, ktp.umur');
         $this->db->from('ktp');
         $this->db->join('pasien', 'pasien.nik = ktp.nik', 'left');
         $this->db->where('ktp.nik', $nik);
@@ -394,4 +394,31 @@ class Mod_pasien extends CI_Model
     {
         return $this->db->delete('magnetik', array('id' => $id));
     }
+
+    public function get_recap_by_nik($nik) {
+        $this->db->select('
+            data_manual.sistol AS manual_sistol,
+            data_manual.diastol AS manual_diastol,
+            data_manual.tinggi_bdn AS manual_tinggi_bdn,
+            data_manual.berat_bdn AS manual_berat_bdn,
+            data_manual.glukosa AS manual_glukosa,
+            data_akm.sistol AS akm_sistol,
+            data_akm.diastol AS akm_diastol,
+            data_akm.tinggi_bdn AS akm_tinggi_bdn,
+            data_akm.berat_bdn AS akm_berat_bdn,
+            data_akm.glukosa AS akm_glukosa,
+            COALESCE(data_manual.sistol, 0) - COALESCE(data_akm.sistol, 0) as selisih_sistol,
+            COALESCE(data_manual.diastol, 0) - COALESCE(data_akm.diastol, 0) as selisih_diastol,
+            COALESCE(data_manual.tinggi_bdn, 0) - COALESCE(data_akm.tinggi_bdn, 0) as selisih_tinggi_bdn,
+            COALESCE(data_manual.berat_bdn, 0) - COALESCE(data_akm.berat_bdn, 0) as selisih_berat_bdn,
+            COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0) as selisih_glukosa
+        ');
+        $this->db->from('data_manual');
+        $this->db->join('data_akm', 'data_manual.nik = data_akm.nik', 'left');
+        $this->db->where('data_manual.nik', $nik);
+    
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
 }

@@ -70,16 +70,11 @@ class Api_superbright extends CI_Controller
             // Data yang valid, perbarui di database
             $data = array(
                 'ins_time' => $json_data['ins_time'],
-                'sb1' => isset($json_data['sb1']) ? implode(' ', $json_data['sb1']) : null,
-                'sb2' => isset($json_data['sb2']) ? implode(' ', $json_data['sb2']) : null,
-                'sb3' => isset($json_data['sb3']) ? implode(' ', $json_data['sb3']) : null,
-                'sb4' => isset($json_data['sb4']) ? implode(' ', $json_data['sb4']) : null,
-                'sb5' => isset($json_data['sb5']) ? implode(' ', $json_data['sb5']) : null,
-                'sb6' => isset($json_data['sb6']) ? implode(' ', $json_data['sb6']) : null,
-                'sb7' => isset($json_data['sb7']) ? implode(' ', $json_data['sb7']) : null,
-                'sb8' => isset($json_data['sb8']) ? implode(' ', $json_data['sb8']) : null,
-                'sb9' => isset($json_data['sb9']) ? implode(' ', $json_data['sb9']) : null,
-                'sb10' => isset($json_data['sb10']) ? implode(' ', $json_data['sb10']) : null
+                'sb1' => $json_data['sb1'],
+                'sb2' => $json_data['sb2'],
+                'sb3' => $json_data['sb3'],
+                'sb4' => $json_data['sb4'],
+                'sb5' => $json_data['sb5'],
             );
 
             if ($this->Superbright_model->update_superbright($id_superbright, $data)) {
