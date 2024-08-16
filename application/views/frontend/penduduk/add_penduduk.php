@@ -52,35 +52,35 @@
                                             <label for="email">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email" data-parsley-required="true" data-parsley-error-message="Email wajib diisi!">
+                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="no_hp">Nomor HP</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="no_hp" class="form-control" name="no_hp" placeholder="Nomor HP" data-parsley-required="true" data-parsley-error-message="Nomor HP wajib diisi!">
+                                            <input type="text" id="no_hp" class="form-control" name="no_hp" placeholder="Nomor HP">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="tempat_lahir">Tempat Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="tempat_lahir" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" data-parsley-required="true" data-parsley-error-message="Tempat Lahir wajib diisi!">
+                                            <input type="text" id="tempat_lahir" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="tanggal_lahir">Tanggal Lahir</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" data-parsley-required="true" data-parsley-error-message="Tanggal Lahir wajib diisi!" onchange="calculateAge()">
+                                            <input type="date" id="tanggal_lahir" class="form-control" name="tanggal_lahir" onchange="calculateAge()">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="tempat_lahir">Umur</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="umur" class="form-control" name="umur" placeholder="Umur" data-parsley-required="true" data-parsley-error-message="Umur wajib diisi!" readonly>
+                                            <input type="text" id="umur" class="form-control" name="umur" placeholder="Umur" readonly>
                                         </div>
 
                                         <div class="col-md-4">
@@ -90,7 +90,7 @@
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <div class="form-check">
-                                                        <input type="radio" id="jenis_kelamin_l" class="form-check-input" name="jenis_kelamin" value="L" data-parsley-required="true" data-parsley-error-message="Jenis Kelamin wajib diisi!">
+                                                        <input type="radio" id="jenis_kelamin_l" class="form-check-input" name="jenis_kelamin" value="L">
                                                         <label class="form-check-label" for="jenis_kelamin_l">Laki-laki</label>
                                                     </div>
                                                 </div>
@@ -111,49 +111,49 @@
                                             <label for="alamat">Alamat</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap" data-parsley-required="true" data-parsley-error-message="Alamat wajib diisi!"></textarea>
+                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="rt">RT</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT" data-parsley-required="true" data-parsley-error-message="RT wajib diisi!">
+                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="rw">RW</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW" data-parsley-required="true" data-parsley-error-message="RW wajib diisi!">
+                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kelurahan">Kelurahan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan" data-parsley-required="true" data-parsley-error-message="Kelurahan wajib diisi!">
+                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kecamatan">Kecamatan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan" data-parsley-required="true" data-parsley-error-message="Kecamatan wajib diisi!">
+                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kota">Kota</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota" data-parsley-required="true" data-parsley-error-message="Kota wajib diisi!">
+                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota">
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="provinsi">Provinsi</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" data-parsley-required="true" data-parsley-error-message="Provinsi wajib diisi!">
+                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi">
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -200,7 +200,8 @@
                         }
                     });
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
                     Swal.fire({
                         title: 'Kesalahan!',
                         text: 'Ada kesalahan simpan.',

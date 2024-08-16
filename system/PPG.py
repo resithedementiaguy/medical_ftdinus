@@ -9,7 +9,7 @@ url = 'http://cemti.org/api_superbright/update/1'
 
 # Konfigurasi Serial
 ser = serial.Serial(
-    port='COM8',  # Ganti sesuai dengan port ESP32 Anda
+    port='COM4',  # Ganti sesuai dengan port ESP32 Anda
     baudrate=115200,
     timeout=1
 )

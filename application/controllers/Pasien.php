@@ -27,6 +27,7 @@ class Pasien extends CI_Controller
     public function index()
     {
         $data['pasien_list'] = $this->Mod_pasien->get_all_pasien();
+        $data['total_recap'] = $this->Mod_pasien->get_total_recap();
         $this->load->view('partials/header');
         $this->load->view('frontend/pasien/view_pasien', $data);
         $this->load->view('partials/footer');
@@ -42,6 +43,7 @@ class Pasien extends CI_Controller
         $data['ultrasound'] = $this->Mod_pasien->get_ultrasound($nik);
         $data['superbright'] = $this->Mod_pasien->get_superbright($nik);
         $data['magnetik'] = $this->Mod_pasien->get_magnetik($nik);
+        $data['recap'] = $this->Mod_pasien->get_recap_by_nik($nik);
 
         $this->load->view('partials/header');
         $this->load->view('frontend/pasien/detail_pasien', $data);

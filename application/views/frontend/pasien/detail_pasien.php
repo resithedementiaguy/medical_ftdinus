@@ -63,10 +63,9 @@
                             <div class="custom-label">Umur</div>
                             <div class="custom-data"><?php echo $pasien['umur'] ?> tahun</div>
                         </div>
-                        
+
                     </div>
                     <div class="col">
-                        
                         <div class="custom-row">
                             <div class="custom-label">Alamat</div>
                             <div class="custom-data"><?php echo $pasien['alamat'] ?>, <?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
@@ -78,7 +77,7 @@
                         <div class="custom-row">
                             <div class="custom-label">No Telepon</div>
                             <div class="custom-data"><?php echo $pasien['no_hp']; ?></div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,60 +87,71 @@
         <div class="row match-height">
             <div class="col-md-12 col-12">
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div>
-                                <h5 class="h5 mb-4">Riwayat Periksa</h5>
-                            </div>
-                            <?php if (!empty($pasien['pasien_nik'])) : ?>
-                                <div class="form-body mb-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="basicSelect">Data Antropometri</label>
-                                        </div>
-                                        <!-- Table untuk Suntik -->
-                                        <div id="antropometri" class="mt-3">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Tanggal Periksa</th>
-                                                            <th>Tinggi</th>
-                                                            <th>Berat</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($antropometri as $antro) : ?>
+                    <div class="card-body">
+                        <div>
+                            <h5 class="h5 mb-4">Riwayat Periksa</h5>
+                        </div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">Periksa Alat</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false">Komparasi</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show mt-4 active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <?php if (!empty($pasien['pasien_nik'])) : ?>
+                                    <div class="form-body mb-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="basicSelect">Data Antropometri</label>
+                                            </div>
+                                            <!-- Table untuk Suntik -->
+                                            <div id="antropometri" class="mt-3">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
                                                             <tr>
-                                                                <td><?= formatDateTime($antro->ins_time_datetime) ?></td>
-                                                                <td><?= $antro->tinggi ?></td>
-                                                                <td><?= $antro->berat ?></td>
-                                                                </td>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Tinggi</th>
+                                                                <th>Berat</th>
                                                             </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($antropometri as $antro) : ?>
+                                                                <tr>
+                                                                    <td><?= formatDateTime($antro->ins_time_datetime) ?></td>
+                                                                    <td><?= $antro->tinggi ?></td>
+                                                                    <td><?= $antro->berat ?></td>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="basicSelect">Nama Alat</label>
-                                        </div>
-                                        <div class="col-md-8 form-group">
-                                            <fieldset class="form-group">
-                                                <select class="form-select" id="basicSelect" name="alat">
-                                                    <option value="" selected hidden>Pilih Alat</option>
-                                                    <option value="suntik">Suntik</option>
-                                                    <option value="ultraSound">Ultra Sound</option>
-                                                    <option value="superBright">Super Bright</option>
-                                                    <option value="magnetik">Magnetik</option>
-                                                </select>
-                                            </fieldset>
-                                        </div>
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="basicSelect">Nama Alat</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="basicSelect" name="alat">
+                                                        <option value="" selected hidden>Pilih Alat</option>
+                                                        <option value="suntik">Suntik</option>
+                                                        <option value="ultraSound">Ultra Sound</option>
+                                                        <option value="superBright">Super Bright</option>
+                                                        <option value="magnetik">Magnetik</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
 
                                             <!-- Table untuk Suntik -->
                                             <div id="suntikFields" style="display: none;">
@@ -165,24 +175,24 @@
                                                         <tbody>
                                                             <?php foreach ($suntik as $suntik) : ?>
                                                                 <?php if (!empty($suntik->glukosa) || !empty($suntik->hb) || !empty($suntik->spo2)) : ?>
-                                                                <tr>
-                                                                    <td><?= formatDateTime($suntik->ins_time) ?></td>
-                                                                    <td><?= formatDateTime($suntik->upd_time) ?></td>
-                                                                    <td><?= $suntik->glukosa ?></td>
-                                                                    <td><?= $suntik->hb ?></td>
-                                                                    <td><?= $suntik->spo2 ?></td>
-                                                                    <td><?= $suntik->kolesterol ?></td>
-                                                                    <td><?= $suntik->asam_urat ?></td>
-                                                                    <td>
-                                                                        <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
-                                                                            <i class="fas fa-edit"></i> Edit
-                                                                        </button>
-                                                                        <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_suntik/' . $suntik->id) ?>">
-                                                                            <i class="fas fa-trash"></i> Hapus
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php endif;?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($suntik->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($suntik->upd_time) ?></td>
+                                                                        <td><?= $suntik->glukosa ?></td>
+                                                                        <td><?= $suntik->hb ?></td>
+                                                                        <td><?= $suntik->spo2 ?></td>
+                                                                        <td><?= $suntik->kolesterol ?></td>
+                                                                        <td><?= $suntik->asam_urat ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_suntik/' . $suntik->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -268,22 +278,22 @@
                                                         <tbody>
                                                             <?php foreach ($ultrasound as $us) : ?>
                                                                 <?php if (!empty($us->ins_time) || !empty($us->upd_time)) : ?>
-                                                                <tr>
-                                                                    <td><?= formatDateTime($us->ins_time) ?></td>
-                                                                    <td><?= formatDateTime($us->upd_time) ?></td>
-                                                                    <td>
-                                                                        <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
-                                                                            <i class="fas fa-eye"></i> Lihat
-                                                                        </button>
-                                                                        <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundEditModal" data-id="<?= $us->id ?>">
-                                                                            <i class="fas fa-edit"></i> Edit
-                                                                        </button>
-                                                                        <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_ultrasound/' . $us->id) ?>">
-                                                                            <i class="fas fa-trash"></i> Hapus
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php endif;?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($us->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($us->upd_time) ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
+                                                                                <i class="fas fa-eye"></i> Lihat
+                                                                            </button>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundEditModal" data-id="<?= $us->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_ultrasound/' . $us->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -302,7 +312,7 @@
                                                             <div class="form-body">
                                                                 <div class="row">
                                                                     <div id="ultraSoundFields">
-                                                                        
+
                                                                         <div class="col">
                                                                             <label for="us1"><strong>Data Ultrasound 1</strong></label>
                                                                         </div>
@@ -379,82 +389,82 @@
                                                             <h5 class="modal-title" id="ultraSoundEditModalTitle">Edit Ultrasound</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        
+
                                                         <div class="modal-body">
-                                                        <form class="" id="editUltrasoundForm" action="<?= base_url('pasien/update_ultrasound')?>" method="POST">
-                                                            <div class="form-body">
-                                                                <div class="row">
-                                                                
-                                                                    <div id="ultraSoundFields">
-                                                                        <div class="col-sm-12 d-flex justify-content-end">
-                                                                            <button type="button" id="ultraSoundSamBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
-                                                                            <button type="button" id="ultraSoundSamBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
+                                                            <form class="" id="editUltrasoundForm" action="<?= base_url('pasien/update_ultrasound') ?>" method="POST">
+                                                                <div class="form-body">
+                                                                    <div class="row">
+
+                                                                        <div id="ultraSoundFields">
+                                                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                                                <button type="button" id="ultraSoundSamBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
+                                                                                <button type="button" id="ultraSoundSamBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us1"><strong>Data Ultrasound 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us1" class="form-control" id="edit-us1" rows="5" placeholder="Data Ultrasound 1"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us2"><strong>Data Ultrasound 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us2" class="form-control" id="edit-us2" rows="5" placeholder="Data Ultrasound 2"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us3"><strong>Data Ultrasound 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us3" class="form-control" id="edit-us3" rows="5" placeholder="Data Ultrasound 3"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us4"><strong>Data Ultrasound 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us4" class="form-control" id="edit-us4" rows="5" placeholder="Data Ultrasound 4"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us5"><strong>Data Ultrasound 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us5" class="form-control" id="edit-us5" rows="5" placeholder="Data Ultrasound 5"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us6"><strong>Data Ultrasound 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us6" class="form-control" id="edit-us6" rows="5" placeholder="Data Ultrasound 6"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us7"><strong>Data Ultrasound 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us7" class="form-control" id="edit-us7" rows="5" placeholder="Data Ultrasound 7"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us8"><strong>Data Ultrasound 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us8" class="form-control" id="edit-us8" rows="5" placeholder="Data Ultrasound 8"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us9"><strong>Data Ultrasound 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us9" class="form-control" id="edit-us9" rows="5" placeholder="Data Ultrasound 9"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="us10"><strong>Data Ultrasound 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="us10" class="form-control" id="edit-us10" rows="5" placeholder="Data Ultrasound 10"></textarea>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col">
-                                                                            <label for="us1"><strong>Data Ultrasound 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us1" class="form-control" id="edit-us1" rows="5" placeholder="Data Ultrasound 1"></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us2"><strong>Data Ultrasound 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us2" class="form-control" id="edit-us2" rows="5" placeholder="Data Ultrasound 2" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us3"><strong>Data Ultrasound 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us3" class="form-control" id="edit-us3" rows="5" placeholder="Data Ultrasound 3" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us4"><strong>Data Ultrasound 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us4" class="form-control" id="edit-us4" rows="5" placeholder="Data Ultrasound 4" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us5"><strong>Data Ultrasound 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us5" class="form-control" id="edit-us5" rows="5" placeholder="Data Ultrasound 5" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us6"><strong>Data Ultrasound 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us6" class="form-control" id="edit-us6" rows="5" placeholder="Data Ultrasound 6" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us7"><strong>Data Ultrasound 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us7" class="form-control" id="edit-us7" rows="5" placeholder="Data Ultrasound 7" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us8"><strong>Data Ultrasound 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us8" class="form-control" id="edit-us8" rows="5" placeholder="Data Ultrasound 8" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us9"><strong>Data Ultrasound 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us9" class="form-control" id="edit-us9" rows="5" placeholder="Data Ultrasound 9" ></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us10"><strong>Data Ultrasound 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="us10" class="form-control" id="edit-us10" rows="5" placeholder="Data Ultrasound 10" ></textarea>
-                                                                        </div>
+
+
                                                                     </div>
-                                                                    
-                                                                
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-between">
                                                             <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
@@ -467,7 +477,7 @@
                                                             </button>
                                                             </form>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -489,22 +499,22 @@
                                                         <tbody>
                                                             <?php foreach ($superbright as $sb) : ?>
                                                                 <?php if (!empty($sb->ins_time) || !empty($sb->upd_time)) : ?>
-                                                                <tr>
-                                                                    <td><?= formatDateTime($sb->ins_time) ?></td>
-                                                                    <td><?= formatDateTime($sb->upd_time) ?></td>
-                                                                    <td>
-                                                                        <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
-                                                                            <i class="fas fa-eye"></i> Lihat
-                                                                        </button>
-                                                                        <button type="button" class="badge bg-warning border-0 edit-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightEditModal" data-id="<?= $sb->id ?>">
-                                                                            <i class="fas fa-edit"></i> Edit
-                                                                        </button>
-                                                                        <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_superbright/' . $sb->id) ?>">
-                                                                            <i class="fas fa-trash"></i> Hapus
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php endif;?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($sb->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($sb->upd_time) ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-primary border-0 view-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightModal" data-id="<?= $sb->id ?>">
+                                                                                <i class="fas fa-eye"></i> Lihat
+                                                                            </button>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-superbright-btn" data-bs-toggle="modal" data-bs-target="#superBrightEditModal" data-id="<?= $sb->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_superbright/' . $sb->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -611,91 +621,91 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                             </button>
                                                         </div>
-                                                        
+
                                                         <div class="modal-body">
-                                                        <form action="" id="editSuperbrightForm" action="<?= base_url('pasien/update_superbright')?>" method="POST">
-                                                            <div class="form-body">
-                                                                <div class="row">
-                                                                    
-                                                                    <!-- Fields untuk Super Bright -->
-                                                                    <div id="superBrightFieldsDetail">
-                                                                        <div class="col-sm-12 d-flex justify-content-end">
-                                                                            <button type="button" id="superBrightSamBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
-                                                                            <button type="button" id="superBrightSamBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb1"><strong>Data Super Bright 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb1" class="form-control" id="edit-sb1" rows="5" placeholder="Data Super Bright 1" ></textarea>
-                                                                        </div>
+                                                            <form action="" id="editSuperbrightForm" action="<?= base_url('pasien/update_superbright') ?>" method="POST">
+                                                                <div class="form-body">
+                                                                    <div class="row">
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb2"><strong>Data Super Bright 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb2" class="form-control" id="edit-sb2" rows="5" placeholder="Data Super Bright 2" ></textarea>
-                                                                        </div>
+                                                                        <!-- Fields untuk Super Bright -->
+                                                                        <div id="superBrightFieldsDetail">
+                                                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                                                <button type="button" id="superBrightSamBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
+                                                                                <button type="button" id="superBrightSamBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb1"><strong>Data Super Bright 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb1" class="form-control" id="edit-sb1" rows="5" placeholder="Data Super Bright 1"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb3"><strong>Data Super Bright 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb3" class="form-control" id="edit-sb3" rows="5" placeholder="Data Super Bright 3" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb2"><strong>Data Super Bright 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb2" class="form-control" id="edit-sb2" rows="5" placeholder="Data Super Bright 2"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb4"><strong>Data Super Bright 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb4" class="form-control" id="edit-sb4" rows="5" placeholder="Data Super Bright 4" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb3"><strong>Data Super Bright 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb3" class="form-control" id="edit-sb3" rows="5" placeholder="Data Super Bright 3"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb5"><strong>Data Super Bright 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb5" class="form-control" id="edit-sb5" rows="5" placeholder="Data Super Bright 5" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb4"><strong>Data Super Bright 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb4" class="form-control" id="edit-sb4" rows="5" placeholder="Data Super Bright 4"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb6"><strong>Data Super Bright 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb6" class="form-control" id="edit-sb6" rows="5" placeholder="Data Super Bright 6" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb5"><strong>Data Super Bright 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb5" class="form-control" id="edit-sb5" rows="5" placeholder="Data Super Bright 5"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb7"><strong>Data Super Bright 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb7" class="form-control" id="edit-sb7" rows="5" placeholder="Data Super Bright 7" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb6"><strong>Data Super Bright 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb6" class="form-control" id="edit-sb6" rows="5" placeholder="Data Super Bright 6"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb8"><strong>Data Super Bright 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb8" class="form-control" id="edit-sb8" rows="5" placeholder="Data Super Bright 8" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb7"><strong>Data Super Bright 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb7" class="form-control" id="edit-sb7" rows="5" placeholder="Data Super Bright 7"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb9"><strong>Data Super Bright 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb9" class="form-control" id="edit-sb9" rows="5" placeholder="Data Super Bright 9" ></textarea>
-                                                                        </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb8"><strong>Data Super Bright 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb8" class="form-control" id="edit-sb8" rows="5" placeholder="Data Super Bright 8"></textarea>
+                                                                            </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="sb10"><strong>Data Super Bright 10</strong></label>
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb9"><strong>Data Super Bright 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb9" class="form-control" id="edit-sb9" rows="5" placeholder="Data Super Bright 9"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="sb10"><strong>Data Super Bright 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sb10" class="form-control" id="edit-sb10" rows="5" placeholder="Data Super Bright 10"></textarea>
+                                                                            </div>
+
                                                                         </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sb10" class="form-control" id="edit-sb10" rows="5" placeholder="Data Super Bright 10" ></textarea>
-                                                                        </div>
-                                                                        
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-between">
                                                             <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
@@ -708,7 +718,7 @@
                                                             </button>
                                                             </form>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -730,22 +740,22 @@
                                                         <tbody>
                                                             <?php foreach ($magnetik as $mag) : ?>
                                                                 <?php if (!empty($mag->ins_time) || !empty($mag->upd_time)) : ?>
-                                                                <tr>
-                                                                    <td><?= formatDateTime($mag->ins_time) ?></td>
-                                                                    <td><?= formatDateTime($mag->upd_time) ?></td>
-                                                                    <td>
-                                                                        <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
-                                                                            <i class="fas fa-eye"></i> Lihat
-                                                                        </button>
-                                                                        <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikEditModal" data-id="<?= $mag->id ?>">
-                                                                            <i class="fas fa-edit"></i> Edit
-                                                                        </button>
-                                                                        <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_magnetik/' . $mag->id) ?>">
-                                                                            <i class="fas fa-trash"></i> Hapus
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php endif;?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($mag->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($mag->upd_time) ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-primary border-0 view-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikModal" data-id="<?= $mag->id ?>">
+                                                                                <i class="fas fa-eye"></i> Lihat
+                                                                            </button>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-magnetik-btn" data-bs-toggle="modal" data-bs-target="#MagnetikEditModal" data-id="<?= $mag->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_magnetik/' . $mag->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
@@ -766,326 +776,326 @@
                                                                 <div class="row">
                                                                     <!-- Fields untuk Magnetik -->
                                                                     <div id="magnetikFieldsDetail">
-                                                                    <div>
-                                                                        <h6 class="h6 mt-4 mb-4">Magnetik Analisis Jantung</h6>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag1">Sinyal Magnetik 1</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag1" name="jtg_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag2">Sinyal Magnetik 2</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag2" name="jtg_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag3">Sinyal Magnetik 3</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag3" name="jtg_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag4">Sinyal Magnetik 4</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag4" name="jtg_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag5">Sinyal Magnetik 5</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag5" name="jtg_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag6">Sinyal Magnetik 6</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag6" name="jtg_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag7">Sinyal Magnetik 7</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag7" name="jtg_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag8">Sinyal Magnetik 8</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag8" name="jtg_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag9">Sinyal Magnetik 9</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag9" name="jtg_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag10">Sinyal Magnetik 10</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="jtg_mag10" name="jtg_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div>
-                                                                        <h6 class="h6 mt-4 mb-4">Magnetik Analisis Sistem Saraf</h6>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag1">Sinyal Magnetik 1</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag1" name="srf_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag2">Sinyal Magnetik 2</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag2" name="srf_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag3">Sinyal Magnetik 3</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag3" name="srf_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag4">Sinyal Magnetik 4</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag4" name="srf_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag5">Sinyal Magnetik 5</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag5" name="srf_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag6">Sinyal Magnetik 6</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag6" name="srf_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag7">Sinyal Magnetik 7</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag7" name="srf_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag8">Sinyal Magnetik 8</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag8" name="srf_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag9">Sinyal Magnetik 9</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag9" name="srf_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag10">Sinyal Magnetik 10</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="srf_mag10" name="srf_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div>
-                                                                        <h6 class="h6 mt-4 mb-4">Magnetik Analisis Darah dan Metabolisme</h6>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag1">Sinyal Magnetik 1</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag1" name="drh_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag2">Sinyal Magnetik 2</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag2" name="drh_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag3">Sinyal Magnetik 3</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag3" name="drh_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag4">Sinyal Magnetik 4</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag4" name="drh_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag5">Sinyal Magnetik 5</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag5" name="drh_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag6">Sinyal Magnetik 6</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag6" name="drh_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag7">Sinyal Magnetik 7</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag7" name="drh_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag8">Sinyal Magnetik 8</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag8" name="drh_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag9">Sinyal Magnetik 9</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag9" name="drh_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag10">Sinyal Magnetik 10</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="drh_mag10" name="drh_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div>
-                                                                        <h6 class="h6 mt-4 mb-4">Magnetik Analisis Molekuler dan Sel</h6>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag1">Sinyal Magnetik 1</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag1" name="sel_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag2">Sinyal Magnetik 2</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag2" name="sel_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag3">Sinyal Magnetik 3</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag3" name="sel_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag4">Sinyal Magnetik 4</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag4" name="sel_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag5">Sinyal Magnetik 5</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag5" name="sel_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag6">Sinyal Magnetik 6</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag6" name="sel_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag7">Sinyal Magnetik 7</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag7" name="sel_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag8">Sinyal Magnetik 8</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag8" name="sel_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag9">Sinyal Magnetik 9</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag9" name="sel_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag10">Sinyal Magnetik 10</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="sel_mag10" name="sel_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
-                                                                    </div>
-                                                                    <hr>
+                                                                        <div>
+                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Jantung</h6>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag1">Sinyal Magnetik 1</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag1" name="jtg_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag2">Sinyal Magnetik 2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag2" name="jtg_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag3">Sinyal Magnetik 3</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag3" name="jtg_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag4">Sinyal Magnetik 4</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag4" name="jtg_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag5">Sinyal Magnetik 5</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag5" name="jtg_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag6">Sinyal Magnetik 6</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag6" name="jtg_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag7">Sinyal Magnetik 7</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag7" name="jtg_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag8">Sinyal Magnetik 8</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag8" name="jtg_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag9">Sinyal Magnetik 9</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag9" name="jtg_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag10">Sinyal Magnetik 10</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="jtg_mag10" name="jtg_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div>
+                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Sistem Saraf</h6>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag1">Sinyal Magnetik 1</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag1" name="srf_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag2">Sinyal Magnetik 2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag2" name="srf_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag3">Sinyal Magnetik 3</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag3" name="srf_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag4">Sinyal Magnetik 4</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag4" name="srf_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag5">Sinyal Magnetik 5</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag5" name="srf_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag6">Sinyal Magnetik 6</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag6" name="srf_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag7">Sinyal Magnetik 7</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag7" name="srf_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag8">Sinyal Magnetik 8</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag8" name="srf_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag9">Sinyal Magnetik 9</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag9" name="srf_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag10">Sinyal Magnetik 10</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="srf_mag10" name="srf_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div>
+                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Darah dan Metabolisme</h6>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag1">Sinyal Magnetik 1</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag1" name="drh_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag2">Sinyal Magnetik 2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag2" name="drh_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag3">Sinyal Magnetik 3</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag3" name="drh_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag4">Sinyal Magnetik 4</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag4" name="drh_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag5">Sinyal Magnetik 5</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag5" name="drh_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag6">Sinyal Magnetik 6</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag6" name="drh_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag7">Sinyal Magnetik 7</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag7" name="drh_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag8">Sinyal Magnetik 8</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag8" name="drh_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag9">Sinyal Magnetik 9</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag9" name="drh_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag10">Sinyal Magnetik 10</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="drh_mag10" name="drh_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div>
+                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Molekuler dan Sel</h6>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag1">Sinyal Magnetik 1</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag1" name="sel_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag2">Sinyal Magnetik 2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag2" name="sel_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag3">Sinyal Magnetik 3</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag3" name="sel_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag4">Sinyal Magnetik 4</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag4" name="sel_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag5">Sinyal Magnetik 5</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag5" name="sel_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag6">Sinyal Magnetik 6</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag6" name="sel_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag7">Sinyal Magnetik 7</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag7" name="sel_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag8">Sinyal Magnetik 8</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag8" name="sel_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag9">Sinyal Magnetik 9</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag9" name="sel_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag10">Sinyal Magnetik 10</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="sel_mag10" name="sel_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
+                                                                        </div>
+                                                                        <hr>
 
-                                                                    <div>
-                                                                        <h6 class="h6 mt-4 mb-4">Magnetik Frekuensi Tinggi</h6>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag1">Sinyal Magnetik 1</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag1" name="tgi_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag2">Sinyal Magnetik 2</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag2" name="tgi_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag3">Sinyal Magnetik 3</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag3" name="tgi_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag4">Sinyal Magnetik 4</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag4" name="tgi_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag5">Sinyal Magnetik 5</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag5" name="tgi_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag6">Sinyal Magnetik 6</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag6" name="tgi_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag7">Sinyal Magnetik 7</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag7" name="tgi_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag8">Sinyal Magnetik 8</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag8" name="tgi_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag9">Sinyal Magnetik 9</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag9" name="tgi_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="mag10">Sinyal Magnetik 10</label>
-                                                                    </div>
-                                                                    <div class="col form-group">
-                                                                        <textarea class="form-control" id="tgi_mag10" name="tgi_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
-                                                                    </div>
+                                                                        <div>
+                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Frekuensi Tinggi</h6>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag1">Sinyal Magnetik 1</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag1" name="tgi_mag1" rows="5" placeholder="Sinyal Magnetik 1" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag2">Sinyal Magnetik 2</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag2" name="tgi_mag2" rows="5" placeholder="Sinyal Magnetik 2" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag3">Sinyal Magnetik 3</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag3" name="tgi_mag3" rows="5" placeholder="Sinyal Magnetik 3" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag4">Sinyal Magnetik 4</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag4" name="tgi_mag4" rows="5" placeholder="Sinyal Magnetik 4" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag5">Sinyal Magnetik 5</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag5" name="tgi_mag5" rows="5" placeholder="Sinyal Magnetik 5" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag6">Sinyal Magnetik 6</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag6" name="tgi_mag6" rows="5" placeholder="Sinyal Magnetik 6" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag7">Sinyal Magnetik 7</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag7" name="tgi_mag7" rows="5" placeholder="Sinyal Magnetik 7" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag8">Sinyal Magnetik 8</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag8" name="tgi_mag8" rows="5" placeholder="Sinyal Magnetik 8" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag9">Sinyal Magnetik 9</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag9" name="tgi_mag9" rows="5" placeholder="Sinyal Magnetik 9" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="mag10">Sinyal Magnetik 10</label>
+                                                                        </div>
+                                                                        <div class="col form-group">
+                                                                            <textarea class="form-control" id="tgi_mag10" name="tgi_mag10" rows="5" placeholder="Sinyal Magnetik 10" readonly></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1105,384 +1115,384 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="" id="editMagnetikForm" action="<?= base_url('pasien/update_magnetik')?>" method="POST">
-                                                            <div class="form-body">
-                                                                <div class="row">
-                                                                    
-                                                                    <!-- Fields untuk Magnetik -->
-                                                                    <div id="magnetikFieldsDetail">
-                                                                        <div class="col-sm-12 d-flex justify-content-end">
-                                                                            <button type="button" id="magnetikEditLeftBtn" class="btn btn-light-primary me-1 mb-1 px-5">Left Hand</button>
-                                                                            <button type="button" id="magnetikEditRightBtn" class="btn btn-light-primary me-1 mb-1 px-5">Right Hand</button>
-                                                                        </div>
-                                                                        <div>
-                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Jantung</h6>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag1" class="form-control" id="edit_jtg_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                            <form action="" id="editMagnetikForm" action="<?= base_url('pasien/update_magnetik') ?>" method="POST">
+                                                                <div class="form-body">
+                                                                    <div class="row">
+
+                                                                        <!-- Fields untuk Magnetik -->
+                                                                        <div id="magnetikFieldsDetail">
+                                                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                                                <button type="button" id="magnetikEditLeftBtn" class="btn btn-light-primary me-1 mb-1 px-5">Left Hand</button>
+                                                                                <button type="button" id="magnetikEditRightBtn" class="btn btn-light-primary me-1 mb-1 px-5">Right Hand</button>
+                                                                            </div>
+                                                                            <div>
+                                                                                <h6 class="h6 mt-4 mb-4">Magnetik Analisis Jantung</h6>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag1" class="form-control" id="edit_jtg_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag2" class="form-control" id="edit_jtg_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag3" class="form-control" id="edit_jtg_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag4" class="form-control" id="edit_jtg_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag5" class="form-control" id="edit_jtg_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag6" class="form-control" id="edit_jtg_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag7" class="form-control" id="edit_jtg_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag8" class="form-control" id="edit_jtg_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag9" class="form-control" id="edit_jtg_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="jtg_mag10" class="form-control" id="edit_jtg_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <h6 class="h6 mt-4 mb-4">Magnetik Analisis Sistem Saraf</h6>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag1" class="form-control" id="edit_srf_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag2" class="form-control" id="edit_srf_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag3" class="form-control" id="edit_srf_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag4" class="form-control" id="edit_srf_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag5" class="form-control" id="edit_srf_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag6" class="form-control" id="edit_srf_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag7" class="form-control" id="edit_srf_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag8" class="form-control" id="edit_srf_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag9" class="form-control" id="edit_srf_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="srf_mag10" class="form-control" id="edit_srf_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <h6 class="h6 mt-4 mb-4">Magnetik Analisis Darah dan Metabolisme</h6>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag1" class="form-control" id="edit_drh_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag2" class="form-control" id="edit_drh_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag3" class="form-control" id="edit_drh_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag4" class="form-control" id="edit_drh_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag5" class="form-control" id="edit_drh_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag6" class="form-control" id="edit_drh_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag7" class="form-control" id="edit_drh_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag8" class="form-control" id="edit_drh_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag9" class="form-control" id="edit_drh_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="drh_mag10" class="form-control" id="edit_drh_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <h6 class="h6 mt-4 mb-4">Magnetik Analisis Molekuler dan Sel</h6>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag1" class="form-control" id="edit_sel_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag2" class="form-control" id="edit_sel_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag3" class="form-control" id="edit_sel_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag4" class="form-control" id="edit_sel_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag5" class="form-control" id="edit_sel_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag6" class="form-control" id="edit_sel_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag7" class="form-control" id="edit_sel_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag8" class="form-control" id="edit_sel_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag9" class="form-control" id="edit_sel_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="sel_mag10" class="form-control" id="edit_sel_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <h6 class="h6 mt-4 mb-4">Magnetik Frekuensi Tinggi</h6>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag1"><strong>Data Magnetik 1</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag1" class="form-control" id="edit_tgi_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag2"><strong>Data Magnetik 2</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag2" class="form-control" id="edit_tgi_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag3"><strong>Data Magnetik 3</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag3" class="form-control" id="edit_tgi_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag4"><strong>Data Magnetik 4</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag4" class="form-control" id="edit_tgi_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag5"><strong>Data Magnetik 5</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag5" class="form-control" id="edit_tgi_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag6"><strong>Data Magnetik 6</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag6" class="form-control" id="edit_tgi_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag7"><strong>Data Magnetik 7</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag7" class="form-control" id="edit_tgi_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag8"><strong>Data Magnetik 8</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag8" class="form-control" id="edit_tgi_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag9"><strong>Data Magnetik 9</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag9" class="form-control" id="edit_tgi_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <label for="mag10"><strong>Data Magnetik 10</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="tgi_mag10" class="form-control" id="edit_tgi_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
+                                                                            </div>
                                                                         </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag2" class="form-control" id="edit_jtg_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag3" class="form-control" id="edit_jtg_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag4" class="form-control" id="edit_jtg_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag5" class="form-control" id="edit_jtg_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag6" class="form-control" id="edit_jtg_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag7" class="form-control" id="edit_jtg_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag8" class="form-control" id="edit_jtg_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag9" class="form-control" id="edit_jtg_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="jtg_mag10" class="form-control" id="edit_jtg_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div>
-                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Sistem Saraf</h6>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag1" class="form-control" id="edit_srf_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag2" class="form-control" id="edit_srf_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag3" class="form-control" id="edit_srf_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag4" class="form-control" id="edit_srf_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag5" class="form-control" id="edit_srf_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag6" class="form-control" id="edit_srf_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag7" class="form-control" id="edit_srf_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag8" class="form-control" id="edit_srf_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag9" class="form-control" id="edit_srf_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="srf_mag10" class="form-control" id="edit_srf_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div>
-                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Darah dan Metabolisme</h6>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag1" class="form-control" id="edit_drh_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag2" class="form-control" id="edit_drh_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag3" class="form-control" id="edit_drh_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag4" class="form-control" id="edit_drh_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag5" class="form-control" id="edit_drh_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag6" class="form-control" id="edit_drh_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag7" class="form-control" id="edit_drh_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag8" class="form-control" id="edit_drh_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag9" class="form-control" id="edit_drh_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="drh_mag10" class="form-control" id="edit_drh_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div>
-                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Analisis Molekuler dan Sel</h6>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag1" class="form-control" id="edit_sel_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag2" class="form-control" id="edit_sel_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag3" class="form-control" id="edit_sel_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag4" class="form-control" id="edit_sel_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag5" class="form-control" id="edit_sel_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag6" class="form-control" id="edit_sel_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag7" class="form-control" id="edit_sel_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag8" class="form-control" id="edit_sel_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag9" class="form-control" id="edit_sel_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="sel_mag10" class="form-control" id="edit_sel_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div>
-                                                                            <h6 class="h6 mt-4 mb-4">Magnetik Frekuensi Tinggi</h6>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag1"><strong>Data Magnetik 1</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag1" class="form-control" id="edit_tgi_mag1" rows="5" placeholder="Data Magnetik 1"></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag2"><strong>Data Magnetik 2</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag2" class="form-control" id="edit_tgi_mag2" rows="5" placeholder="Data Magnetik 2" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag3"><strong>Data Magnetik 3</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag3" class="form-control" id="edit_tgi_mag3" rows="5" placeholder="Data Magnetik 3" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag4"><strong>Data Magnetik 4</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag4" class="form-control" id="edit_tgi_mag4" rows="5" placeholder="Data Magnetik 4" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag5"><strong>Data Magnetik 5</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag5" class="form-control" id="edit_tgi_mag5" rows="5" placeholder="Data Magnetik 5" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag6"><strong>Data Magnetik 6</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag6" class="form-control" id="edit_tgi_mag6" rows="5" placeholder="Data Magnetik 6" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag7"><strong>Data Magnetik 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag7" class="form-control" id="edit_tgi_mag7" rows="5" placeholder="Data Magnetik 7" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag8"><strong>Data Magnetik 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag8" class="form-control" id="edit_tgi_mag8" rows="5" placeholder="Data Magnetik 8" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag9"><strong>Data Magnetik 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag9" class="form-control" id="edit_tgi_mag9" rows="5" placeholder="Data Magnetik 9" readonly></textarea>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label for="mag10"><strong>Data Magnetik 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea name="tgi_mag10" class="form-control" id="edit_tgi_mag10" rows="5" placeholder="Data Magnetik 10" readonly></textarea>
-                                                                        </div>
                                                                     </div>
-                                                                    
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-between">
                                                             <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
@@ -1500,18 +1510,67 @@
                                             </div>
                                         </div>
                                     </div>
-                            <?php else : ?>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-5 text-center">
-                                        <div class="alert alert-light-warning">
-                                            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i></h4>
-                                            <p>Pasien belum pernah periksa!</p>
-                                            <p>Silahkan untuk periksa pasien terlebih dahulu.</p>
+                                <?php else : ?>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5 text-center">
+                                            <div class="alert alert-light-warning">
+                                                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i></h4>
+                                                <p>Pasien belum pernah periksa!</p>
+                                                <p>Silahkan untuk periksa pasien terlebih dahulu.</p>
+                                            </div>
+                                            <a href="<?= base_url('analisis_darah') ?>" class="btn btn-primary me-1 mb-1 px-5">Periksa Pasien</a>
                                         </div>
-                                        <a href="<?= base_url('analisis_darah') ?>" class="btn btn-primary me-1 mb-1 px-5">Periksa Pasien</a>
                                     </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="tab-pane fade mt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Data Manual</th>
+                                                <th>Data AKM</th>
+                                                <th>Selisih Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($recap as $data) : ?>
+                                                <tr>
+                                                    <td>Tensi Sistol</td>
+                                                    <td><?= $data->manual_sistol ?></td>
+                                                    <td><?= $data->akm_sistol ?></td>
+                                                    <td><?= $data->selisih_sistol ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tensi Diastol</td>
+                                                    <td><?= $data->manual_diastol ?></td>
+                                                    <td><?= $data->akm_diastol ?></td>
+                                                    <td><?= $data->selisih_diastol ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tinggi Badan</td>
+                                                    <td><?= $data->manual_tinggi_bdn ?></td>
+                                                    <td><?= $data->akm_tinggi_bdn ?></td>
+                                                    <td><?= $data->selisih_tinggi_bdn ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Berat Badan</td>
+                                                    <td><?= $data->manual_berat_bdn ?></td>
+                                                    <td><?= $data->akm_berat_bdn ?></td>
+                                                    <td><?= $data->selisih_berat_bdn ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Glukosa</td>
+                                                    <td><?= $data->manual_glukosa ?></td>
+                                                    <td><?= $data->akm_glukosa ?></td>
+                                                    <td><?= $data->selisih_glukosa ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1910,15 +1969,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#magnetikEditLeftBtn').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#magnetikEditLeftBtn').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_magnetik_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit_jtg_mag1').val(data.jtg_mag1);
                         $('#edit_jtg_mag2').val(data.jtg_mag2);
                         $('#edit_jtg_mag3').val(data.jtg_mag3);
@@ -1957,15 +2016,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#magnetikEditRightBtn').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#magnetikEditRightBtn').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_magnetik_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit_jtg_mag6').val(data.jtg_mag1);
                         $('#edit_jtg_mag7').val(data.jtg_mag2);
                         $('#edit_jtg_mag8').val(data.jtg_mag3);
@@ -2004,15 +2063,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#ultraSoundSamBtn1').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#ultraSoundSamBtn1').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-us1').val(data.us1);
                         $('#edit-us2').val(data.us2);
                         $('#edit-us3').val(data.us3);
@@ -2027,15 +2086,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#ultraSoundSamBtn2').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#ultraSoundSamBtn2').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-us6').val(data.us1);
                         $('#edit-us7').val(data.us2);
                         $('#edit-us8').val(data.us3);
@@ -2050,15 +2109,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#superBrightSamBtn1').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#superBrightSamBtn1').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_superbright_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-sb1').val(data.sb1);
                         $('#edit-sb2').val(data.sb2);
                         $('#edit-sb3').val(data.sb3);
@@ -2073,15 +2132,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#superBrightSamBtn2').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#superBrightSamBtn2').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_superbright_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-sb6').val(data.sb1);
                         $('#edit-sb7').val(data.sb2);
                         $('#edit-sb8').val(data.sb3);
@@ -2107,8 +2166,18 @@ function formatDateTime($datetime)
 
     $date = new DateTime($datetime);
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
-        7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
     ];
     $day = $date->format('d');
     $month = $months[(int)$date->format('m')];
@@ -2127,8 +2196,18 @@ function formatDate($datetime)
 
     $date = new DateTime($datetime);
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei',
-        6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
     ];
     $day = $date->format('d');
     $month = $months[(int)$date->format('m')];

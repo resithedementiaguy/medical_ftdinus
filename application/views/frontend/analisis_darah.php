@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="nik" name="nik">
+                                                <select class="choices form-select" id="nik" name="nik">
                                                     <option value="" selected hidden>Pilih NIK</option>
                                                     <?php foreach ($ktp as $data) : ?>
                                                         <option value="<?= $data->nik ?>" <?= set_select('nik', $data->nik) ?>><?= $data->nik ?></option>
@@ -879,7 +879,7 @@
             .catch(error => console.error('Error:', error));
     });
 
-    
+
 
     document.getElementById('superBrightBtn1').addEventListener('click', function() {
         var superbrightId = 1;

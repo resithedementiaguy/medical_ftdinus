@@ -43,20 +43,9 @@ class Penduduk extends CI_Controller
 
     public function add()
     {
-        // Set validation rules for all form fields
+        // Set validation rules for required fields
         $this->form_validation->set_rules('nik', 'NIK', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
-        $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('no_hp', 'Nomor HP', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('rt', 'RT', 'required');
-        $this->form_validation->set_rules('rw', 'RW', 'required');
-        $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
-        $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
-        $this->form_validation->set_rules('kota', 'Kota', 'required');
-        $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             redirect('penduduk');
@@ -65,9 +54,9 @@ class Penduduk extends CI_Controller
             $data = array(
                 'nik' => $this->input->post('nik'),
                 'nama' => $this->input->post('nama'),
+                'email' => $this->input->post('email'),
                 'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir'),
-                'email' => $this->input->post('email'),
                 'no_hp' => $this->input->post('no_hp'),
                 'alamat' => $this->input->post('alamat'),
                 'rt' => $this->input->post('rt'),
@@ -80,13 +69,14 @@ class Penduduk extends CI_Controller
                 'pembuat' => $this->input->post('pembuat'),
                 'umur' => $this->input->post('umur')
             );
+
             // Add the new resident to the database
             $this->Mod_penduduk->add_penduduk($data);
 
             // Ambil subject dan body dari database
-            $data = $this->Mod_email->get_email(1);
-            $subject = $data->subject;
-            $body = $data->body;
+            $email_data = $this->Mod_email->get_email(1);
+            $subject = $email_data->subject;
+            $body = $email_data->body;
 
             // Kirim email
             $to = $this->input->post('email');

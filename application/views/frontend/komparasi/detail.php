@@ -63,10 +63,10 @@
                             <div class="custom-label">Umur</div>
                             <div class="custom-data"><?php echo $pasien['umur'] ?> tahun</div>
                         </div>
-                        
+
                     </div>
                     <div class="col">
-                        
+
                         <div class="custom-row">
                             <div class="custom-label">Alamat</div>
                             <div class="custom-data"><?php echo $pasien['alamat'] ?>, <?php echo $pasien['kelurahan']; ?>, <?php echo $pasien['kecamatan']; ?>, <?php echo $pasien['kota']; ?></div>
@@ -78,7 +78,7 @@
                         <div class="custom-row">
                             <div class="custom-label">No Telepon</div>
                             <div class="custom-data"><?php echo $pasien['no_hp']; ?></div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,31 +109,31 @@
                                                 <td>Tensi Sistol</td>
                                                 <td><?= $data->manual_sistol ?></td>
                                                 <td><?= $data->akm_sistol ?></td>
-                                                <td><?= $data->selisih_sistol?></td>
+                                                <td><?= $data->selisih_sistol ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Tensi Diastol</td>
                                                 <td><?= $data->manual_diastol ?></td>
                                                 <td><?= $data->akm_diastol ?></td>
-                                                <td><?= $data->selisih_diastol?></td>
+                                                <td><?= $data->selisih_diastol ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Tinggi Badan</td>
                                                 <td><?= $data->manual_tinggi_bdn ?></td>
                                                 <td><?= $data->akm_tinggi_bdn ?></td>
-                                                <td><?= $data->selisih_tinggi_bdn?></td>
+                                                <td><?= $data->selisih_tinggi_bdn ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Berat Badan</td>
                                                 <td><?= $data->manual_berat_bdn ?></td>
                                                 <td><?= $data->akm_berat_bdn ?></td>
-                                                <td><?= $data->selisih_berat_bdn?></td>
+                                                <td><?= $data->selisih_berat_bdn ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Glukosa</td>
                                                 <td><?= $data->manual_glukosa ?></td>
                                                 <td><?= $data->akm_glukosa ?></td>
-                                                <td><?= $data->selisih_glukosa?></td>
+                                                <td><?= $data->selisih_glukosa ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -537,15 +537,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#magnetikEditLeftBtn').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#magnetikEditLeftBtn').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_magnetik_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit_jtg_mag1').val(data.jtg_mag1);
                         $('#edit_jtg_mag2').val(data.jtg_mag2);
                         $('#edit_jtg_mag3').val(data.jtg_mag3);
@@ -584,15 +584,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#magnetikEditRightBtn').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#magnetikEditRightBtn').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_magnetik_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit_jtg_mag6').val(data.jtg_mag1);
                         $('#edit_jtg_mag7').val(data.jtg_mag2);
                         $('#edit_jtg_mag8').val(data.jtg_mag3);
@@ -631,15 +631,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#ultraSoundSamBtn1').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#ultraSoundSamBtn1').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-us1').val(data.us1);
                         $('#edit-us2').val(data.us2);
                         $('#edit-us3').val(data.us3);
@@ -654,15 +654,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#ultraSoundSamBtn2').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#ultraSoundSamBtn2').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-us6').val(data.us1);
                         $('#edit-us7').val(data.us2);
                         $('#edit-us8').val(data.us3);
@@ -677,15 +677,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#superBrightSamBtn1').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#superBrightSamBtn1').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_superbright_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-sb1').val(data.sb1);
                         $('#edit-sb2').val(data.sb2);
                         $('#edit-sb3').val(data.sb3);
@@ -700,15 +700,15 @@
         });
     });
 
-    $(document).ready(function(){
-        $('#superBrightSamBtn2').on('click', function(){
-            var id = 1;  // Ambil ID dari hidden input
+    $(document).ready(function() {
+        $('#superBrightSamBtn2').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
             $.ajax({
                 url: '<?= base_url('pasien/get_superbright_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data) {
+                    if (data) {
                         $('#edit-sb6').val(data.sb1);
                         $('#edit-sb7').val(data.sb2);
                         $('#edit-sb8').val(data.sb3);
@@ -734,8 +734,18 @@ function formatDateTime($datetime)
 
     $date = new DateTime($datetime);
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
-        7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
     ];
     $day = $date->format('d');
     $month = $months[(int)$date->format('m')];
@@ -754,8 +764,18 @@ function formatDate($datetime)
 
     $date = new DateTime($datetime);
     $months = [
-        1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei',
-        6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
     ];
     $day = $date->format('d');
     $month = $months[(int)$date->format('m')];
