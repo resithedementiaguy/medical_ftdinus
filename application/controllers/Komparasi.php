@@ -26,6 +26,7 @@ class Komparasi extends CI_Controller
 
     public function index()
     {
+        $data['all_recap']=$this->Mod_pasien->get_all_recap();
         $data['pasien_list'] = $this->Mod_pasien->get_all_pasien();
         $this->load->view('partials/header');
         $this->load->view('frontend/komparasi/view', $data);

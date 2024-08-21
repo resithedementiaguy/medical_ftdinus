@@ -81,10 +81,10 @@
                                 <span>Pasien</span>
                             </a>
                         </li>
-                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'komparasi') ? 'active' : ''; ?>">
-                            <a href="<?php echo site_url('komparasi'); ?>" class="sidebar-link">
+                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'total_periksa') ? 'active' : ''; ?>">
+                            <a href="<?php echo site_url('total_periksa'); ?>" class="sidebar-link">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Analisis Komparasi</span>
+                                <span>Data Periksa</span>
                             </a>
                         </li>
 

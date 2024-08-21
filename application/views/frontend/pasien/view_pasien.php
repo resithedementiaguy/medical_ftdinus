@@ -32,7 +32,9 @@
                                 <th>Total Data Manual</th>
                                 <th>Total Data AKM</th>
                                 <th>Total Selisih Data</th>
-                                <th>Persentase</th>
+                                <th>Selisih Rata-Rata</th>
+                                <th>Persentase Selisih</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,35 +43,45 @@
                                 <td><?= $total_recap->manual_sistol ?></td>
                                 <td><?= $total_recap->akm_sistol ?></td>
                                 <td><?= $total_recap->total_selisih_sistol ?></td>
-                                <td><?= ($total_recap->manual_sistol != 0) ? round(($total_recap->total_selisih_sistol / $total_recap->manual_sistol) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->avg_sistol ?></td>
+                                <td><?= ($total_recap->avg_manual_sistol != 0) ? round(($total_recap->avg_sistol / $total_recap->avg_manual_sistol) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->keterangan_sistol ?></td>
                             </tr>
                             <tr>
                                 <td>Tensi Diastol</td>
                                 <td><?= $total_recap->manual_diastol ?></td>
                                 <td><?= $total_recap->akm_diastol ?></td>
                                 <td><?= $total_recap->total_selisih_diastol ?></td>
-                                <td><?= ($total_recap->manual_diastol != 0) ? round(($total_recap->total_selisih_diastol / $total_recap->manual_diastol) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->avg_diastol ?></td>
+                                <td><?= ($total_recap->avg_manual_diastol != 0) ? round(($total_recap->avg_diastol / $total_recap->avg_manual_diastol) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->keterangan_diastol ?></td>
                             </tr>
                             <tr>
                                 <td>Tinggi Badan</td>
                                 <td><?= $total_recap->manual_tinggi_bdn ?></td>
                                 <td><?= $total_recap->akm_tinggi_bdn ?></td>
                                 <td><?= $total_recap->total_selisih_tinggi_bdn ?></td>
-                                <td><?= ($total_recap->manual_tinggi_bdn != 0) ? round(($total_recap->total_selisih_tinggi_bdn / $total_recap->manual_tinggi_bdn) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->avg_tinggi_bdn ?></td>
+                                <td><?= ($total_recap->avg_manual_tinggi_bdn != 0) ? round(($total_recap->avg_tinggi_bdn / $total_recap->avg_manual_tinggi_bdn) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->keterangan_tinggi_bdn ?></td>
                             </tr>
                             <tr>
                                 <td>Berat Badan</td>
                                 <td><?= $total_recap->manual_berat_bdn ?></td>
                                 <td><?= $total_recap->akm_berat_bdn ?></td>
                                 <td><?= $total_recap->total_selisih_berat_bdn ?></td>
-                                <td><?= ($total_recap->manual_berat_bdn != 0) ? round(($total_recap->total_selisih_berat_bdn / $total_recap->manual_berat_bdn) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->avg_berat_bdn ?></td>
+                                <td><?= ($total_recap->avg_manual_berat_bdn != 0) ? round(($total_recap->avg_berat_bdn / $total_recap->avg_manual_berat_bdn) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->keterangan_berat_bdn ?></td>
                             </tr>
                             <tr>
                                 <td>Glukosa</td>
                                 <td><?= $total_recap->manual_glukosa ?></td>
                                 <td><?= $total_recap->akm_glukosa ?></td>
                                 <td><?= $total_recap->total_selisih_glukosa ?></td>
-                                <td><?= ($total_recap->manual_glukosa != 0) ? round(($total_recap->total_selisih_glukosa / $total_recap->manual_glukosa) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->avg_glukosa ?></td>
+                                <td><?= ($total_recap->avg_manual_glukosa != 0) ? round(($total_recap->avg_glukosa / $total_recap->avg_manual_glukosa) * 100, 2) . '%' : '0%' ?></td>
+                                <td><?= $total_recap->keterangan_glukosa ?></td>
                             </tr>
                         </tbody>
                     </table>

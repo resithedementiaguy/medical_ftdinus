@@ -19,54 +19,114 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">
-                    Daftar riwayat periksa pasien
-                </h5>
+                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="table-tab" data-bs-toggle="tab" href="#table" role="tab" aria-controls="table" aria-selected="true">Daftar riwayat periksa pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chart-tab" data-bs-toggle="tab" href="#chart" role="tab" aria-controls="chart" aria-selected="false">Grafik</a>
+                    </li>
+                </ul>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table" id="table1">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>NIK</th>
-                                <th>Nama Lengkap</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Pembuat</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (!empty($pasien_list)) : ?>
-                                <?php $no = 1;
-                                foreach ($pasien_list as $pasien) : ?>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="table" role="tabpanel" aria-labelledby="table-tab">
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table" id="table1">
+                                <thead>
                                     <tr>
-                                        <td class="py-3"><?php echo $no++; ?></td>
-                                        <td>
-                                            <a href="<?php echo site_url('komparasi/detail/' . $pasien['nik']); ?>"><?php echo $pasien['nik']; ?></a>
-                                        </td>
-                                        <td><?php echo $pasien['nama']; ?></td>
-                                        <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
-                                        <td><?php echo $pasien['pembuat']; ?></td>
-                                        <td>
-                                            <a href="<?php echo site_url('komparasi/detail/' . $pasien['nik']); ?>" class="badge bg-success">
-                                                <i class="fas fa-eye"></i> Lihat
-                                            </a>
-                                        </td>
+                                        <th>No</th>
+                                        <th>NIK</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Pembuat</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <tr>
-                                    <td colspan="6">Tidak ada data pasien.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($pasien_list)) : ?>
+                                        <?php $no = 1;
+                                        foreach ($pasien_list as $pasien) : ?>
+                                            <tr>
+                                                <td class="py-3"><?php echo $no++; ?></td>
+                                                <td>
+                                                    <a href="<?php echo site_url('komparasi/detail/' . $pasien['nik']); ?>"><?php echo $pasien['nik']; ?></a>
+                                                </td>
+                                                <td><?php echo $pasien['nama']; ?></td>
+                                                <td><?php echo formatDate($pasien['tanggal_lahir']); ?></td>
+                                                <td><?php echo $pasien['pembuat']; ?></td>
+                                                <td>
+                                                    <a href="<?php echo site_url('komparasi/detail/' . $pasien['nik']); ?>" class="badge bg-success">
+                                                        <i class="fas fa-eye"></i> Lihat
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <tr>
+                                            <td colspan="6">Tidak ada data pasien.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Data Manual</th>
+                                        <th>Data AKM</th>
+                                        <th>Selisih Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recap as $data) : ?>
+                                        <tr>
+                                            <td>Tensi Sistol</td>
+                                            <td><?= $data->manual_sistol ?></td>
+                                            <td><?= $data->akm_sistol ?></td>
+                                            <td><?= $data->selisih_sistol?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tensi Diastol</td>
+                                            <td><?= $data->manual_diastol ?></td>
+                                            <td><?= $data->akm_diastol ?></td>
+                                            <td><?= $data->selisih_diastol?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tinggi Badan</td>
+                                            <td><?= $data->manual_tinggi_bdn ?></td>
+                                            <td><?= $data->akm_tinggi_bdn ?></td>
+                                            <td><?= $data->selisih_tinggi_bdn?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Berat Badan</td>
+                                            <td><?= $data->manual_berat_bdn ?></td>
+                                            <td><?= $data->akm_berat_bdn ?></td>
+                                            <td><?= $data->selisih_berat_bdn?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Glukosa</td>
+                                            <td><?= $data->manual_glukosa ?></td>
+                                            <td><?= $data->akm_glukosa ?></td>
+                                            <td><?= $data->selisih_glukosa?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
