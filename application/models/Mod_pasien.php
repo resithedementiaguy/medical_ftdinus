@@ -527,4 +527,42 @@ class Mod_pasien extends CI_Model
         $query = $this->db->get();
         return $query->row();
     }
+
+    public function get_manual_akm() 
+    {
+        $this->db->select('
+            dm.id AS manual_id,
+            dm.nik AS manual_nik,
+            dm.nama AS manual_nama,
+            dm.sistol AS manual_sistol,
+            dm.diastol AS manual_diastol,
+            dm.tinggi_bdn AS manual_tinggi_bdn,
+            dm.berat_bdn AS manual_berat_bdn,
+            dm.glukosa AS manual_glukosa,
+            dm.asam_urat AS manual_asam_urat,
+            dm.kolesterol AS manual_kolesterol,
+            da.id AS akm_id,
+            da.nik AS akm_nik,
+            da.nama AS akm_nama,
+            da.sistol AS akm_sistol,
+            da.diastol AS akm_diastol,
+            da.tinggi_bdn AS akm_tinggi_bdn,
+            da.berat_bdn AS akm_berat_bdn,
+            da.glukosa AS akm_glukosa,
+            da.asam_urat AS akm_asam_urat,
+            da.kolesterol AS akm_kolesterol,
+            (dm.sistol - da.sistol) AS diff_sistol,
+            (dm.diastol - da.diastol) AS diff_diastol,
+            (dm.tinggi_bdn - da.tinggi_bdn) AS diff_tinggi_bdn,
+            (dm.berat_bdn - da.berat_bdn) AS diff_berat_bdn,
+            (dm.glukosa - da.glukosa) AS diff_glukosa
+        ');
+        $this->db->from('data_manual dm');
+        $this->db->join('data_akm da', 'dm.nik = da.nik', 'left');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+
 }
