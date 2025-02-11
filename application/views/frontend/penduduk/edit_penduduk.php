@@ -34,12 +34,12 @@
                                         <div>
                                             <h5 class="h5 mb-4">Informasi Penduduk</h5>
                                         </div>
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="nik" class="form-control" name="nik" placeholder="Nomor Induk Kependudukan" value="<?php echo htmlspecialchars($penduduk['nik'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-md-4">
                                             <label for="nama">Nama Lengkap</label>
@@ -48,12 +48,12 @@
                                             <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?php echo htmlspecialchars($penduduk['nama'], ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <label for="email">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="<?php echo htmlspecialchars($penduduk['email'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
+                                            <input type="email" id="email" class="form-control" name="email" placeholder="Email">
+                                        </div> -->
 
                                         <div class="col-md-4">
                                             <label for="no_hp">Nomor HP</label>
@@ -111,50 +111,49 @@
                                             <label for="alamat">Alamat</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"><?php echo htmlspecialchars($penduduk['alamat'], ENT_QUOTES, 'UTF-8'); ?></textarea>
+                                            <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap" ><?=$penduduk['alamat']?></textarea>
                                         </div>
-
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <label for="rt">RT</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT" value="<?php echo htmlspecialchars($penduduk['rt'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="text" id="rt" class="form-control" name="rt" placeholder="RT" >
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="rw">RW</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW" value="<?php echo htmlspecialchars($penduduk['rw'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="text" id="rw" class="form-control" name="rw" placeholder="RW" >
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kelurahan">Kelurahan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan" value="<?php echo htmlspecialchars($penduduk['kelurahan'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="text" id="kelurahan" class="form-control" name="kelurahan" placeholder="Kelurahan" >
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kecamatan">Kecamatan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan" value="<?php echo htmlspecialchars($penduduk['kecamatan'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan" >
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="kota">Kota</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota" value="<?php echo htmlspecialchars($penduduk['kota'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <input type="text" id="kota" class="form-control" name="kota" placeholder="Kota" >
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="provinsi">Provinsi</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" value="<?php echo htmlspecialchars($penduduk['provinsi'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        </div>
+                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" >
+                                        </div> -->
 
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1 px-5">Simpan</button>

@@ -35,6 +35,16 @@ class Mod_penduduk extends CI_Model
         return $this->db->insert('ktp', $data);
     }
 
+    public function add_data_manual($data)
+    {
+        return $this->db->insert('data_manual', $data);
+    }
+
+    public function add_data_akm($data)
+    {
+        return $this->db->insert('data_akm', $data);
+    }
+
     // Update data penduduk
     public function update_penduduk($id, $data)
     {

@@ -9,7 +9,7 @@ url = 'http://localhost/medical_ftdinus/api_magnetik/update/1'
 
 # Konfigurasi Serial
 ser = serial.Serial(
-    port='COM7',  # Ganti sesuai dengan port ESP32 Anda
+    port='COM5',  # Ganti sesuai dengan port ESP32 Anda
     baudrate=9600,
     timeout=1
 )
@@ -25,12 +25,6 @@ data_50Hz = ""
 data_500Hz = ""
 data_5KHz = ""
 data_30KHz = ""
-
-jtg_mag1 = ""
-srf_mag1 = ""
-drh_mag1 = ""
-sel_mag1 = ""
-tgi_mag1 = ""
 
 try:
     while True:

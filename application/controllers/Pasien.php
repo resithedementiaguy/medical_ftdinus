@@ -9,6 +9,7 @@ class Pasien extends CI_Controller
         $this->load->model('Mod_penduduk');
         $this->load->model('Mod_pasien');
         $this->load->model('Ultrasound_model');
+        $this->load->model('Auk_model');
         $this->load->model('Superbright_model');
         $this->load->model('Magnetik_model');
         $this->load->library('session'); // Load session library
@@ -40,7 +41,8 @@ class Pasien extends CI_Controller
         $data['pasien'] = $this->Mod_pasien->get_pasien_detail($nik);
         $data['antropometri'] = $this->Mod_pasien->get_antropometri($nik);
         $data['suntik'] = $this->Mod_pasien->get_suntik($nik);
-        $data['ultrasound'] = $this->Mod_pasien->get_ultrasound($nik);
+        $data['asam_urat'] = $this->Mod_pasien->get_asam_urat($nik);
+        $data['kolesterol'] = $this->Mod_pasien->get_kolesterol($nik);
         $data['superbright'] = $this->Mod_pasien->get_superbright($nik);
         $data['magnetik'] = $this->Mod_pasien->get_magnetik($nik);
         $data['recap'] = $this->Mod_pasien->get_recap_by_nik($nik);
@@ -65,7 +67,6 @@ class Pasien extends CI_Controller
 
         $data = array(
             'glukosa'    => $this->input->post('glukosa'),
-            'hb'         => $this->input->post('hb'),
             'spo2'       => $this->input->post('spo2'),
             'kolesterol' => $this->input->post('kolesterol'),
             'asam_urat'  => $this->input->post('asam_urat')
@@ -80,32 +81,58 @@ class Pasien extends CI_Controller
         }
     }
 
-    // function ultrasound
-    public function get_ultrasound($id)
+    // function asam urat
+    public function get_asam_urat($id)
     {
-        $ultrasound = $this->Mod_pasien->get_ultrasound_id($id);
+        $asam_urat = $this->Mod_pasien->get_asam_urat_id($id);
         header('Content-Type: application/json');
-        echo json_encode($ultrasound);
+        echo json_encode($asam_urat);
     }
 
-    public function update_ultrasound($id)
+    public function update_asam_urat($id)
     {
         $this->load->model('Mod_pasien');
 
         $data = array(
-            'us1'       => $this->input->post('us1'),
-            'us2'       => $this->input->post('us2'),
-            'us3'       => $this->input->post('us3'),
-            'us4'       => $this->input->post('us4'),
-            'us5'       => $this->input->post('us5'),
-            'us6'       => $this->input->post('us6'),
-            'us7'       => $this->input->post('us7'),
-            'us8'       => $this->input->post('us8'),
-            'us9'       => $this->input->post('us9'),
-            'us10'      => $this->input->post('us10')
+            'violet' => $this->input->post('asamviolet'),
+            'blue' => $this->input->post('asamblue'),
+            'green' => $this->input->post('asamgreen'),
+            'yellow' => $this->input->post('asamyellow'),
+            'orange' => $this->input->post('asamorange'),
+            'red' => $this->input->post('asamred'),
         );
 
-        $updated = $this->Mod_pasien->update_ultrasound($id, $data);
+        $updated = $this->Mod_pasien->update_asam_urat($id, $data);
+
+        if ($updated) {
+            echo json_encode(array('status' => 'success', 'message' => 'Data berhasil diperbarui.'));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Terjadi kesalahan saat memperbarui data.'));
+        }
+    }
+
+    // function kolesterol
+    public function get_kolesterol($id)
+    {
+        $kolesterol = $this->Mod_pasien->get_kolesterol_id($id);
+        header('Content-Type: application/json');
+        echo json_encode($kolesterol);
+    }
+
+    public function update_kolesterol($id)
+    {
+        $this->load->model('Mod_pasien');
+
+        $data = array(
+            'violet' => $this->input->post('kolesterolviolet'),
+            'blue' => $this->input->post('kolesterolblue'),
+            'green' => $this->input->post('kolesterolgreen'),
+            'yellow' => $this->input->post('kolesterolyellow'),
+            'orange' => $this->input->post('kolesterolorange'),
+            'red' => $this->input->post('kolesterolred'),
+        );
+
+        $updated = $this->Mod_pasien->update_kolesterol($id, $data);
 
         if ($updated) {
             echo json_encode(array('status' => 'success', 'message' => 'Data berhasil diperbarui.'));
@@ -238,6 +265,18 @@ class Pasien extends CI_Controller
         redirect('pasien');
     }
 
+    public function delete_asam_urat($id)
+    {
+        $this->Mod_pasien->delete_asam_urat($id);
+        redirect('pasien');
+    }
+
+    public function delete_kolesterol($id)
+    {
+        $this->Mod_pasien->delete_kolesterol($id);
+        redirect('pasien');
+    }
+
     public function delete_superbright($id)
     {
         $this->Mod_pasien->delete_superbright($id);
@@ -257,6 +296,24 @@ class Pasien extends CI_Controller
 
         // Kirimkan data sebagai JSON response
         echo json_encode($data_us);
+    }
+
+    public function get_asam_urat_data($id)
+    {
+        // Ambil data asamurat berdasarkan ID
+        $data_asam = $this->Auk_model->get_asamurat($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_asam);
+    }
+
+    public function get_kolesterol_data($id)
+    {
+        // Ambil data kolesterol berdasarkan ID
+        $data_kolesterol = $this->Auk_model->get_kolesterol($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_kolesterol);
     }
 
     public function get_superbright_data($id)

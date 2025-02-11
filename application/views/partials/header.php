@@ -72,7 +72,7 @@
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'analisis_darah') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('analisis_darah'); ?>" class="sidebar-link">
                                 <i class="bi bi-heart-pulse-fill"></i>
-                                <span>Analisis Darah</span>
+                                <span>Pemeriksaan</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'pasien') ? 'active' : ''; ?>">
@@ -81,19 +81,25 @@
                                 <span>Pasien</span>
                             </a>
                         </li>
+                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'akm_manual') ? 'active' : ''; ?>">
+                            <a href="<?php echo site_url('akm_manual'); ?>" class="sidebar-link">
+                                <i class="bi bi-heart-pulse-fill"></i>
+                                <span>Input Data AKM dan Manual</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'total_periksa') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('total_periksa'); ?>" class="sidebar-link">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Data Periksa</span>
+                                <span>Rekapitulasi AKM dan Manual</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-title">Penduduk</li>
+                        <li class="sidebar-title">Reponden</li>
 
                         <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'penduduk') ? 'active' : ''; ?>">
                             <a href="<?php echo site_url('penduduk'); ?>" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
-                                <span>Penduduk</span>
+                                <span>Daftar Responden</span>
                             </a>
                         </li>
                     </ul>

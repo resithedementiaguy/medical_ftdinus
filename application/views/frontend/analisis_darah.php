@@ -2,14 +2,14 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Analisis Darah</h3>
-                <p class="text-subtitle text-muted">Silahkan isi form di bawah untuk analisis darah</p>
+                <h3>Pemeriksaan</h3>
+                <p class="text-subtitle text-muted">Silahkan isi form di bawah untuk menyimpan data pemeriksaan sesuai alat</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Analisis Darah</li>
+                        <li class="breadcrumb-item active" aria-current="page">Pemeriksaan</li>
                     </ol>
                 </nav>
             </div>
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="choices form-select" id="nik" name="nik">
+                                                <select class="choices form-select" id="nik" name="nik" required>
                                                     <option value="" selected hidden>Pilih NIK</option>
                                                     <?php foreach ($ktp as $data) : ?>
                                                         <option value="<?= $data->nik ?>" <?= set_select('nik', $data->nik) ?>><?= $data->nik ?></option>
@@ -58,14 +58,14 @@
                                             <label for="tinggi">Tinggi Badan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi Badan" data-parsley-required="true" data-parsley-error-message="Tinggi Badan wajib diisi!">
+                                            <input type="text" id="tinggi" class="form-control" name="tinggi" placeholder="Tinggi Badan" required>
                                         </div>
 
                                         <div class="col-md-4">
                                             <label for="berat">Berat Badan</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat Badan" data-parsley-required="true" data-parsley-error-message="Berat Badan wajib diisi!">
+                                            <input type="text" id="berat" class="form-control" name="berat" placeholder="Berat Badan" required>
                                         </div>
 
                                         <div>
@@ -77,10 +77,11 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <fieldset class="form-group">
-                                                <select class="form-select" id="alat" name="alat">
+                                                <select class="form-select" id="alat" name="alat" required>
                                                     <option value="" selected hidden>Pilih Alat</option>
                                                     <option value="suntik">Suntik</option>
-                                                    <option value="ultraSound">Ultrasound</option>
+                                                    <option value="asamUrat">Deteksi Asam Urat</option>
+                                                    <option value="kolesterol">Deteksi Kolesterol</option>
                                                     <option value="superBright">SuperBright</option>
                                                     <option value="magnetik">Magnetik</option>
                                                 </select>
@@ -97,109 +98,130 @@
                                                 <label for="glukosa">Glukosa</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="hb">HB</label>
-                                            </div>
-                                            <div class="col form-group">
-                                                <input type="text" id="hb" class="form-control" name="hb" placeholder="Masukkan HB">
+                                                <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa" oninput="updateKeteranganGlukosa()">
+                                                <span id="keterangan_glukosa"></span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="spo2">SPO2</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2">
+                                                <input type="text" id="spo2" class="form-control" name="spo2" placeholder="Masukkan SPO2" oninput="updateKeteranganSpO2()">
+                                                <span id="keterangan_spo2"></span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="kolesterol">Kolesterol</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol">
+                                                <input type="text" id="kolesterol" class="form-control" name="kolesterol" placeholder="Masukkan kolesterol" oninput="updateKeteranganKolesterol()">
+                                                <span id="keterangan_kolesterol"></span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="asam_urat">Asam Urat</label>
                                             </div>
                                             <div class="col form-group">
-                                                <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat">
+                                                <input type="text" id="asam_urat" class="form-control" name="asam_urat" placeholder="Masukkan Asam Urat" oninput="updateKeteranganAsamUrat()">
+                                                <span id="keterangan_asam_urat"></span>
                                             </div>
                                         </div>
 
-                                        <!-- Fields untuk Ultrasound -->
-                                        <div id="ultraSoundFields" style="display: none;">
+                                        <!-- Fields untuk Deteksi Asam Urat -->
+                                        <div id="asamFields" style="display: none;">
                                             <div>
-                                                <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
+                                                <h6 class="h6 mt-4 mb-4">Deteksi Asam Urat</h6>
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="button" id="ultraSoundBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
-                                                <button type="button" id="ultraSoundBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
+                                                <button type="button" id="asamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us1">Sinyal Ultrasound 1</label>
+                                                <label for="violet">Sinyal Violet</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us1" name="us1" rows="5" placeholder="Sinyal Ultrasound 1" readonly></textarea>
+                                                <textarea class="form-control" id="asam_violet" name="asam_violet" rows="5" placeholder="Sinyal Violet" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us2">Sinyal Ultrasound 2</label>
+                                                <label for="blue">Sinyal Blue</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us2" name="us2" rows="5" placeholder="Sinyal Ultrasound 2" readonly></textarea>
+                                                <textarea class="form-control" id="asam_blue" name="asam_blue" rows="5" placeholder="Sinyal Blue" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us3">Sinyal Ultrasound 3</label>
+                                                <label for="green">Sinyal Green</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us3" name="us3" rows="5" placeholder="Sinyal Ultrasound 3" readonly></textarea>
+                                                <textarea class="form-control" id="asam_green" name="asam_green" rows="5" placeholder="Sinyal Green" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us4">Sinyal Ultrasound 4</label>
+                                                <label for="yellow">Sinyal Yellow</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us4" name="us4" rows="5" placeholder="Sinyal Ultrasound 4" readonly></textarea>
+                                                <textarea class="form-control" id="asam_yellow" name="asam_yellow" rows="5" placeholder="Sinyal Yellow" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us5">Sinyal Ultrasound 5</label>
+                                                <label for="orange">Sinyal Orange</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us5" name="us5" rows="5" placeholder="Sinyal Ultrasound 5" readonly></textarea>
+                                                <textarea class="form-control" id="asam_orange" name="asam_orange" rows="5" placeholder="Sinyal Orange" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us6">Sinyal Ultrasound 6</label>
+                                                <label for="red">Sinyal Red</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us6" name="us6" rows="5" placeholder="Sinyal Ultrasound 6" readonly></textarea>
+                                                <textarea class="form-control" id="asam_red" name="asam_red" rows="5" placeholder="Sinyal Red" readonly></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Fields untuk Deteksi Kolesterol -->
+                                        <div id="kolesterolFields" style="display: none;">
+                                            <div>
+                                                <h6 class="h6 mt-4 mb-4">Deteksi Kolesterol</h6>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" id="kolesterolBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us7">Sinyal Ultrasound 7</label>
+                                                <label for="violet">Sinyal Violet</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us7" name="us7" rows="5" placeholder="Sinyal Ultrasound 7" readonly></textarea>
+                                                <textarea class="form-control" id="kolesterol_violet" name="kolesterol_violet" rows="5" placeholder="Sinyal Violet" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us8">Sinyal Ultrasound 8</label>
+                                                <label for="blue">Sinyal Blue</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us8" name="us8" rows="5" placeholder="Sinyal Ultrasound 8" readonly></textarea>
+                                                <textarea class="form-control" id="kolesterol_blue" name="kolesterol_blue" rows="5" placeholder="Sinyal Blue" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us9">Sinyal Ultrasound 9</label>
+                                                <label for="green">Sinyal Green</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us9" name="us9" rows="5" placeholder="Sinyal Ultrasound 9" readonly></textarea>
+                                                <textarea class="form-control" id="kolesterol_green" name="kolesterol_green" rows="5" placeholder="Sinyal Green" readonly></textarea>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="us10">Sinyal Ultrasound 10</label>
+                                                <label for="yellow">Sinyal Yellow</label>
                                             </div>
                                             <div class="col form-group">
-                                                <textarea class="form-control" id="us10" name="us10" rows="5" placeholder="Sinyal Ultrasound 10" readonly></textarea>
+                                                <textarea class="form-control" id="kolesterol_yellow" name="kolesterol_yellow" rows="5" placeholder="Sinyal Yellow" readonly></textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="orange">Sinyal Orange</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="kolesterol_orange" name="kolesterol_orange" rows="5" placeholder="Sinyal Orange" readonly></textarea>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="red">Sinyal Red</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="kolesterol_red" name="kolesterol_red" rows="5" placeholder="Sinyal Red" readonly></textarea>
                                             </div>
                                         </div>
 
                                         <!-- Fields untuk Super Bright -->
                                         <div id="superBrightFields" style="display: none;">
+                                            <br>
+                                            <h5 class="text text-danger">*Pemeriksaan superbright dilakukan mulai dari tangan kiri lalu ke tangan kanan</h5>
                                             <div>
-                                                <h6 class="h6 mt-4 mb-4">Super Bright</h6>
+                                                <h6 class="h6 mt-4 mb-4">Superbright</h6>
                                             </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="button" id="superBrightBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
@@ -269,6 +291,8 @@
 
                                         <!-- Fields untuk Magnetik -->
                                         <div id="magnetikFields" style="display: none;">
+                                            <br>
+                                            <h5 class="text text-danger">*Pemeriksaan magnetik dilakukan mulai dari tangan kiri lalu ke tangan kanan</h5>
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Magnetik</h6>
                                             </div>
@@ -651,7 +675,7 @@
     </div>
 </div>
 
-<!-- Modal berhasil  -->
+<!-- Success Modal -->
 <div class="modal modal-borderless fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -660,28 +684,98 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Data alat berhasil ditambahkan!
+                <div class="text-center">
+                    <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                    <p class="mt-3">Data alat berhasil ditambahkan!</p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lanjut</button>
+                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Error Modal -->
+<div class="modal fade" id="validationErrorModal" tabindex="-1" aria-labelledby="validationErrorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="validationErrorModalLabel">Peringatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php if (validation_errors()) : ?>
+                    <div class="alert alert-danger">
+                        <?= validation_errors() ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    async function fetchData() {
-        try {
-            const response = await fetch('http://localhost/medical_ftdinus/analisis_darah/get_data');
-            const data = await response.json();
-            const textarea = document.getElementById('us1');
-            textarea.value = data.join('\n');
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
+    $(document).ready(function() {
+        // Handle NIK change
+        $('#nik').change(function() {
+            var selectedNik = $(this).val();
+            if (selectedNik) {
+                $.ajax({
+                    url: '<?= base_url('analisis_darah/get_nama_by_nik'); ?>',
+                    type: 'POST',
+                    data: { nik: selectedNik },
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#nama').val(response ? response : '');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                $('#nama').val('');
+            }
+        });
 
-    setInterval(fetchData, 1000);
+        // Show validation errors modal if there are validation errors
+        <?php if (validation_errors()) : ?>
+            var validationErrorModal = new bootstrap.Modal(document.getElementById('validationErrorModal'));
+            validationErrorModal.show();
+        <?php endif; ?>
+
+        // Show success modal if form submission was successful
+        <?php if ($this->session->flashdata('success')) : ?>
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Auto close success modal after 2 seconds
+            setTimeout(function() {
+                successModal.hide();
+                // Optional: redirect after success
+                // window.location.href = '<?= base_url("analisis_darah") ?>';
+            }, 2000);
+        <?php endif; ?>
+
+        // Handle form submission
+        $('#analisisForm').submit(function(e) {
+            var nik = $('#nik').val();
+            var alat = $('#alat').val();
+
+            if (!nik || !alat) {
+                e.preventDefault();
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+                return false;
+            }
+
+            // Disable submit button to prevent double submission
+            $(this).find('button[type="submit"]').prop('disabled', true);
+        });
+    });
 </script>
 
 <script>
@@ -708,65 +802,7 @@
                 $('#nama').val('');
             }
         });
-
-        // Function for form submission
-        $('#analisisForm').submit(function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            var selectedNik = $('#nik').val();
-            var selectedNama = $('#nama').val();
-            var selectedAlat = $('#alat').val();
-            var tinggi = $('#tinggi').val();
-            var berat = $('#berat').val();
-
-            if (selectedNik === "" || selectedAlat === "") {
-                $('#errorModal').modal('show');
-                return;
-            }
-
-            var formData = $(this).serialize();
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    $('#successModal').modal('show');
-
-                    console.log('Jumlah opsi di #alat:', $('#alat option').length);
-
-                    // Check if there are only default options left
-                    if ($('#alat option').length === 2) {
-                        // Show success modal
-                        $('#successModal').on('hide.bs.modal', function() {
-                            $.ajax({
-                                url: '<?php echo site_url('analisis_darah/clear_session_id'); ?>',
-                                type: 'POST',
-                                success: function(response) {
-                                    location.reload();
-                                }
-                            });
-                        });
-                    } else {
-                        // Remove selected option and reset form
-                        $('#alat option:selected').remove();
-                        $('#analisisForm')[0].reset();
-                        $('#nik').val(selectedNik);
-                        $('#nama').val(selectedNama);
-                        $('#nama').val($('#nama').val());
-                        $('#tinggi').val(tinggi);
-                        $('#berat').val(berat);
-
-                        // Hide fields related to the selected alat
-                        $('#' + selectedAlat + 'Fields').hide();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    alert('Terjadi kesalahan: ' + error);
-                }
-            });
-        });
-
+        
         // Handle "Lewati" button click
         $('#lewatiButton').click(function() {
             $('#lewatiModal').modal('show');
@@ -790,13 +826,33 @@
                 }
             });
         });
+
+        // Handle confirm "Lewati" button click in modal
+        $('#tutupButton').click(function() {
+            $.ajax({
+                url: '<?= base_url('analisis_darah/clear_session_id'); ?>',
+                type: 'POST',
+                success: function(response) {
+                    // Reset the form and re-enable all options
+                    $('#analisisForm')[0].reset();
+                    $('#alat option').prop('disabled', false).show();
+                    $('#suntikFields, #ultraSoundFields, #superBrightFields, #magnetikFields').hide();
+                    // Reload the page to refresh all AJAX functions
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan: ' + error);
+                }
+            });
+        });
     });
 
     // Function select alat sembunyi
     document.addEventListener('DOMContentLoaded', function() {
         const alatSelect = document.getElementById('alat');
         const suntikFields = document.getElementById('suntikFields');
-        const ultraSoundFields = document.getElementById('ultraSoundFields');
+        const asamFields = document.getElementById('asamFields');
+        const kolesterolFields = document.getElementById('kolesterolFields');
         const superBrightFields = document.getElementById('superBrightFields');
         const magnetikFields = document.getElementById('magnetikFields');
 
@@ -804,7 +860,8 @@
             const selectedAlat = alatSelect.value;
 
             suntikFields.style.display = selectedAlat === 'suntik' ? 'block' : 'none';
-            ultraSoundFields.style.display = selectedAlat === 'ultraSound' ? 'block' : 'none';
+            asamFields.style.display = selectedAlat === 'asamUrat' ? 'block' : 'none';
+            kolesterolFields.style.display = selectedAlat === 'kolesterol' ? 'block' : 'none';
             superBrightFields.style.display = selectedAlat === 'superBright' ? 'block' : 'none';
             magnetikFields.style.display = selectedAlat === 'magnetik' ? 'block' : 'none';
         }
@@ -824,7 +881,7 @@
             var selectedValue = alatSelect.value;
 
             // Menampilkan field sesuai dengan pilihan alat
-            var fields = ["suntikFields", "ultraSoundFields", "superBrightFields", "magnetikFields"];
+            var fields = ["suntikFields", "deteksiFields", "superBrightFields", "magnetikFields"];
             fields.forEach(function(field) {
                 document.getElementById(field).style.display = "none";
             });
@@ -839,47 +896,47 @@
     });
 
 
-    document.getElementById('ultraSoundBtn1').addEventListener('click', function() {
-        var ultrasoundId = 1;
+    document.getElementById('asamBtn').addEventListener('click', function() {
+        var asamId = 1;
 
-        // Ambil data_us dari API (controller) menggunakan AJAX
-        fetch('analisis_darah/get_ultrasound_data/' + ultrasoundId)
+        // Ambil data_asam dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_asam_urat_data/' + asamId)
             .then(response => response.json())
-            .then(data_us => {
-                // Mengisi nilai textarea dengan data dari data_us
-                document.getElementById('us1').value = data_us.us1 || '';
-                document.getElementById('us2').value = data_us.us2 || '';
-                document.getElementById('us3').value = data_us.us3 || '';
-                document.getElementById('us4').value = data_us.us4 || '';
-                document.getElementById('us5').value = data_us.us5 || '';
+            .then(data_asam => {
+                // Mengisi nilai textarea dengan data dari data_asam
+                document.getElementById('asam_violet').value = data_asam.violet || '';
+                document.getElementById('asam_blue').value = data_asam.blue || '';
+                document.getElementById('asam_green').value = data_asam.green || '';
+                document.getElementById('asam_yellow').value = data_asam.yellow || '';
+                document.getElementById('asam_orange').value = data_asam.orange || '';
+                document.getElementById('asam_red').value = data_asam.red || '';
 
-                // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
-                document.getElementById('ultraSoundFields').style.display = 'block';
+                // Tampilkan div asamFields (jika sebelumnya disembunyikan)
+                document.getElementById('asamFields').style.display = 'block';
             })
             .catch(error => console.error('Error:', error));
     });
 
-    document.getElementById('ultraSoundBtn2').addEventListener('click', function() {
-        var ultrasoundId = 1;
+    document.getElementById('kolesterolBtn').addEventListener('click', function() {
+        var kolesterolId = 1;
 
-        // Ambil data_us dari API (controller) menggunakan AJAX
-        fetch('analisis_darah/get_ultrasound_data/' + ultrasoundId)
+        // Ambil data_kolesterol dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_kolesterol_data/' + kolesterolId)
             .then(response => response.json())
-            .then(data_us => {
-                // Mengisi nilai textarea dengan data dari data_us
-                document.getElementById('us6').value = data_us.us1 || '';
-                document.getElementById('us7').value = data_us.us2 || '';
-                document.getElementById('us8').value = data_us.us3 || '';
-                document.getElementById('us9').value = data_us.us4 || '';
-                document.getElementById('us10').value = data_us.us5 || '';
+            .then(data_kolesterol => {
+                // Mengisi nilai textarea dengan data dari data_kolesterol
+                document.getElementById('kolesterol_violet').value = data_kolesterol.violet || '';
+                document.getElementById('kolesterol_blue').value = data_kolesterol.blue || '';
+                document.getElementById('kolesterol_green').value = data_kolesterol.green || '';
+                document.getElementById('kolesterol_yellow').value = data_kolesterol.yellow || '';
+                document.getElementById('kolesterol_orange').value = data_kolesterol.orange || '';
+                document.getElementById('kolesterol_red').value = data_kolesterol.red || '';
 
-                // Tampilkan div ultraSoundFields (jika sebelumnya disembunyikan)
-                document.getElementById('ultraSoundFields').style.display = 'block';
+                // Tampilkan div asamFields (jika sebelumnya disembunyikan)
+                document.getElementById('kolesterolFields').style.display = 'block';
             })
             .catch(error => console.error('Error:', error));
     });
-
-
 
     document.getElementById('superBrightBtn1').addEventListener('click', function() {
         var superbrightId = 1;
@@ -1015,4 +1072,108 @@
             allowClear: true
         });
     });
+
+    function updateKeteranganSpO2() {
+        const spo2 = parseInt(document.getElementById("spo2").value);
+        const keteranganSpO2 = document.getElementById("keterangan_spo2");
+
+        if (!spo2) {
+            keteranganSpO2.textContent = "";
+            return;
+        }
+
+        if (spo2 >= 95 && spo2 <= 100) {
+            keteranganSpO2.textContent = "Normal";
+            keteranganSpO2.style.color = "green";
+        } else if (spo2 >= 90 && spo2 < 95) {
+            keteranganSpO2.textContent = "Hipoksemia Ringan (Perlu Pemantauan)";
+            keteranganSpO2.style.color = "orange";
+        } else if (spo2 >= 80 && spo2 < 90) {
+            keteranganSpO2.textContent = "Hipoksemia Sedang (Perlu Penanganan)";
+            keteranganSpO2.style.color = "red";
+        } else if (spo2 < 80) {
+            keteranganSpO2.textContent = "Hipoksemia Berat (Darurat Medis)";
+            keteranganSpO2.style.color = "darkred";
+        } else {
+            keteranganSpO2.textContent = "Tidak dikenali";
+            keteranganSpO2.style.color = "black";
+        }
+    }
+
+    function updateKeteranganGlukosa() {
+    const glukosa = document.getElementById("glukosa").value;
+    const keteranganSpan = document.getElementById("keterangan_glukosa");
+
+    if (glukosa === "") {
+        keteranganSpan.textContent = "";
+        keteranganSpan.style.color = "black";
+        return;
+    }
+
+    const glukosaValue = parseFloat(glukosa);
+
+    if (glukosaValue < 70) {
+        keteranganSpan.textContent = "Rendah (Hipoglikemia)";
+        keteranganSpan.style.color = "red";
+    } else if (glukosaValue >= 70 && glukosaValue <= 140) {
+        keteranganSpan.textContent = "Normal";
+        keteranganSpan.style.color = "green";
+    } else if (glukosaValue > 140 && glukosaValue <= 199) {
+        keteranganSpan.textContent = "Pre-diabetes";
+        keteranganSpan.style.color = "orange";
+    } else {
+        keteranganSpan.textContent = "Diabetes";
+        keteranganSpan.style.color = "red";
+    }
+}
+
+function updateKeteranganAsamUrat() {
+    const asamUrat = document.getElementById("asam_urat").value;
+    const keteranganSpan = document.getElementById("keterangan_asam_urat");
+
+    if (asamUrat === "") {
+        keteranganSpan.textContent = "";
+        keteranganSpan.style.color = "black";
+        return;
+    }
+
+    const asamUratValue = parseFloat(asamUrat);
+
+    if (asamUratValue < 3.5) {
+        keteranganSpan.textContent = "Rendah";
+        keteranganSpan.style.color = "red";
+    } else if (asamUratValue >= 3.5 && asamUratValue <= 7.2) {
+        keteranganSpan.textContent = "Normal";
+        keteranganSpan.style.color = "green";
+    } else {
+        keteranganSpan.textContent = "Tinggi (Hiperurisemia)";
+        keteranganSpan.style.color = "red";
+    }
+}
+
+function updateKeteranganKolesterol() {
+    const kolesterol = document.getElementById("kolesterol").value;
+    const keteranganKolesterol = document.getElementById("keterangan_kolesterol");
+
+    if (kolesterol === "") {
+        keteranganKolesterol.textContent = "";
+        return;
+    }
+
+    const kolesterolValue = parseFloat(kolesterol);
+
+    if (kolesterolValue < 200 && kolesterolValue >= 120) {
+        keteranganKolesterol.textContent = "Normal";
+        keteranganKolesterol.style.color = "green";
+    } else if (kolesterolValue >= 200 && kolesterolValue < 240) {
+        keteranganKolesterol.textContent = "Borderline (Waspada)";
+        keteranganKolesterol.style.color = "orange";
+    } else if (kolesterolValue < 120) {
+        keteranganKolesterol.textContent = "Sangat Rendah (Berisiko)";
+        keteranganKolesterol.style.color = "red";
+    } else {
+        keteranganKolesterol.textContent = "Tinggi (Berisiko)";
+        keteranganKolesterol.style.color = "red";
+    }
+}
 </script>

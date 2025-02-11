@@ -96,6 +96,60 @@ class Mod_pasien extends CI_Model
         return $query->row_array();
     }
 
+    // Function Deteksi Asam Urat
+    public function get_asam_urat($nik)
+    {
+        $this->db->select('asam_urat.*, pasien.id as pasien_id, pasien.nik, STR_TO_DATE(asam_urat.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        $this->db->from('pasien');
+        $this->db->join('asam_urat', 'asam_urat.id_pasien = pasien.id', 'left');
+        $this->db->where('pasien.nik', $nik);
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function update_asam_urat($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('asam_urat', $data);
+    }
+
+    public function get_asam_urat_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('asam_urat');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    // Function Deteksi Kolesterol
+    public function get_kolesterol($nik)
+    {
+        $this->db->select('kolesterol.*, pasien.id as pasien_id, pasien.nik, STR_TO_DATE(kolesterol.ins_time, "%Y-%m-%d %H:%i:%s") as ins_time_datetime');
+        $this->db->from('pasien');
+        $this->db->join('kolesterol', 'kolesterol.id_pasien = pasien.id', 'left');
+        $this->db->where('pasien.nik', $nik);
+        $this->db->order_by("ins_time_datetime", 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function update_kolesterol($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('kolesterol', $data);
+    }
+
+    public function get_kolesterol_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from('kolesterol');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     // Function Super Bright
     public function get_superbright($nik)
     {
@@ -344,46 +398,53 @@ class Mod_pasien extends CI_Model
 
     public function get_periksa_mingguan()
     {
-        $query = "
-            SELECT 
-                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
-                COUNT(*) as total, 
-                'Suntik' as type 
-            FROM suntik 
-            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
-            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
-            GROUP BY day
-            UNION ALL
-            SELECT 
-                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
-                COUNT(*) as total, 
-                'Ultrasound' as type 
-            FROM ultrasound 
-            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
-            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
-            GROUP BY day
-            UNION ALL
-            SELECT 
-                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
-                COUNT(*) as total, 
-                'Superbright' as type 
-            FROM superbright 
-            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
-            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
-            GROUP BY day
-            UNION ALL
-            SELECT 
-                DATE_FORMAT(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'), '%W') as day, 
-                COUNT(*) as total, 
-                'Magnetik' as type 
-            FROM magnetik 
-            WHERE WEEK(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = WEEK(NOW()) 
-            AND YEAR(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) = YEAR(NOW()) 
-            GROUP BY day
-        ";
+        // Get current week's start and end dates
+        $week_dates = $this->get_week_dates();
+        
+        // Union all queries for different examination types
+        $suntik_query = $this->db->select("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) as day, 'Suntik' as type, COUNT(*) as total")
+            ->from('suntik')
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') >=", $week_dates['start'])
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') <=", $week_dates['end'])
+            ->group_by("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'))")
+            ->get_compiled_select();
 
-        $result = $this->db->query($query);
-        return $result->result();
+        $ultrasound_query = $this->db->select("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) as day, 'Ultrasound' as type, COUNT(*) as total")
+            ->from('ultrasound')
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') >=", $week_dates['start'])
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') <=", $week_dates['end'])
+            ->group_by("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'))")
+            ->get_compiled_select();
+
+        $superbright_query = $this->db->select("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) as day, 'Superbright' as type, COUNT(*) as total")
+            ->from('superbright')
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') >=", $week_dates['start'])
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') <=", $week_dates['end'])
+            ->group_by("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'))")
+            ->get_compiled_select();
+
+        $magnetik_query = $this->db->select("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s')) as day, 'Magnetik' as type, COUNT(*) as total")
+            ->from('magnetik')
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') >=", $week_dates['start'])
+            ->where("STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s') <=", $week_dates['end'])
+            ->group_by("DAYNAME(STR_TO_DATE(ins_time, '%Y-%m-%d %H:%i:%s'))")
+            ->get_compiled_select();
+
+        $final_query = $this->db->query("$suntik_query UNION ALL $ultrasound_query UNION ALL $superbright_query UNION ALL $magnetik_query");
+        
+        return $final_query->result();
+    }
+
+    private function get_week_dates()
+    {
+        $today = date('Y-m-d H:i:s');
+        $week_start = date('Y-m-d 00:00:00', strtotime('monday this week', strtotime($today)));
+        $week_end = date('Y-m-d 23:59:59', strtotime('sunday this week', strtotime($today)));
+        
+        return [
+            'start' => $week_start,
+            'end' => $week_end
+        ];
     }
 
     public function delete_suntik($id)
@@ -393,6 +454,14 @@ class Mod_pasien extends CI_Model
     public function delete_ultrasound($id)
     {
         return $this->db->delete('ultrasound', array('id' => $id));
+    }
+    public function delete_asam_urat($id)
+    {
+        return $this->db->delete('asam_urat', array('id' => $id));
+    }
+    public function delete_kolesterol($id)
+    {
+        return $this->db->delete('kolesterol', array('id' => $id));
     }
     public function delete_superbright($id)
     {
@@ -416,11 +485,11 @@ class Mod_pasien extends CI_Model
             data_akm.tinggi_bdn AS akm_tinggi_bdn,
             data_akm.berat_bdn AS akm_berat_bdn,
             data_akm.glukosa AS akm_glukosa,
-            COALESCE(data_manual.sistol, 0) - COALESCE(data_akm.sistol, 0) as selisih_sistol,
-            COALESCE(data_manual.diastol, 0) - COALESCE(data_akm.diastol, 0) as selisih_diastol,
-            COALESCE(data_manual.tinggi_bdn, 0) - COALESCE(data_akm.tinggi_bdn, 0) as selisih_tinggi_bdn,
-            COALESCE(data_manual.berat_bdn, 0) - COALESCE(data_akm.berat_bdn, 0) as selisih_berat_bdn,
-            COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0) as selisih_glukosa
+            ROUND(COALESCE(data_manual.sistol, 0) - COALESCE(data_akm.sistol, 0),2) as selisih_sistol,
+            ROUND(COALESCE(data_manual.diastol, 0) - COALESCE(data_akm.diastol, 0),2) as selisih_diastol,
+            ROUND(COALESCE(data_manual.tinggi_bdn, 0) - COALESCE(data_akm.tinggi_bdn, 0),2) as selisih_tinggi_bdn,
+            ROUND(COALESCE(data_manual.berat_bdn, 0) - COALESCE(data_akm.berat_bdn, 0),2) as selisih_berat_bdn,
+            ROUND(COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0),2) as selisih_glukosa
         ');
         $this->db->from('data_manual');
         $this->db->join('data_akm', 'data_manual.nik = data_akm.nik', 'left');
@@ -431,51 +500,51 @@ class Mod_pasien extends CI_Model
     }
 
     public function get_total_recap()
-    {
-        $this->db->select('
-        SUM(COALESCE(data_manual.sistol, 0)) as manual_sistol,
-        SUM(COALESCE(data_akm.sistol, 0)) as akm_sistol,
-        
-        AVG(COALESCE(data_manual.sistol, 0)) as avg_manual_sistol,
-        AVG(COALESCE(data_akm.sistol, 0)) as avg_akm_sistol,
-        SUM(COALESCE(data_manual.sistol, 0) - COALESCE(data_akm.sistol, 0)) as total_selisih_sistol,
-        ABS(AVG(COALESCE(data_manual.sistol, 0)) - AVG(COALESCE(data_akm.sistol, 0))) as avg_sistol,
+{
+    $this->db->select('
+        ROUND(SUM(COALESCE(data_manual.sistol, 0)), 2) as manual_sistol,
+        ROUND(SUM(COALESCE(data_akm.sistol, 0)), 2) as akm_sistol,
+
+        ROUND(AVG(COALESCE(data_manual.sistol, 0)), 2) as avg_manual_sistol,
+        ROUND(AVG(COALESCE(data_akm.sistol, 0)), 2) as avg_akm_sistol,
+        ROUND(SUM(COALESCE(data_manual.sistol, 0) - COALESCE(data_akm.sistol, 0)), 2) as total_selisih_sistol,
+        ROUND(ABS(AVG(COALESCE(data_manual.sistol, 0)) - AVG(COALESCE(data_akm.sistol, 0))), 2) as avg_sistol,
         (CASE WHEN AVG(COALESCE(data_manual.sistol, 0)) - AVG(COALESCE(data_akm.sistol, 0)) < 0 THEN "Data Lebih" ELSE "Data Kurang" END) as keterangan_sistol,
 
-        SUM(COALESCE(data_manual.diastol, 0)) as manual_diastol,
-        SUM(COALESCE(data_akm.diastol, 0)) as akm_diastol,
-        
-        AVG(COALESCE(data_manual.diastol, 0)) as avg_manual_diastol,
-        AVG(COALESCE(data_akm.diastol, 0)) as avg_akm_diastol,
-        SUM(COALESCE(data_manual.diastol, 0) - COALESCE(data_akm.diastol, 0)) as total_selisih_diastol,
-        ABS(AVG(COALESCE(data_manual.diastol, 0)) - AVG(COALESCE(data_akm.diastol, 0))) as avg_diastol,
+        ROUND(SUM(COALESCE(data_manual.diastol, 0)), 2) as manual_diastol,
+        ROUND(SUM(COALESCE(data_akm.diastol, 0)), 2) as akm_diastol,
+
+        ROUND(AVG(COALESCE(data_manual.diastol, 0)), 2) as avg_manual_diastol,
+        ROUND(AVG(COALESCE(data_akm.diastol, 0)), 2) as avg_akm_diastol,
+        ROUND(SUM(COALESCE(data_manual.diastol, 0) - COALESCE(data_akm.diastol, 0)), 2) as total_selisih_diastol,
+        ROUND(ABS(AVG(COALESCE(data_manual.diastol, 0)) - AVG(COALESCE(data_akm.diastol, 0))), 2) as avg_diastol,
         (CASE WHEN AVG(COALESCE(data_manual.diastol, 0)) - AVG(COALESCE(data_akm.diastol, 0)) < 0 THEN "Data Lebih" ELSE "Data Kurang" END) as keterangan_diastol,
 
-        SUM(COALESCE(data_manual.tinggi_bdn, 0)) as manual_tinggi_bdn,
-        SUM(COALESCE(data_akm.tinggi_bdn, 0)) as akm_tinggi_bdn,
-        
-        AVG(COALESCE(data_manual.tinggi_bdn, 0)) as avg_manual_tinggi_bdn,
-        AVG(COALESCE(data_akm.tinggi_bdn, 0)) as avg_akm_tinggi_bdn,
-        SUM(COALESCE(data_manual.tinggi_bdn, 0) - COALESCE(data_akm.tinggi_bdn, 0)) as total_selisih_tinggi_bdn,
-        ABS(AVG(COALESCE(data_manual.tinggi_bdn, 0)) - AVG(COALESCE(data_akm.tinggi_bdn, 0))) as avg_tinggi_bdn,
+        ROUND(SUM(COALESCE(data_manual.tinggi_bdn, 0)), 2) as manual_tinggi_bdn,
+        ROUND(SUM(COALESCE(data_akm.tinggi_bdn, 0)), 2) as akm_tinggi_bdn,
+
+        ROUND(AVG(COALESCE(data_manual.tinggi_bdn, 0)), 2) as avg_manual_tinggi_bdn,
+        ROUND(AVG(COALESCE(data_akm.tinggi_bdn, 0)), 2) as avg_akm_tinggi_bdn,
+        ROUND(SUM(COALESCE(data_manual.tinggi_bdn, 0) - COALESCE(data_akm.tinggi_bdn, 0)), 2) as total_selisih_tinggi_bdn,
+        ROUND(ABS(AVG(COALESCE(data_manual.tinggi_bdn, 0)) - AVG(COALESCE(data_akm.tinggi_bdn, 0))), 2) as avg_tinggi_bdn,
         (CASE WHEN AVG(COALESCE(data_manual.tinggi_bdn, 0)) - AVG(COALESCE(data_akm.tinggi_bdn, 0)) < 0 THEN "Data Lebih" ELSE "Data Kurang" END) as keterangan_tinggi_bdn,
 
-        SUM(COALESCE(data_manual.berat_bdn, 0)) as manual_berat_bdn,
-        SUM(COALESCE(data_akm.berat_bdn, 0)) as akm_berat_bdn,
-        
-        AVG(COALESCE(data_manual.berat_bdn, 0)) as avg_manual_berat_bdn,
-        AVG(COALESCE(data_akm.berat_bdn, 0)) as avg_akm_berat_bdn,
-        SUM(COALESCE(data_manual.berat_bdn, 0) - COALESCE(data_akm.berat_bdn, 0)) as total_selisih_berat_bdn,
-        ABS(AVG(COALESCE(data_manual.berat_bdn, 0)) - AVG(COALESCE(data_akm.berat_bdn, 0))) as avg_berat_bdn,
+        ROUND(SUM(COALESCE(data_manual.berat_bdn, 0)), 2) as manual_berat_bdn,
+        ROUND(SUM(COALESCE(data_akm.berat_bdn, 0)), 2) as akm_berat_bdn,
+
+        ROUND(AVG(COALESCE(data_manual.berat_bdn, 0)), 2) as avg_manual_berat_bdn,
+        ROUND(AVG(COALESCE(data_akm.berat_bdn, 0)), 2) as avg_akm_berat_bdn,
+        ROUND(SUM(COALESCE(data_manual.berat_bdn, 0) - COALESCE(data_akm.berat_bdn, 0)), 2) as total_selisih_berat_bdn,
+        ROUND(ABS(AVG(COALESCE(data_manual.berat_bdn, 0)) - AVG(COALESCE(data_akm.berat_bdn, 0))), 2) as avg_berat_bdn,
         (CASE WHEN AVG(COALESCE(data_manual.berat_bdn, 0)) - AVG(COALESCE(data_akm.berat_bdn, 0)) < 0 THEN "Data Lebih" ELSE "Data Kurang" END) as keterangan_berat_bdn,
 
-        SUM(COALESCE(data_manual.glukosa, 0)) as manual_glukosa,
-        SUM(COALESCE(data_akm.glukosa, 0)) as akm_glukosa,
-        
-        AVG(COALESCE(data_manual.glukosa, 0)) as avg_manual_glukosa,
-        AVG(COALESCE(data_akm.glukosa, 0)) as avg_akm_glukosa,
-        SUM(COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0)) as total_selisih_glukosa,
-        ABS(AVG(COALESCE(data_manual.glukosa, 0)) - AVG(COALESCE(data_akm.glukosa, 0))) as avg_glukosa,
+        ROUND(SUM(COALESCE(data_manual.glukosa, 0)), 2) as manual_glukosa,
+        ROUND(SUM(COALESCE(data_akm.glukosa, 0)), 2) as akm_glukosa,
+
+        ROUND(AVG(COALESCE(data_manual.glukosa, 0)), 2) as avg_manual_glukosa,
+        ROUND(AVG(COALESCE(data_akm.glukosa, 0)), 2) as avg_akm_glukosa,
+        ROUND(SUM(COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0)), 2) as total_selisih_glukosa,
+        ROUND(ABS(AVG(COALESCE(data_manual.glukosa, 0)) - AVG(COALESCE(data_akm.glukosa, 0))), 2) as avg_glukosa,
         (CASE WHEN AVG(COALESCE(data_manual.glukosa, 0)) - AVG(COALESCE(data_akm.glukosa, 0)) < 0 THEN "Data Lebih" ELSE "Data Kurang" END) as keterangan_glukosa,
 
         -- Menghitung persentase selisih
@@ -521,17 +590,18 @@ class Mod_pasien extends CI_Model
         COUNT(DISTINCT CASE WHEN COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0) > 0 THEN data_manual.nik ELSE NULL END) as total_selisih_positif_glukosa,
         COUNT(DISTINCT CASE WHEN COALESCE(data_manual.glukosa, 0) - COALESCE(data_akm.glukosa, 0) < 0 THEN data_manual.nik ELSE NULL END) as total_selisih_negatif_glukosa
     ');
-        $this->db->from('data_manual');
-        $this->db->join('data_akm', 'data_manual.nik = data_akm.nik', 'left');
+    $this->db->from('data_manual');
+    $this->db->join('data_akm', 'data_manual.nik = data_akm.nik');
+    
+    return $this->db->get()->row();
+}
 
-        $query = $this->db->get();
-        return $query->row();
-    }
 
-    public function get_manual_akm() 
+    public function get_manual_akm()
     {
         $this->db->select('
             dm.id AS manual_id,
+            dm.tgl_periksa as manual_tgl,
             dm.nik AS manual_nik,
             dm.nama AS manual_nama,
             dm.sistol AS manual_sistol,
@@ -551,11 +621,11 @@ class Mod_pasien extends CI_Model
             da.glukosa AS akm_glukosa,
             da.asam_urat AS akm_asam_urat,
             da.kolesterol AS akm_kolesterol,
-            (dm.sistol - da.sistol) AS diff_sistol,
-            (dm.diastol - da.diastol) AS diff_diastol,
-            (dm.tinggi_bdn - da.tinggi_bdn) AS diff_tinggi_bdn,
-            (dm.berat_bdn - da.berat_bdn) AS diff_berat_bdn,
-            (dm.glukosa - da.glukosa) AS diff_glukosa
+            ROUND((dm.sistol - da.sistol),2) AS diff_sistol,
+            ROUND((dm.diastol - da.diastol),2) AS diff_diastol,
+            ROUND((dm.tinggi_bdn - da.tinggi_bdn),2) AS diff_tinggi_bdn,
+            ROUND((dm.berat_bdn - da.berat_bdn),2) AS diff_berat_bdn,
+            ROUND((dm.glukosa - da.glukosa),2) AS diff_glukosa
         ');
         $this->db->from('data_manual dm');
         $this->db->join('data_akm da', 'dm.nik = da.nik', 'left');
@@ -564,5 +634,42 @@ class Mod_pasien extends CI_Model
         return $query->result();
     }
 
+    public function get_filtered_data($start_date, $end_date)
+{
+    $this->db->select('
+        dm.id AS manual_id,
+        dm.tgl_periksa as manual_tgl,
+        dm.nik AS manual_nik,
+        dm.nama AS manual_nama,
+        dm.sistol AS manual_sistol,
+        dm.diastol AS manual_diastol,
+        dm.tinggi_bdn AS manual_tinggi_bdn,
+        dm.berat_bdn AS manual_berat_bdn,
+        dm.glukosa AS manual_glukosa,
+        dm.asam_urat AS manual_asam_urat,
+        dm.kolesterol AS manual_kolesterol,
+        da.id AS akm_id,
+        da.nik AS akm_nik,
+        da.nama AS akm_nama,
+        da.sistol AS akm_sistol,
+        da.diastol AS akm_diastol,
+        da.tinggi_bdn AS akm_tinggi_bdn,
+        da.berat_bdn AS akm_berat_bdn,
+        da.glukosa AS akm_glukosa,
+        da.asam_urat AS akm_asam_urat,
+        da.kolesterol AS akm_kolesterol,
+        (dm.sistol - da.sistol) AS diff_sistol,
+        (dm.diastol - da.diastol) AS diff_diastol,
+        (dm.tinggi_bdn - da.tinggi_bdn) AS diff_tinggi_bdn,
+        (dm.berat_bdn - da.berat_bdn) AS diff_berat_bdn,
+        (dm.glukosa - da.glukosa) AS diff_glukosa
+    ');
+    $this->db->from('data_manual dm');
+    $this->db->join('data_akm da', 'dm.nik = da.nik', 'left');
+    $this->db->where('dm.tgl_periksa >=', $start_date);
+    $this->db->where('dm.tgl_periksa <=', $end_date);
+    $query = $this->db->get();
 
+    return $query->result();
+}
 }

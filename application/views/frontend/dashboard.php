@@ -261,28 +261,39 @@
         var periksaMingguan = <?= json_encode($periksa_mingguan) ?>;
 
         // Inisialisasi data per hari dalam minggu
-        var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        var daysOfWeek = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
         var suntikData = Array(7).fill(0);
         var ultrasoundData = Array(7).fill(0);
         var superbrightData = Array(7).fill(0);
         var magnetikData = Array(7).fill(0);
 
+        // Map English day names to array indices
+        var dayMapping = {
+            'Monday': 0,
+            'Tuesday': 1,
+            'Wednesday': 2,
+            'Thursday': 3,
+            'Friday': 4,
+            'Saturday': 5,
+            'Sunday': 6
+        };
+
         // Olah data untuk Chart.js
         periksaMingguan.forEach(function(item) {
-            var dayIndex = daysOfWeek.indexOf(item.day);
-            if (dayIndex !== -1) {
+            var dayIndex = dayMapping[item.day];
+            if (dayIndex !== undefined) {
                 switch (item.type) {
                     case 'Suntik':
-                        suntikData[dayIndex] = item.total;
+                        suntikData[dayIndex] = parseInt(item.total);
                         break;
                     case 'Ultrasound':
-                        ultrasoundData[dayIndex] = item.total;
+                        ultrasoundData[dayIndex] = parseInt(item.total);
                         break;
                     case 'Superbright':
-                        superbrightData[dayIndex] = item.total;
+                        superbrightData[dayIndex] = parseInt(item.total);
                         break;
                     case 'Magnetik':
-                        magnetikData[dayIndex] = item.total;
+                        magnetikData[dayIndex] = parseInt(item.total);
                         break;
                 }
             }
@@ -328,6 +339,14 @@
                                 var value = tooltipItem.raw;
                                 return label + ': ' + value;
                             }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
                         }
                     }
                 }

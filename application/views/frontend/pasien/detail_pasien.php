@@ -146,8 +146,9 @@
                                                     <select class="form-select" id="basicSelect" name="alat">
                                                         <option value="" selected hidden>Pilih Alat</option>
                                                         <option value="suntik">Suntik</option>
-                                                        <option value="ultraSound">Ultra Sound</option>
-                                                        <option value="superBright">Super Bright</option>
+                                                        <option value="asamUrat">Deteksi Asam Urat</option>
+                                                        <option value="kolesterol">Deteksi Kolesterol</option>
+                                                        <option value="superBright">Superbright</option>
                                                         <option value="magnetik">Magnetik</option>
                                                     </select>
                                                 </fieldset>
@@ -165,7 +166,6 @@
                                                                 <th>Tanggal Periksa</th>
                                                                 <th>Tanggal Update</th>
                                                                 <th>Glukosa</th>
-                                                                <th>HB</th>
                                                                 <th>SPO2</th>
                                                                 <th>Kolesterol</th>
                                                                 <th>Asam Urat</th>
@@ -174,15 +174,34 @@
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach ($suntik as $suntik) : ?>
-                                                                <?php if (!empty($suntik->glukosa) || !empty($suntik->hb) || !empty($suntik->spo2)) : ?>
+                                                                <?php if (!empty($suntik->glukosa) || !empty($suntik->spo2) || !empty($suntik->kolesterol)) : ?>
                                                                     <tr>
                                                                         <td><?= formatDateTime($suntik->ins_time) ?></td>
                                                                         <td><?= formatDateTime($suntik->upd_time) ?></td>
-                                                                        <td><?= $suntik->glukosa ?></td>
-                                                                        <td><?= $suntik->hb ?></td>
-                                                                        <td><?= $suntik->spo2 ?></td>
-                                                                        <td><?= $suntik->kolesterol ?></td>
-                                                                        <td><?= $suntik->asam_urat ?></td>
+                                                                        <td>
+                                                                            <?= $suntik->glukosa ?><br>
+                                                                            <span style="color: <?= getGlukosaColor($suntik->glukosa) ?>">
+                                                                                (<?= getGlukosaKeterangan($suntik->glukosa) ?>)
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?= $suntik->spo2 ?><br>
+                                                                            <span style="color: <?= getSpo2Color($suntik->spo2) ?>">
+                                                                                (<?= getSpo2Keterangan($suntik->spo2) ?>)
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?= $suntik->kolesterol ?><br>
+                                                                            <span style="color: <?= getKolesterolColor($suntik->kolesterol) ?>">
+                                                                                (<?= getKolesterolKeterangan($suntik->kolesterol) ?>)
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?= $suntik->asam_urat ?><br>
+                                                                            <span style="color: <?= getAsamUratColor($suntik->asam_urat) ?>">
+                                                                                (<?= getAsamUratKeterangan($suntik->asam_urat) ?>)
+                                                                            </span>
+                                                                        </td>
                                                                         <td>
                                                                             <button type="button" class="badge bg-warning border-0 edit-suntik-btn" data-bs-toggle="modal" data-bs-target="#SuntikModal" data-id="<?= $suntik->id ?>">
                                                                                 <i class="fas fa-edit"></i> Edit
@@ -217,12 +236,6 @@
                                                                             </div>
                                                                             <div class="col form-group">
                                                                                 <input type="text" id="glukosa" class="form-control" name="glukosa" placeholder="Masukkan Glukosa">
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="hb">HB</label>
-                                                                            </div>
-                                                                            <div class="col form-group">
-                                                                                <input type="text" id="hb" class="form-control" name="hb" placeholder="Masukkan HB">
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label for="spo2">SPO2</label>
@@ -261,10 +274,10 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Table untuk Ultrasound -->
-                                            <div id="ultraSoundFields" style="display: none;">
+                                            <!-- Table untuk Deteksi Asam Urat -->
+                                            <div id="asamFields" style="display: none;">
                                                 <div>
-                                                    <h6 class="h6 mt-4 mb-4">Ultrasound</h6>
+                                                    <h6 class="h6 mt-4 mb-4">Deteksi Asam Urat</h6>
                                                 </div>
                                                 <div class="table-responsive">
                                                     <table class="table">
@@ -276,19 +289,19 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php foreach ($ultrasound as $us) : ?>
-                                                                <?php if (!empty($us->ins_time) || !empty($us->upd_time)) : ?>
+                                                            <?php foreach ($asam_urat as $au) : ?>
+                                                                <?php if (!empty($au->ins_time) || !empty($au->upd_time)) : ?>
                                                                     <tr>
-                                                                        <td><?= formatDateTime($us->ins_time) ?></td>
-                                                                        <td><?= formatDateTime($us->upd_time) ?></td>
+                                                                        <td><?= formatDateTime($au->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($au->upd_time) ?></td>
                                                                         <td>
-                                                                            <button type="button" class="badge bg-primary border-0 view-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundModal" data-id="<?= $us->id ?>">
+                                                                            <button type="button" class="badge bg-primary border-0 view-asam-btn" data-bs-toggle="modal" data-bs-target="#asamModal" data-id="<?= $au->id ?>">
                                                                                 <i class="fas fa-eye"></i> Lihat
                                                                             </button>
-                                                                            <button type="button" class="badge bg-warning border-0 edit-ultrasound-btn" data-bs-toggle="modal" data-bs-target="#ultraSoundEditModal" data-id="<?= $us->id ?>">
+                                                                            <button type="button" class="badge bg-warning border-0 edit-asam-btn" data-bs-toggle="modal" data-bs-target="#asamEditModal" data-id="<?= $au->id ?>">
                                                                                 <i class="fas fa-edit"></i> Edit
                                                                             </button>
-                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_ultrasound/' . $us->id) ?>">
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_asam_urat/' . $au->id) ?>">
                                                                                 <i class="fas fa-trash"></i> Hapus
                                                                             </a>
                                                                         </td>
@@ -300,78 +313,53 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Detail Modal Ultrasound -->
-                                            <div class="modal fade" id="ultraSoundModal" tabindex="-1" role="dialog" aria-labelledby="ultraSoundModalTitle" aria-hidden="true">
+                                            <!-- Detail Modal asam urat -->
+                                            <div class="modal fade" id="asamModal" tabindex="-1" role="dialog" aria-labelledby="asamModalTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="ultraSoundModalTitle">Detail Ultrasound</h5>
+                                                            <h5 class="modal-title" id="asamModalTitle">Detail Deteksi Asam Urat</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="form-body">
                                                                 <div class="row">
-                                                                    <div id="ultraSoundFields">
-
+                                                                    <div id="asamFields">
                                                                         <div class="col">
-                                                                            <label for="us1"><strong>Data Ultrasound 1</strong></label>
+                                                                            <label for="asam_violet"><strong>Data Violet</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us1" rows="5" placeholder="Data Ultrasound 1" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_violet" rows="5" placeholder="Data Violet" readonly></textarea>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="us2"><strong>Data Ultrasound 2</strong></label>
+                                                                            <label for="asam_blue"><strong>Data Blue</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us2" rows="5" placeholder="Data Ultrasound 2" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_blue" rows="5" placeholder="Data Blue" readonly></textarea>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="us3"><strong>Data Ultrasound 3</strong></label>
+                                                                            <label for="asam_green"><strong>Data Green</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us3" rows="5" placeholder="Data Ultrasound 3" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_green" rows="5" placeholder="Data Green" readonly></textarea>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="us4"><strong>Data Ultrasound 4</strong></label>
+                                                                            <label for="asam_yellow"><strong>Data Yellow</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us4" rows="5" placeholder="Data Ultrasound 4" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_yellow" rows="5" placeholder="Data Yellow" readonly></textarea>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="us5"><strong>Data Ultrasound 5</strong></label>
+                                                                            <label for="asam_orange"><strong>Data Orange</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us5" rows="5" placeholder="Data Ultrasound 5" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_orange" rows="5" placeholder="Data Orange" readonly></textarea>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="us6"><strong>Data Ultrasound 6</strong></label>
+                                                                            <label for="asam_red"><strong>Data Red</strong></label>
                                                                         </div>
                                                                         <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us6" rows="5" placeholder="Data Ultrasound 6" readonly></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us7"><strong>Data Ultrasound 7</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us7" rows="5" placeholder="Data Ultrasound 7" readonly></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us8"><strong>Data Ultrasound 8</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us8" rows="5" placeholder="Data Ultrasound 8" readonly></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us9"><strong>Data Ultrasound 9</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us9" rows="5" placeholder="Data Ultrasound 9" readonly></textarea>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <label for="us10"><strong>Data Ultrasound 10</strong></label>
-                                                                        </div>
-                                                                        <div class="col mb-3">
-                                                                            <textarea class="form-control" id="us10" rows="5" placeholder="Data Ultrasound 10" readonly></textarea>
+                                                                            <textarea class="form-control" id="asam_red" rows="5" placeholder="Data Red" readonly></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -381,106 +369,242 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Edit Modal Ultrasound -->
-                                            <div class="modal fade" id="ultraSoundEditModal" tabindex="-1" role="dialog" aria-labelledby="ultraSoundEditModalTitle" aria-hidden="true">
+                                            <!-- Edit Modal Deteksi Asam Urat -->
+                                            <div class="modal fade" id="asamEditModal" tabindex="-1" role="dialog" aria-labelledby="asamEditModalTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="ultraSoundEditModalTitle">Edit Ultrasound</h5>
+                                                            <h5 class="modal-title" id="asamEditModalTitle">Edit Deteksi Asam Urat</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-
                                                         <div class="modal-body">
-                                                            <form class="" id="editUltrasoundForm" action="<?= base_url('pasien/update_ultrasound') ?>" method="POST">
+                                                            <form class="" id="editAsamForm" action="<?= base_url('pasien/update_asam_urat') ?>" method="POST">
                                                                 <div class="form-body">
                                                                     <div class="row">
-
-                                                                        <div id="ultraSoundFields">
+                                                                        <div id="asamFields">
                                                                             <div class="col-sm-12 d-flex justify-content-end">
-                                                                                <button type="button" id="ultraSoundSamBtn1" class="btn btn-light-primary me-1 mb-1 px-5">Sample 1-5</button>
-                                                                                <button type="button" id="ultraSoundSamBtn2" class="btn btn-light-primary me-1 mb-1 px-5">Sample 6-10</button>
+                                                                                <button type="button" id="asamSamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us1"><strong>Data Ultrasound 1</strong></label>
+                                                                                <label for="violet"><strong>Data Violet</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us1" class="form-control" id="edit-us1" rows="5" placeholder="Data Ultrasound 1"></textarea>
+                                                                                <textarea name="asamviolet" class="form-control" id="edit-asamviolet" rows="5" placeholder="Data Violet"></textarea>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us2"><strong>Data Ultrasound 2</strong></label>
+                                                                                <label for="blue"><strong>Data Blue</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us2" class="form-control" id="edit-us2" rows="5" placeholder="Data Ultrasound 2"></textarea>
+                                                                                <textarea name="asamblue" class="form-control" id="edit-asamblue" rows="5" placeholder="Data Blue"></textarea>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us3"><strong>Data Ultrasound 3</strong></label>
+                                                                                <label for="green"><strong>Data Green</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us3" class="form-control" id="edit-us3" rows="5" placeholder="Data Ultrasound 3"></textarea>
+                                                                                <textarea name="asamgreen" class="form-control" id="edit-asamgreen" rows="5" placeholder="Data Green"></textarea>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us4"><strong>Data Ultrasound 4</strong></label>
+                                                                                <label for="yellow"><strong>Data Yellow</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us4" class="form-control" id="edit-us4" rows="5" placeholder="Data Ultrasound 4"></textarea>
+                                                                                <textarea name="asamyellow" class="form-control" id="edit-asamyellow" rows="5" placeholder="Data Yellow"></textarea>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us5"><strong>Data Ultrasound 5</strong></label>
+                                                                                <label for="orange"><strong>Data Orange</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us5" class="form-control" id="edit-us5" rows="5" placeholder="Data Ultrasound 5"></textarea>
+                                                                                <textarea name="asamorange" class="form-control" id="edit-asamorange" rows="5" placeholder="Data Orange"></textarea>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <label for="us6"><strong>Data Ultrasound 6</strong></label>
+                                                                                <label for="red"><strong>Data Red</strong></label>
                                                                             </div>
                                                                             <div class="col mb-3">
-                                                                                <textarea name="us6" class="form-control" id="edit-us6" rows="5" placeholder="Data Ultrasound 6"></textarea>
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <label for="us7"><strong>Data Ultrasound 7</strong></label>
-                                                                            </div>
-                                                                            <div class="col mb-3">
-                                                                                <textarea name="us7" class="form-control" id="edit-us7" rows="5" placeholder="Data Ultrasound 7"></textarea>
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <label for="us8"><strong>Data Ultrasound 8</strong></label>
-                                                                            </div>
-                                                                            <div class="col mb-3">
-                                                                                <textarea name="us8" class="form-control" id="edit-us8" rows="5" placeholder="Data Ultrasound 8"></textarea>
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <label for="us9"><strong>Data Ultrasound 9</strong></label>
-                                                                            </div>
-                                                                            <div class="col mb-3">
-                                                                                <textarea name="us9" class="form-control" id="edit-us9" rows="5" placeholder="Data Ultrasound 9"></textarea>
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <label for="us10"><strong>Data Ultrasound 10</strong></label>
-                                                                            </div>
-                                                                            <div class="col mb-3">
-                                                                                <textarea name="us10" class="form-control" id="edit-us10" rows="5" placeholder="Data Ultrasound 10"></textarea>
+                                                                                <textarea name="asamred" class="form-control" id="edit-asamred" rows="5" placeholder="Data Red"></textarea>
                                                                             </div>
                                                                         </div>
-
-
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Batal</span>
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Simpan</span>
+                                                                </button>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-footer d-flex justify-content-between">
-                                                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                                <i class="bx bx-x d-block d-sm-none"></i>
-                                                                <span class="d-none d-sm-block">Batal</span>
-                                                            </button>
-                                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-                                                                <i class="bx bx-check d-block d-sm-none"></i>
-                                                                <span class="d-none d-sm-block">Simpan</span>
-                                                            </button>
-                                                            </form>
-                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                            <!-- Table untuk Deteksi Kolesterol -->
+                                            <div id="kolesterolFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Deteksi Kolesterol</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Tanggal Update</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($kolesterol as $k) : ?>
+                                                                <?php if (!empty($k->ins_time) || !empty($k->upd_time)) : ?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($k->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($k->upd_time) ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-primary border-0 view-kolesterol-btn" data-bs-toggle="modal" data-bs-target="#kolesterolModal" data-id="<?= $k->id ?>">
+                                                                                <i class="fas fa-eye"></i> Lihat
+                                                                            </button>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-kolesterol-btn" data-bs-toggle="modal" data-bs-target="#kolesterolEditModal" data-id="<?= $k->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-suntik-btn" href="<?= site_url('pasien/delete_kolesterol/' . $k->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Detail Modal kolesterol -->
+                                            <div class="modal fade" id="kolesterolModal" tabindex="-1" role="dialog" aria-labelledby="kolesterolModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="kolesterolModalTitle">Detail Deteksi Kolesterol</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                    <div id="kolesterolFields">
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_violet"><strong>Data Violet</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_violet" rows="5" placeholder="Data Violet" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_blue"><strong>Data Blue</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_blue" rows="5" placeholder="Data Blue" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_green"><strong>Data Green</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_green" rows="5" placeholder="Data Green" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_yellow"><strong>Data Yellow</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_yellow" rows="5" placeholder="Data Yellow" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_orange"><strong>Data Orange</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_orange" rows="5" placeholder="Data Orange" readonly></textarea>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="kolesterol_red"><strong>Data Red</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="kolesterol_red" rows="5" placeholder="Data Red" readonly></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <!-- Edit Modal Deteksi Kolesterol -->
+                                            <div class="modal fade" id="kolesterolEditModal" tabindex="-1" role="dialog" aria-labelledby="kolesterolEditModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="kolesterolEditModalTitle">Edit Deteksi Kolesterol</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="" id="editKolesterolForm" action="<?= base_url('pasien/update_kolesterol') ?>" method="POST">
+                                                                <div class="form-body">
+                                                                    <div class="row">
+                                                                        <div id="kolesterolFields">
+                                                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                                                <button type="button" id="kolesterolSamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="violet"><strong>Data Violet</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolviolet" class="form-control" id="edit-kolesterolviolet" rows="5" placeholder="Data Violet"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="blue"><strong>Data Blue</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolblue" class="form-control" id="edit-kolesterolblue" rows="5" placeholder="Data Blue"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="green"><strong>Data Green</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolgreen" class="form-control" id="edit-kolesterolgreen" rows="5" placeholder="Data Green"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="yellow"><strong>Data Yellow</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolyellow" class="form-control" id="edit-kolesterolyellow" rows="5" placeholder="Data Yellow"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="orange"><strong>Data Orange</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolorange" class="form-control" id="edit-kolesterolorange" rows="5" placeholder="Data Orange"></textarea>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="red"><strong>Data Red</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3">
+                                                                                <textarea name="kolesterolred" class="form-control" id="edit-kolesterolred" rows="5" placeholder="Data Red"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Batal</span>
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Simpan</span>
+                                                                </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             <!-- Table untuk Super Bright -->
                                             <div id="superBrightFields" style="display: none;">
@@ -1614,7 +1738,8 @@
     document.getElementById('basicSelect').addEventListener('change', function() {
         var alat = this.value;
         document.getElementById('suntikFields').style.display = alat === 'suntik' ? 'block' : 'none';
-        document.getElementById('ultraSoundFields').style.display = alat === 'ultraSound' ? 'block' : 'none';
+        document.getElementById('asamFields').style.display = alat === 'asamUrat' ? 'block' : 'none';
+        document.getElementById('kolesterolFields').style.display = alat === 'kolesterol' ? 'block' : 'none';
         document.getElementById('superBrightFields').style.display = alat === 'superBright' ? 'block' : 'none';
         document.getElementById('magnetikFields').style.display = alat === 'magnetik' ? 'block' : 'none';
     });
@@ -1676,28 +1801,24 @@
         });
     });
 
-    // Ultrasound
+    // Deteksi Asam Urat
     $(document).ready(function() {
-        $('.view-ultrasound-btn').on('click', function() {
+        $('.view-asam-btn').on('click', function() {
             var id = $(this).data('id');
             $.ajax({
-                url: '<?= base_url('Pasien/get_ultrasound/') ?>' + id,
+                url: '<?= base_url('Pasien/get_asam_urat/') ?>' + id,
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
                     if (data) {
-                        $('#us1').val(data.us1);
-                        $('#us2').val(data.us2);
-                        $('#us3').val(data.us3);
-                        $('#us4').val(data.us4);
-                        $('#us5').val(data.us5);
-                        $('#us6').val(data.us6);
-                        $('#us7').val(data.us7);
-                        $('#us8').val(data.us8);
-                        $('#us9').val(data.us9);
-                        $('#us10').val(data.us10);
-                        $('#ultraSoundModal').modal('show');
+                        $('#asam_violet').val(data.violet);
+                        $('#asam_blue').val(data.blue);
+                        $('#asam_green').val(data.green);
+                        $('#asam_yellow').val(data.yellow);
+                        $('#asam_orange').val(data.orange);
+                        $('#asam_red').val(data.red);
+                        $('#asamModal').modal('show');
                     } else {
                         console.log('Data not found');
                     }
@@ -1709,19 +1830,19 @@
         });
     });
 
-    // Edit Ultrasound
+    // Edit Deteksi Asam Urat
     $(document).ready(function() {
-        $('.edit-ultrasound-btn').on('click', function() {
+        $('.edit-asam-btn').on('click', function() {
             var id = $(this).data('id');
             $.ajax({
-                url: '<?= base_url('Pasien/get_ultrasound/') ?>' + id,
+                url: '<?= base_url('Pasien/get_asam_urat/') ?>' + id,
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
                     if (data) {
-                        $('#editUltrasoundForm').attr('action', '<?= base_url('Pasien/update_ultrasound/') ?>' + id);
-                        $('#ultraSoundEditModal').modal('show');
+                        $('#editAsamForm').attr('action', '<?= base_url('Pasien/update_asam_urat/') ?>' + id);
+                        $('#asamEditModal').modal('show');
                     } else {
                         console.log('Data not found');
                     }
@@ -1732,7 +1853,7 @@
             });
         });
 
-        $('#editUltrasoundForm').on('submit', function(e) {
+        $('#editAsamForm').on('submit', function(e) {
             e.preventDefault(); // Mencegah submit default
 
             var formData = $(this).serialize();
@@ -1746,7 +1867,86 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         alert(response.message);
-                        $('#ultraSoundEditModal').modal('hide');
+                        $('#asamEditModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                }
+            });
+        });
+    });
+
+    // Deteksi Kolesterol
+    $(document).ready(function() {
+        $('.view-kolesterol-btn').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('Pasien/get_kolesterol/') ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data) {
+                        $('#kolesterol_violet').val(data.violet);
+                        $('#kolesterol_blue').val(data.blue);
+                        $('#kolesterol_green').val(data.green);
+                        $('#kolesterol_yellow').val(data.yellow);
+                        $('#kolesterol_orange').val(data.orange);
+                        $('#kolesterol_red').val(data.red);
+                        $('#kolesterolModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+        });
+    });
+
+    // Edit Deteksi Kolesterol
+    $(document).ready(function() {
+        $('.edit-kolesterol-btn').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('Pasien/get_kolesterol/') ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data) {
+                        $('#editKolesterolForm').attr('action', '<?= base_url('Pasien/update_kolesterol/') ?>' + id);
+                        $('#kolesterolEditModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+        });
+
+        $('#editKolesterolForm').on('submit', function(e) {
+            e.preventDefault(); // Mencegah submit default
+
+            var formData = $(this).serialize();
+            var actionUrl = $(this).attr('action');
+
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        $('#kolesterolEditModal').modal('hide');
                         location.reload();
                     } else {
                         alert(response.message);
@@ -2064,19 +2264,20 @@
     });
 
     $(document).ready(function() {
-        $('#ultraSoundSamBtn1').on('click', function() {
+        $('#asamSamBtn').on('click', function() {
             var id = 1; // Ambil ID dari hidden input
             $.ajax({
-                url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
+                url: '<?= base_url('pasien/get_asam_urat_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     if (data) {
-                        $('#edit-us1').val(data.us1);
-                        $('#edit-us2').val(data.us2);
-                        $('#edit-us3').val(data.us3);
-                        $('#edit-us4').val(data.us4);
-                        $('#edit-us5').val(data.us5);
+                        $('#edit-asamviolet').val(data.violet);
+                        $('#edit-asamblue').val(data.blue);
+                        $('#edit-asamgreen').val(data.green);
+                        $('#edit-asamyellow').val(data.yellow);
+                        $('#edit-asamorange').val(data.orange);
+                        $('#edit-asamred').val(data.red);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -2087,19 +2288,20 @@
     });
 
     $(document).ready(function() {
-        $('#ultraSoundSamBtn2').on('click', function() {
+        $('#kolesterolSamBtn').on('click', function() {
             var id = 1; // Ambil ID dari hidden input
             $.ajax({
-                url: '<?= base_url('pasien/get_ultrasound_data/') ?>' + id,
+                url: '<?= base_url('pasien/get_kolesterol_data/') ?>' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     if (data) {
-                        $('#edit-us6').val(data.us1);
-                        $('#edit-us7').val(data.us2);
-                        $('#edit-us8').val(data.us3);
-                        $('#edit-us9').val(data.us4);
-                        $('#edit-us10').val(data.us5);
+                        $('#edit-kolesterolviolet').val(data.violet);
+                        $('#edit-kolesterolblue').val(data.blue);
+                        $('#edit-kolesterolgreen').val(data.green);
+                        $('#edit-kolesterolyellow').val(data.yellow);
+                        $('#edit-kolesterolorange').val(data.orange);
+                        $('#edit-kolesterolred').val(data.red);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -2214,5 +2416,99 @@ function formatDate($datetime)
     $year = $date->format('Y');
 
     return "{$day} {$month} {$year}";
+}
+?>
+
+<?php
+function getGlukosaKeterangan($glukosa) {
+    if ($glukosa < 70) {
+        return "Rendah";
+    } elseif ($glukosa >= 70 && $glukosa <= 140) {
+        return "Normal";
+    } elseif ($glukosa > 140 && $glukosa <= 200) {
+        return "Tinggi (Waspada)";
+    } else {
+        return "Sangat Tinggi (Berisiko)";
+    }
+}
+
+function getGlukosaColor($glukosa) {
+    if ($glukosa < 70) {
+        return "blue";
+    } elseif ($glukosa >= 70 && $glukosa <= 140) {
+        return "green";
+    } elseif ($glukosa > 140 && $glukosa <= 200) {
+        return "orange";
+    } else {
+        return "red";
+    }
+}
+
+function getSpo2Keterangan($spo2) {
+    if ($spo2 >= 95) {
+        return "Normal";
+    } elseif ($spo2 >= 90 && $spo2 < 95) {
+        return "Hipoksemia Ringan";
+    } elseif ($spo2 >= 80 && $spo2 < 90) {
+        return "Hipoksemia Sedang";
+    } else {
+        return "Hipoksemia Berat";
+    }
+}
+
+function getSpo2Color($spo2) {
+    if ($spo2 >= 95) {
+        return "green";
+    } elseif ($spo2 >= 90 && $spo2 < 95) {
+        return "orange";
+    } elseif ($spo2 >= 80 && $spo2 < 90) {
+        return "red";
+    } else {
+        return "darkred";
+    }
+}
+
+function getKolesterolKeterangan($kolesterol) {
+    if ($kolesterol < 120) {
+        return "Sangat Rendah (Berisiko)";
+    } elseif ($kolesterol >= 120 && $kolesterol < 200) {
+        return "Normal";
+    } elseif ($kolesterol >= 200 && $kolesterol < 240) {
+        return "Borderline (Waspada)";
+    } else {
+        return "Tinggi (Berisiko)";
+    }
+}
+
+function getKolesterolColor($kolesterol) {
+    if ($kolesterol < 120) {
+        return "red";
+    } elseif ($kolesterol >= 120 && $kolesterol < 200) {
+        return "green";
+    } elseif ($kolesterol >= 200 && $kolesterol < 240) {
+        return "orange";
+    } else {
+        return "red";
+    }
+}
+
+function getAsamUratKeterangan($asam_urat) {
+    if ($asam_urat < 3.5) {
+        return "Rendah";
+    } elseif ($asam_urat >= 3.5 && $asam_urat <= 7.2) {
+        return "Normal";
+    } else {
+        return "Tinggi";
+    }
+}
+
+function getAsamUratColor($asam_urat) {
+    if ($asam_urat < 3.5) {
+        return "blue";
+    } elseif ($asam_urat >= 3.5 && $asam_urat <= 7.2) {
+        return "green";
+    } else {
+        return "red";
+    }
 }
 ?>

@@ -2,7 +2,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Tambah Penduduk</h3>
+                <h3>Form Daftar Responden</h3>
                 <p class="text-subtitle text-muted">Silahkan isi form di bawah sesuai dengan KTP</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -31,7 +31,7 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div>
-                                            <h5 class="h5 mb-4">Informasi Penduduk</h5>
+                                            <h5 class="h5 mb-4">Informasi Responden</h5>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="nik">NIK</label>
@@ -48,12 +48,12 @@
                                             <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama Lengkap" data-parsley-required="true" data-parsley-error-message="Nama Lengkap wajib diisi!">
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <!--<div class="col-md-4">
                                             <label for="email">Email</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="email" id="email" class="form-control" name="email" placeholder="Email">
-                                        </div>
+                                        </div>-->
 
                                         <div class="col-md-4">
                                             <label for="no_hp">Nomor HP</label>
@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="tempat_lahir">Umur</label>
+                                            <label for="umur">Umur</label>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="umur" class="form-control" name="umur" placeholder="Umur" readonly>
@@ -114,7 +114,7 @@
                                             <textarea id="alamat" class="form-control" name="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <!--<div class="col-md-4">
                                             <label for="rt">RT</label>
                                         </div>
                                         <div class="col-md-8 form-group">
@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi">
-                                        </div>
+                                        </div>-->
 
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" id="success" class="btn btn-primary me-1 mb-1 px-5">Simpan</button>

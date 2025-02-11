@@ -48,6 +48,18 @@ class Mod_darah extends CI_Model
         return $this->db->affected_rows() > 0;
     }
 
+    public function add_asam_urat($data)
+    {
+        $this->db->insert('asam_urat', $data);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function add_kolesterol($data)
+    {
+        $this->db->insert('kolesterol', $data);
+        return $this->db->affected_rows() > 0;
+    }
+
     public function add_superbright($data)
     {
         $this->db->insert('superbright', $data);

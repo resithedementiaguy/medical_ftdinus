@@ -51,27 +51,41 @@ class Penduduk extends CI_Controller
             redirect('penduduk');
         } else {
             // Collect form data
+            $nik = $this->input->post('nik');
+            $nama = $this->input->post('nama');
             $data = array(
-                'nik' => $this->input->post('nik'),
-                'nama' => $this->input->post('nama'),
-                'email' => $this->input->post('email'),
-                'tempat_lahir' => $this->input->post('tempat_lahir'),
+                'nik' => $nik,
+                'nama' => $nama,
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                'pembuat' => $this->input->post('pembuat'),
+                'umur' => $this->input->post('umur'),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+                //'email' => $this->input->post('email'),
+                'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'no_hp' => $this->input->post('no_hp'),
-                'alamat' => $this->input->post('alamat'),
-                'rt' => $this->input->post('rt'),
+                'alamat' => $this->input->post('alamat')
+                /*'rt' => $this->input->post('rt'),
                 'rw' => $this->input->post('rw'),
                 'kelurahan' => $this->input->post('kelurahan'),
                 'kecamatan' => $this->input->post('kecamatan'),
-                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                 'kota' => $this->input->post('kota'),
-                'provinsi' => $this->input->post('provinsi'),
-                'pembuat' => $this->input->post('pembuat'),
-                'umur' => $this->input->post('umur')
+                'provinsi' => $this->input->post('provinsi'),*/
             );
 
             // Add the new resident to the database
             $this->Mod_penduduk->add_penduduk($data);
+
+            date_default_timezone_set('Asia/Jakarta');
+            $tgl_periksa = date('Y-m-d', time());
+
+            $akm_manual = array(
+                'tgl_periksa' => $tgl_periksa,
+                'nik' => $nik,
+                'nama' => $nama
+            );
+
+            $this->Mod_penduduk->add_data_manual($akm_manual);
+            $this->Mod_penduduk->add_data_akm($akm_manual);
 
             // Ambil subject dan body dari database
             $email_data = $this->Mod_email->get_email(1);
@@ -97,15 +111,15 @@ class Penduduk extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
         $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        // $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('no_hp', 'Nomor HP', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('rt', 'RT', 'required');
-        $this->form_validation->set_rules('rw', 'RW', 'required');
-        $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
-        $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
-        $this->form_validation->set_rules('kota', 'Kota', 'required');
-        $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
+        // $this->form_validation->set_rules('rt', 'RT', 'required');
+        // $this->form_validation->set_rules('rw', 'RW', 'required');
+        // $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
+        // $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
+        // $this->form_validation->set_rules('kota', 'Kota', 'required');
+        // $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             // Jika validasi gagal, kembalikan ke halaman edit dengan pesan kesalahan
@@ -113,20 +127,20 @@ class Penduduk extends CI_Controller
         } else {
             // Jika validasi berhasil, lakukan update data
             $data = array(
-                'nik' => $this->input->post('nik'),
+                // 'nik' => $this->input->post('nik'),
                 'nama' => $this->input->post('nama'),
                 'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir'),
-                'email' => $this->input->post('email'),
+                // 'email' => $this->input->post('email'),
                 'no_hp' => $this->input->post('no_hp'),
                 'alamat' => $this->input->post('alamat'),
-                'rt' => $this->input->post('rt'),
-                'rw' => $this->input->post('rw'),
-                'kelurahan' => $this->input->post('kelurahan'),
-                'kecamatan' => $this->input->post('kecamatan'),
+                // 'rt' => $this->input->post('rt'),
+                // 'rw' => $this->input->post('rw'),
+                // 'kelurahan' => $this->input->post('kelurahan'),
+                // 'kecamatan' => $this->input->post('kecamatan'),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                'kota' => $this->input->post('kota'),
-                'provinsi' => $this->input->post('provinsi'),
+                // 'kota' => $this->input->post('kota'),
+                // 'provinsi' => $this->input->post('provinsi'),
                 'umur' => $this->input->post('umur')
             );
             $this->Mod_penduduk->update_penduduk($id, $data);

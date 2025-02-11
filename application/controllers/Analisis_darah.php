@@ -8,6 +8,7 @@ class Analisis_darah extends CI_Controller
         parent::__construct();
         $this->load->model('Mod_darah');
         $this->load->model('Ultrasound_model');
+        $this->load->model('Auk_model');
         $this->load->model('Superbright_model');
         $this->load->model('Magnetik_model');
         $this->load->library('session');
@@ -55,21 +56,23 @@ class Analisis_darah extends CI_Controller
 
         if ($alat == 'suntik') {
             $this->form_validation->set_rules('glukosa', 'Glukosa', 'required');
-            $this->form_validation->set_rules('hb', 'HB', 'required');
             $this->form_validation->set_rules('spo2', 'SPO2', 'required');
             $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
             $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
-        } elseif ($alat == 'ultraSound') {
-            $this->form_validation->set_rules('us1', 'US1', 'required');
-            $this->form_validation->set_rules('us2', 'US2', 'required');
-            $this->form_validation->set_rules('us3', 'US3', 'required');
-            $this->form_validation->set_rules('us4', 'US4', 'required');
-            $this->form_validation->set_rules('us5', 'US5', 'required');
-            $this->form_validation->set_rules('us6', 'US6', 'required');
-            $this->form_validation->set_rules('us7', 'US7', 'required');
-            $this->form_validation->set_rules('us8', 'US8', 'required');
-            $this->form_validation->set_rules('us9', 'US9', 'required');
-            $this->form_validation->set_rules('us10', 'US10', 'required');
+        } elseif ($alat == 'asamUrat') {
+            $this->form_validation->set_rules('asam_violet', 'Violet', 'required');
+            $this->form_validation->set_rules('asam_blue', 'Blue', 'required');
+            $this->form_validation->set_rules('asam_green', 'Green', 'required');
+            $this->form_validation->set_rules('asam_yellow', 'Yellow', 'required');
+            $this->form_validation->set_rules('asam_orange', 'Orange', 'required');
+            $this->form_validation->set_rules('asam_red', 'Red', 'required');
+        } elseif ($alat == 'kolesterol') {
+            $this->form_validation->set_rules('kolesterol_violet', 'Violet', 'required');
+            $this->form_validation->set_rules('kolesterol_blue', 'Blue', 'required');
+            $this->form_validation->set_rules('kolesterol_green', 'Green', 'required');
+            $this->form_validation->set_rules('kolesterol_yellow', 'Yellow', 'required');
+            $this->form_validation->set_rules('kolesterol_orange', 'Orange', 'required');
+            $this->form_validation->set_rules('kolesterol_red', 'Red', 'required');
         } elseif ($alat == 'superBright') {
             $this->form_validation->set_rules('sb1', 'SB1', 'required');
             $this->form_validation->set_rules('sb2', 'SB2', 'required');
@@ -82,25 +85,67 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('sb9', 'SB9', 'required');
             $this->form_validation->set_rules('sb10', 'SB10', 'required');
         } elseif ($alat == 'magnetik') {
+            $this->form_validation->set_rules('jtg_mag1', 'JTG MAG1', 'required');
+            $this->form_validation->set_rules('jtg_mag2', 'JTG MAG2', 'required');
+            $this->form_validation->set_rules('jtg_mag3', 'JTG MAG3', 'required');
+            $this->form_validation->set_rules('jtg_mag4', 'JTG MAG4', 'required');
+            $this->form_validation->set_rules('jtg_mag5', 'JTG MAG5', 'required');
+            $this->form_validation->set_rules('jtg_mag6', 'JTG MAG6', 'required');
+            $this->form_validation->set_rules('jtg_mag7', 'JTG MAG7', 'required');
+            $this->form_validation->set_rules('jtg_mag8', 'JTG MAG8', 'required');
+            $this->form_validation->set_rules('jtg_mag9', 'JTG MAG9', 'required');
+            $this->form_validation->set_rules('jtg_mag10', 'JTG MAG10', 'required');
+            $this->form_validation->set_rules('srf_mag1', 'SRF MAG1', 'required');
+            $this->form_validation->set_rules('srf_mag2', 'SRF MAG2', 'required');
+            $this->form_validation->set_rules('srf_mag3', 'SRF MAG3', 'required');
+            $this->form_validation->set_rules('srf_mag4', 'SRF MAG4', 'required');
+            $this->form_validation->set_rules('srf_mag5', 'SRF MAG5', 'required');
+            $this->form_validation->set_rules('srf_mag6', 'SRF MAG6', 'required');
+            $this->form_validation->set_rules('srf_mag7', 'SRF MAG7', 'required');
+            $this->form_validation->set_rules('srf_mag8', 'SRF MAG8', 'required');
+            $this->form_validation->set_rules('srf_mag9', 'SRF MAG9', 'required');
+            $this->form_validation->set_rules('srf_mag10', 'SRF MAG10', 'required');
+            $this->form_validation->set_rules('drh_mag1', 'DRH MAG1', 'required');
+            $this->form_validation->set_rules('drh_mag2', 'DRH MAG2', 'required');
+            $this->form_validation->set_rules('drh_mag3', 'DRH MAG3', 'required');
+            $this->form_validation->set_rules('drh_mag4', 'DRH MAG4', 'required');
+            $this->form_validation->set_rules('drh_mag5', 'DRH MAG5', 'required');
+            $this->form_validation->set_rules('drh_mag6', 'DRH MAG6', 'required');
+            $this->form_validation->set_rules('drh_mag7', 'DRH MAG7', 'required');
+            $this->form_validation->set_rules('drh_mag8', 'DRH MAG8', 'required');
+            $this->form_validation->set_rules('drh_mag9', 'DRH MAG9', 'required');
+            $this->form_validation->set_rules('drh_mag10', 'DRH MAG10', 'required');
+            $this->form_validation->set_rules('sel_mag1', 'SEL MAG1', 'required');
+            $this->form_validation->set_rules('sel_mag2', 'SEL MAG2', 'required');
+            $this->form_validation->set_rules('sel_mag3', 'SEL MAG3', 'required');
+            $this->form_validation->set_rules('sel_mag4', 'SEL MAG4', 'required');
+            $this->form_validation->set_rules('sel_mag5', 'SEL MAG5', 'required');
+            $this->form_validation->set_rules('sel_mag6', 'SEL MAG6', 'required');
+            $this->form_validation->set_rules('sel_mag7', 'SEL MAG7', 'required');
+            $this->form_validation->set_rules('sel_mag8', 'SEL MAG8', 'required');
+            $this->form_validation->set_rules('sel_mag9', 'SEL MAG9', 'required');
+            $this->form_validation->set_rules('sel_mag10', 'SEL MAG10', 'required');
+            $this->form_validation->set_rules('tgi_mag1', 'TGI MAG1', 'required');
+            $this->form_validation->set_rules('tgi_mag2', 'TGI MAG2', 'required');
+            $this->form_validation->set_rules('tgi_mag3', 'TGI MAG3', 'required');
+            $this->form_validation->set_rules('tgi_mag4', 'TGI MAG4', 'required');
+            $this->form_validation->set_rules('tgi_mag5', 'TGI MAG5', 'required');
+            $this->form_validation->set_rules('tgi_mag6', 'TGI MAG6', 'required');
+            $this->form_validation->set_rules('tgi_mag7', 'TGI MAG7', 'required');
+            $this->form_validation->set_rules('tgi_mag8', 'TGI MAG8', 'required');
+            $this->form_validation->set_rules('tgi_mag9', 'TGI MAG9', 'required');
         }
 
         if ($this->form_validation->run() === FALSE) {
+            $this->session->set_flashdata('validation_errors', validation_errors());
             $this->index();
         } else {
             // Check if we already have a pasien ID in session
-            if (!$this->session->userdata('pasien_id')) {
-                // Insert the pasien data into the pasien table and get the new ID
-                $id_pasien = $this->Mod_darah->add_pasien([
-                    'nik' => $nik,
-                    'tinggi' => $tinggi,
-                    'berat' => $berat,
-                ]);
-                // Save the pasien ID in session
-                $this->session->set_userdata('pasien_id', $id_pasien);
-            } else {
-                // Use the pasien ID from session
-                $id_pasien = $this->session->userdata('pasien_id');
-            }
+            $id_pasien = $this->Mod_darah->add_pasien([
+                'nik' => $nik,
+                'tinggi' => $tinggi,
+                'berat' => $berat,
+            ]);
 
             date_default_timezone_set('Asia/Jakarta');
             $ins_time = date('Y-m-d H:i:s', time());
@@ -113,26 +158,31 @@ class Analisis_darah extends CI_Controller
             if ($alat == 'suntik') {
                 $data += array(
                     'glukosa' => $this->input->post('glukosa'),
-                    'hb' => $this->input->post('hb'),
                     'spo2' => $this->input->post('spo2'),
                     'kolesterol' => $this->input->post('kolesterol'),
                     'asam_urat' => $this->input->post('asam_urat')
                 );
                 $this->Mod_darah->add_suntik($data);
-            } elseif ($alat == 'ultraSound') {
+            } elseif ($alat == 'asamUrat') {
                 $data += array(
-                    'us1' => $this->input->post('us1'),
-                    'us2' => $this->input->post('us2'),
-                    'us3' => $this->input->post('us3'),
-                    'us4' => $this->input->post('us4'),
-                    'us5' => $this->input->post('us5'),
-                    'us6' => $this->input->post('us6'),
-                    'us7' => $this->input->post('us7'),
-                    'us8' => $this->input->post('us8'),
-                    'us9' => $this->input->post('us9'),
-                    'us10' => $this->input->post('us10')
+                    'violet' => $this->input->post('asam_violet'),
+                    'blue' => $this->input->post('asam_blue'),
+                    'green' => $this->input->post('asam_green'),
+                    'yellow' => $this->input->post('asam_yellow'),
+                    'orange' => $this->input->post('asam_orange'),
+                    'red' => $this->input->post('asam_red')
                 );
-                $this->Mod_darah->add_ultrasound($data);
+                $this->Mod_darah->add_asam_urat($data);
+            } elseif ($alat == 'kolesterol') {
+                $data += array(
+                    'violet' => $this->input->post('kolesterol_violet'),
+                    'blue' => $this->input->post('kolesterol_blue'),
+                    'green' => $this->input->post('kolesterol_green'),
+                    'yellow' => $this->input->post('kolesterol_yellow'),
+                    'orange' => $this->input->post('kolesterol_orange'),
+                    'red' => $this->input->post('kolesterol_red')
+                );
+                $this->Mod_darah->add_kolesterol($data);
             } elseif ($alat == 'superBright') {
                 $data += array(
                     'sb1' => $this->input->post('sb1'),
@@ -208,6 +258,7 @@ class Analisis_darah extends CI_Controller
                 $this->session->unset_userdata('pasien_id');
             }
 
+            $this->session->set_flashdata('success', true);
             redirect('analisis_darah');
         }
     }
@@ -225,6 +276,24 @@ class Analisis_darah extends CI_Controller
 
         // Kirimkan data sebagai JSON response
         echo json_encode($data_us);
+    }
+
+    public function get_asam_urat_data($id)
+    {
+        // Ambil data asam berdasarkan ID
+        $data_asam = $this->Auk_model->get_asamurat($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_asam);
+    }
+
+    public function get_kolesterol_data($id)
+    {
+        // Ambil data kolesterol berdasarkan ID
+        $data_kolesterol = $this->Auk_model->get_kolesterol($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_kolesterol);
     }
 
     public function get_superbright_data($id)
