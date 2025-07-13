@@ -633,7 +633,6 @@
                                                             <tr>
                                                                 <th>Tanggal Periksa</th>
                                                                 <th>Tanggal Update</th>
-                                                                <th>Gula Darah</th>
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
