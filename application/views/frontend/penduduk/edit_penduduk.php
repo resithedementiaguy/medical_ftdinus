@@ -2,7 +2,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Edit Penduduk</h3>
+                <h3>Form Edit Responden</h3>
                 <p class="text-subtitle text-muted">Silahkan untuk edit form di bawah sesuai dengan KTP</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -10,7 +10,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?= base_url('pasien/detail/' . $penduduk['nik']) ?>">Pasien</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Penduduk</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Responden</li>
                     </ol>
                 </nav>
             </div>

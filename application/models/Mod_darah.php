@@ -60,6 +60,12 @@ class Mod_darah extends CI_Model
         return $this->db->affected_rows() > 0;
     }
 
+    public function add_glukosa($data)
+    {
+        $this->db->insert('glukosa', $data);
+        return $this->db->affected_rows() > 0;
+    }
+
     public function add_superbright($data)
     {
         $this->db->insert('superbright', $data);

@@ -9,6 +9,7 @@ class Analisis_darah extends CI_Controller
         $this->load->model('Mod_darah');
         $this->load->model('Ultrasound_model');
         $this->load->model('Auk_model');
+        $this->load->model('Glukosa_model');
         $this->load->model('Superbright_model');
         $this->load->model('Magnetik_model');
         $this->load->library('session');
@@ -60,6 +61,7 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('kolesterol', 'Kolesterol', 'required');
             $this->form_validation->set_rules('asam_urat', 'Asam Urat', 'required');
         } elseif ($alat == 'asamUrat') {
+            $this->form_validation->set_rules('asam_manual', 'Asam Urat Manual', 'required');
             $this->form_validation->set_rules('asam_violet', 'Violet', 'required');
             $this->form_validation->set_rules('asam_blue', 'Blue', 'required');
             $this->form_validation->set_rules('asam_green', 'Green', 'required');
@@ -67,12 +69,15 @@ class Analisis_darah extends CI_Controller
             $this->form_validation->set_rules('asam_orange', 'Orange', 'required');
             $this->form_validation->set_rules('asam_red', 'Red', 'required');
         } elseif ($alat == 'kolesterol') {
+            $this->form_validation->set_rules('kolesterol_manual', 'Kolesterol Manual', 'required');
             $this->form_validation->set_rules('kolesterol_violet', 'Violet', 'required');
             $this->form_validation->set_rules('kolesterol_blue', 'Blue', 'required');
             $this->form_validation->set_rules('kolesterol_green', 'Green', 'required');
             $this->form_validation->set_rules('kolesterol_yellow', 'Yellow', 'required');
             $this->form_validation->set_rules('kolesterol_orange', 'Orange', 'required');
             $this->form_validation->set_rules('kolesterol_red', 'Red', 'required');
+        } elseif ($alat == 'glukosa') {
+            $this->form_validation->set_rules('gula_darah', 'Gula Darah', 'required');
         } elseif ($alat == 'superBright') {
             $this->form_validation->set_rules('sb1', 'SB1', 'required');
             $this->form_validation->set_rules('sb2', 'SB2', 'required');
@@ -165,6 +170,7 @@ class Analisis_darah extends CI_Controller
                 $this->Mod_darah->add_suntik($data);
             } elseif ($alat == 'asamUrat') {
                 $data += array(
+                    'manual' => $this->input->post('asam_manual'),
                     'violet' => $this->input->post('asam_violet'),
                     'blue' => $this->input->post('asam_blue'),
                     'green' => $this->input->post('asam_green'),
@@ -175,6 +181,7 @@ class Analisis_darah extends CI_Controller
                 $this->Mod_darah->add_asam_urat($data);
             } elseif ($alat == 'kolesterol') {
                 $data += array(
+                    'manual' => $this->input->post('kolesterol_manual'),
                     'violet' => $this->input->post('kolesterol_violet'),
                     'blue' => $this->input->post('kolesterol_blue'),
                     'green' => $this->input->post('kolesterol_green'),
@@ -183,6 +190,11 @@ class Analisis_darah extends CI_Controller
                     'red' => $this->input->post('kolesterol_red')
                 );
                 $this->Mod_darah->add_kolesterol($data);
+            } elseif ($alat == 'glukosa') {
+                $data += array(
+                    'nilai_glukosa' => $this->input->post('gula_darah')
+                );
+                $this->Mod_darah->add_glukosa($data);
             } elseif ($alat == 'superBright') {
                 $data += array(
                     'sb1' => $this->input->post('sb1'),
@@ -294,6 +306,15 @@ class Analisis_darah extends CI_Controller
 
         // Kirimkan data sebagai JSON response
         echo json_encode($data_kolesterol);
+    }
+
+    public function get_glukosa_data($id)
+    {
+        // Ambil data glukosa berdasarkan ID
+        $data_glukosa = $this->Glukosa_model->get_glukosa($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_glukosa);
     }
 
     public function get_superbright_data($id)

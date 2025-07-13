@@ -10,6 +10,7 @@ class Pasien extends CI_Controller
         $this->load->model('Mod_pasien');
         $this->load->model('Ultrasound_model');
         $this->load->model('Auk_model');
+        $this->load->model('Glukosa_model');
         $this->load->model('Superbright_model');
         $this->load->model('Magnetik_model');
         $this->load->library('session'); // Load session library
@@ -28,7 +29,6 @@ class Pasien extends CI_Controller
     public function index()
     {
         $data['pasien_list'] = $this->Mod_pasien->get_all_pasien();
-        $data['total_recap'] = $this->Mod_pasien->get_total_recap();
         $this->load->view('partials/header');
         $this->load->view('frontend/pasien/view_pasien', $data);
         $this->load->view('partials/footer');
@@ -43,6 +43,7 @@ class Pasien extends CI_Controller
         $data['suntik'] = $this->Mod_pasien->get_suntik($nik);
         $data['asam_urat'] = $this->Mod_pasien->get_asam_urat($nik);
         $data['kolesterol'] = $this->Mod_pasien->get_kolesterol($nik);
+        $data['glukosa'] = $this->Mod_pasien->get_glukosa($nik);
         $data['superbright'] = $this->Mod_pasien->get_superbright($nik);
         $data['magnetik'] = $this->Mod_pasien->get_magnetik($nik);
         $data['recap'] = $this->Mod_pasien->get_recap_by_nik($nik);
@@ -94,6 +95,7 @@ class Pasien extends CI_Controller
         $this->load->model('Mod_pasien');
 
         $data = array(
+            'manual' => $this->input->post('asam_manual'), // New field for manual input
             'violet' => $this->input->post('asamviolet'),
             'blue' => $this->input->post('asamblue'),
             'green' => $this->input->post('asamgreen'),
@@ -124,6 +126,7 @@ class Pasien extends CI_Controller
         $this->load->model('Mod_pasien');
 
         $data = array(
+            'manual' => $this->input->post('kolesterol_manual'), // New field for manual input
             'violet' => $this->input->post('kolesterolviolet'),
             'blue' => $this->input->post('kolesterolblue'),
             'green' => $this->input->post('kolesterolgreen'),
@@ -133,6 +136,31 @@ class Pasien extends CI_Controller
         );
 
         $updated = $this->Mod_pasien->update_kolesterol($id, $data);
+
+        if ($updated) {
+            echo json_encode(array('status' => 'success', 'message' => 'Data berhasil diperbarui.'));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Terjadi kesalahan saat memperbarui data.'));
+        }
+    }
+
+    // function glukosa
+    public function get_glukosa($id)
+    {
+        $glukosa = $this->Mod_pasien->get_glukosa_id($id);
+        header('Content-Type: application/json');
+        echo json_encode($glukosa);
+    }
+
+    public function update_glukosa($id)
+    {
+        $this->load->model('Mod_pasien');
+
+        $data = array(
+            'nilai_glukosa' => $this->input->post('gula_darah')
+        );
+
+        $updated = $this->Mod_pasien->update_glukosa($id, $data);
 
         if ($updated) {
             echo json_encode(array('status' => 'success', 'message' => 'Data berhasil diperbarui.'));
@@ -277,6 +305,12 @@ class Pasien extends CI_Controller
         redirect('pasien');
     }
 
+    public function delete_glukosa($id)
+    {
+        $this->Mod_pasien->delete_glukosa($id);
+        redirect('pasien');
+    }
+
     public function delete_superbright($id)
     {
         $this->Mod_pasien->delete_superbright($id);
@@ -315,6 +349,16 @@ class Pasien extends CI_Controller
         // Kirimkan data sebagai JSON response
         echo json_encode($data_kolesterol);
     }
+
+    public function get_glukosa_data($id)
+    {
+        // Ambil data glukosa berdasarkan ID
+        $data_glukosa = $this->Glukosa_model->get_glukosa($id);
+
+        // Kirimkan data sebagai JSON response
+        echo json_encode($data_glukosa);
+    }
+
 
     public function get_superbright_data($id)
     {

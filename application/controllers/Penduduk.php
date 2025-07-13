@@ -78,14 +78,14 @@ class Penduduk extends CI_Controller
             date_default_timezone_set('Asia/Jakarta');
             $tgl_periksa = date('Y-m-d', time());
 
-            $akm_manual = array(
-                'tgl_periksa' => $tgl_periksa,
-                'nik' => $nik,
-                'nama' => $nama
-            );
+            // $akm_manual = array(
+            //     'tgl_periksa' => $tgl_periksa,
+            //     'nik' => $nik,
+            //     'nama' => $nama
+            // );
 
-            $this->Mod_penduduk->add_data_manual($akm_manual);
-            $this->Mod_penduduk->add_data_akm($akm_manual);
+            // $this->Mod_penduduk->add_data_manual($akm_manual);
+            // $this->Mod_penduduk->add_data_akm($akm_manual);
 
             // Ambil subject dan body dari database
             $email_data = $this->Mod_email->get_email(1);
@@ -145,6 +145,127 @@ class Penduduk extends CI_Controller
             );
             $this->Mod_penduduk->update_penduduk($id, $data);
             redirect('pasien');
+        }
+    }
+
+    public function import_data() 
+    {
+        // Initialize variables
+        $url = 'http://103.101.52.65:7021/api/patient/all';
+        $inserted = 0;
+        $skipped = 0;
+        
+        try {
+            // Initialize cURL session
+            $ch = curl_init();
+            
+            // Set curl options
+            curl_setopt_array($ch, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json',
+                    'Content-Type: application/json'
+                ),
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false
+            ));
+            
+            // Execute cURL request
+            $response = curl_exec($ch);
+            
+            // Check for cURL errors
+            if(curl_errno($ch)) {
+                throw new Exception('Curl error: ' . curl_error($ch));
+            }
+            
+            // Get HTTP status code
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if($httpCode !== 200) {
+                throw new Exception('HTTP error: ' . $httpCode);
+            }
+            
+            // Close cURL session
+            curl_close($ch);
+            
+            // Log response for debugging
+            log_message('debug', 'API Response: ' . $response);
+            
+            // Decode JSON response
+            $result = json_decode($response, true);
+            
+            // Check if data exists and has the correct structure
+            if(!$result || !isset($result['data']) || !is_array($result['data'])) {
+                throw new Exception('Invalid data structure received from API. Response: ' . $response);
+            }
+            
+            // Process each record from the data array
+            foreach($result['data'] as $patient) {
+                // Log each patient record for debugging
+                log_message('debug', 'Processing patient: ' . json_encode($patient));
+                
+                // Validate required fields exist
+                if(empty($patient['nik']) || empty($patient['nama_pasien'])) {
+                    log_message('debug', 'Skipping record - missing required fields');
+                    continue;
+                }
+                
+                // Check if NIK already exists
+                $existing = $this->Mod_penduduk->get_nama_by_nik($patient['nik']);
+                
+                if(empty($existing)) {
+                    // Prepare data for insertion
+                    $insert_data = array(
+                        'nik' => $patient['nik'],
+                        'nama' => $patient['nama_pasien'],
+                        'jenis_kelamin' => isset($patient['jenis_kelamin']) ? $patient['jenis_kelamin'] : '',
+                        'tanggal_lahir' => isset($patient['tgl_lahir']) ? date('Y-m-d', strtotime($patient['tgl_lahir'])) : null,
+                        'no_hp' => isset($patient['no_hp']) ? $patient['no_hp'] : '',
+                        'alamat' => isset($patient['alamat']) ? $patient['alamat'] : '',
+                        'kelurahan' => isset($patient['kelurahan']) ? $patient['kelurahan'] : '',
+                        'kecamatan' => isset($patient['kecamatan']) ? $patient['kecamatan'] : '',
+                        'kota' => isset($patient['kabkota']) ? $patient['kabkota'] : '',
+                        'pembuat' => $this->session->userdata('username')
+                    );
+                    
+                    // Log insertion attempt
+                    log_message('debug', 'Attempting to insert: ' . json_encode($insert_data));
+                    
+                    // Insert data
+                    if($this->Mod_penduduk->add_penduduk($insert_data)) {
+                        $inserted++;
+                        log_message('debug', 'Successfully inserted record');
+                    } else {
+                        log_message('error', 'Failed to insert record');
+                    }
+                } else {
+                    $skipped++;
+                    log_message('debug', 'Skipped duplicate NIK: ' . $patient['nik']);
+                }
+            }
+            
+            // Prepare response message
+            $message = "Berhasil mengimpor $inserted data baru. ";
+            if($skipped > 0) {
+                $message .= "$skipped data dilewati karena NIK sudah ada.";
+            }
+            
+            echo json_encode(array(
+                'status' => true,
+                'message' => $message
+            ));
+            
+        } catch(Exception $e) {
+            log_message('error', 'Import Error: ' . $e->getMessage());
+            echo json_encode(array(
+                'status' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ));
         }
     }
 }

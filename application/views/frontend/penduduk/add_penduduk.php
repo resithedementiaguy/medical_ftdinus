@@ -30,8 +30,11 @@
                             <form class="form form-horizontal" id="analisisForm" action="<?= base_url('penduduk/add') ?>" method="POST">
                                 <div class="form-body">
                                     <div class="row">
-                                        <div>
-                                            <h5 class="h5 mb-4">Informasi Responden</h5>
+                                        <div class="h5 mb-4">
+                                            <h5 >Informasi Responden</h5>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" id="import_data" class="btn btn-light-primary me-1 mb-1 px-3">Import Data Responden</button>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="nik">NIK</label>
@@ -237,4 +240,38 @@
 
         document.getElementById('umur').value = age;
     }
+
+    // Add this after your existing scripts
+    $('#import_data').on('click', function() {
+        // Show loading state
+        $(this).prop('disabled', true);
+        $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Importing...');
+
+        $.ajax({
+            url: '<?= base_url('penduduk/import_data') ?>',
+            type: 'POST',
+            success: function(response) {
+                let result = JSON.parse(response);
+                Swal.fire({
+                    title: result.status ? 'Berhasil!' : 'Informasi',
+                    text: result.message,
+                    icon: result.status ? 'success' : 'info',
+                    confirmButtonText: 'Ok'
+                });
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Gagal mengimpor data: ' + error,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            },
+            complete: function() {
+                // Reset button state
+                $('#import_data').prop('disabled', false);
+                $('#import_data').html('Import Data Responden');
+            }
+        });
+    });
 </script>

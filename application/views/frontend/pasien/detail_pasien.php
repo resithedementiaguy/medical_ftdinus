@@ -145,9 +145,9 @@
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="basicSelect" name="alat">
                                                         <option value="" selected hidden>Pilih Alat</option>
-                                                        <option value="suntik">Suntik</option>
                                                         <option value="asamUrat">Deteksi Asam Urat</option>
                                                         <option value="kolesterol">Deteksi Kolesterol</option>
+                                                        <option value="glukosa">Deteksi Gula Darah</option>
                                                         <option value="superBright">Superbright</option>
                                                         <option value="magnetik">Magnetik</option>
                                                     </select>
@@ -285,6 +285,7 @@
                                                             <tr>
                                                                 <th>Tanggal Periksa</th>
                                                                 <th>Tanggal Update</th>
+                                                                <th>Data Manual</th>
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
@@ -294,6 +295,7 @@
                                                                     <tr>
                                                                         <td><?= formatDateTime($au->ins_time) ?></td>
                                                                         <td><?= formatDateTime($au->upd_time) ?></td>
+                                                                        <td><?= $au->manual ?></td>
                                                                         <td>
                                                                             <button type="button" class="badge bg-primary border-0 view-asam-btn" data-bs-toggle="modal" data-bs-target="#asamModal" data-id="<?= $au->id ?>">
                                                                                 <i class="fas fa-eye"></i> Lihat
@@ -385,6 +387,12 @@
                                                                             <div class="col-sm-12 d-flex justify-content-end">
                                                                                 <button type="button" id="asamSamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                                                             </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="asam_manual">Data Manual</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="asam_manual" class="form-control" name="asam_manual" placeholder="Masukkan Data Manual Asam Urat">
+                                                                            </div>
                                                                             <div class="col">
                                                                                 <label for="violet"><strong>Data Violet</strong></label>
                                                                             </div>
@@ -451,6 +459,7 @@
                                                             <tr>
                                                                 <th>Tanggal Periksa</th>
                                                                 <th>Tanggal Update</th>
+                                                                <th>Data Manual</th>
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
@@ -460,6 +469,7 @@
                                                                     <tr>
                                                                         <td><?= formatDateTime($k->ins_time) ?></td>
                                                                         <td><?= formatDateTime($k->upd_time) ?></td>
+                                                                        <td><?= $k->manual ?></td>
                                                                         <td>
                                                                             <button type="button" class="badge bg-primary border-0 view-kolesterol-btn" data-bs-toggle="modal" data-bs-target="#kolesterolModal" data-id="<?= $k->id ?>">
                                                                                 <i class="fas fa-eye"></i> Lihat
@@ -551,6 +561,12 @@
                                                                             <div class="col-sm-12 d-flex justify-content-end">
                                                                                 <button type="button" id="kolesterolSamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                                                             </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="kolesterol_manual">Data Manual</label>
+                                                                            </div>
+                                                                            <div class="col form-group">
+                                                                                <input type="text" id="kolesterol_manual" class="form-control" name="kolesterol_manual" placeholder="Masukkan Data Manual Kolesterol">
+                                                                            </div>
                                                                             <div class="col">
                                                                                 <label for="violet"><strong>Data Violet</strong></label>
                                                                             </div>
@@ -586,6 +602,113 @@
                                                                             </div>
                                                                             <div class="col mb-3">
                                                                                 <textarea name="kolesterolred" class="form-control" id="edit-kolesterolred" rows="5" placeholder="Data Red"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Batal</span>
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Simpan</span>
+                                                                </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <!-- Table untuk Deteksi Glukosa -->
+                                            <div id="glukosaFields" style="display: none;">
+                                                <div>
+                                                    <h6 class="h6 mt-4 mb-4">Deteksi Gula Darah</h6>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tanggal Periksa</th>
+                                                                <th>Tanggal Update</th>
+                                                                <th>Gula Darah</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($glukosa as $glu) : ?>
+                                                                <?php if (!empty($glu->ins_time) || !empty($glu->upd_time)) : ?>
+                                                                    <tr>
+                                                                        <td><?= formatDateTime($glu->ins_time) ?></td>
+                                                                        <td><?= formatDateTime($glu->upd_time) ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="badge bg-primary border-0 view-glukosa-btn" data-bs-toggle="modal" data-bs-target="#glukosaModal" data-id="<?= $glu->id ?>">
+                                                                                <i class="fas fa-eye"></i> Lihat
+                                                                            </button>
+                                                                            <button type="button" class="badge bg-warning border-0 edit-glukosa-btn" data-bs-toggle="modal" data-bs-target="#glukosaEditModal" data-id="<?= $glu->id ?>">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                            <a class="badge bg-danger border-0 delete-glukosa-btn" href="<?= site_url('pasien/delete_glukosa/' . $glu->id) ?>">
+                                                                                <i class="fas fa-trash"></i> Hapus
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Detail Modal glukosa -->
+                                            <div class="modal fade" id="glukosaModal" tabindex="-1" role="dialog" aria-labelledby="glukosaModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="glukosaModalTitle">Detail Deteksi Glukosa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                    <div id="glukosaFields">
+                                                                        <div class="col">
+                                                                            <label for="gula_darah"><strong>Gula Darah</strong></label>
+                                                                        </div>
+                                                                        <div class="col mb-3">
+                                                                            <textarea class="form-control" id="gula_darah" rows="5" placeholder="Gula Darah" readonly></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Edit Modal Deteksi Glukosa -->
+                                            <div class="modal fade" id="glukosaEditModal" tabindex="-1" role="dialog" aria-labelledby="glukosaEditModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="glukosaEditModalTitle">Edit Deteksi Gula Darah</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="" id="editGlukosaForm" action="<?= base_url('pasien/update_glukosa') ?>" method="POST">
+                                                                <div class="form-body">
+                                                                    <div class="row">
+                                                                        <div id="glukosaFields">
+                                                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                                                <button type="button" id="glukosaSamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <label for="violet"><strong>Gula Darah</strong></label>
+                                                                            </div>
+                                                                            <div class="col mb-3"> 
+                                                                                <textarea name="gula_darah" class="form-control" id="edit-guladarah" rows="5" placeholder="Gula Darah" readonly></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1740,6 +1863,7 @@
         document.getElementById('suntikFields').style.display = alat === 'suntik' ? 'block' : 'none';
         document.getElementById('asamFields').style.display = alat === 'asamUrat' ? 'block' : 'none';
         document.getElementById('kolesterolFields').style.display = alat === 'kolesterol' ? 'block' : 'none';
+        document.getElementById('glukosaFields').style.display = alat === 'glukosa' ? 'block' : 'none';
         document.getElementById('superBrightFields').style.display = alat === 'superBright' ? 'block' : 'none';
         document.getElementById('magnetikFields').style.display = alat === 'magnetik' ? 'block' : 'none';
     });
@@ -1947,6 +2071,80 @@
                     if (response.status === 'success') {
                         alert(response.message);
                         $('#kolesterolEditModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                }
+            });
+        });
+    });
+
+    // Deteksi glukosa
+    $(document).ready(function() {
+        $('.view-glukosa-btn').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('Pasien/get_glukosa/') ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data) {
+                        $('#gula_darah').val(data.nilai_glukosa);
+                        $('#glukosaModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+        });
+    });
+
+    // Edit Deteksi Glukosa
+    $(document).ready(function() {
+        $('.edit-glukosa-btn').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('Pasien/get_glukosa/') ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data) {
+                        $('#editGlukosaForm').attr('action', '<?= base_url('Pasien/update_glukosa/') ?>' + id);
+                        $('#glukosaEditModal').modal('show');
+                    } else {
+                        console.log('Data not found');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+        });
+
+        $('#editGlukosaForm').on('submit', function(e) {
+            e.preventDefault(); // Mencegah submit default
+
+            var formData = $(this).serialize();
+            var actionUrl = $(this).attr('action');
+
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        $('#glukosaEditModal').modal('hide');
                         location.reload();
                     } else {
                         alert(response.message);
@@ -2302,6 +2500,25 @@
                         $('#edit-kolesterolyellow').val(data.yellow);
                         $('#edit-kolesterolorange').val(data.orange);
                         $('#edit-kolesterolred').val(data.red);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $('#glukosaSamBtn').on('click', function() {
+            var id = 1; // Ambil ID dari hidden input
+            $.ajax({
+                url: '<?= base_url('pasien/get_glukosa_data/') ?>' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data) {
+                        $('#edit-guladarah').val(data.nilai_glukosa);
                     }
                 },
                 error: function(xhr, status, error) {

@@ -79,9 +79,9 @@
                                             <fieldset class="form-group">
                                                 <select class="form-select" id="alat" name="alat" required>
                                                     <option value="" selected hidden>Pilih Alat</option>
-                                                    <option value="suntik">Suntik</option>
                                                     <option value="asamUrat">Deteksi Asam Urat</option>
                                                     <option value="kolesterol">Deteksi Kolesterol</option>
+                                                    <option value="glukosa">Deteksi Gula Darah</option>
                                                     <option value="superBright">SuperBright</option>
                                                     <option value="magnetik">Magnetik</option>
                                                 </select>
@@ -129,6 +129,15 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Deteksi Asam Urat</h6>
                                             </div>
+                                            <div class="col-md-4">
+                                                <label for="asam_manual">Data Manual</label>
+                                            </div>
+                                            <div class="col-md form-group">
+                                                <input type="text" id="asam_manual" class="form-control" name="asam_manual" placeholder="Asam Urat Manual">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="tinggi">Data Sensor</label>
+                                            </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="button" id="asamBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                             </div>
@@ -175,6 +184,15 @@
                                             <div>
                                                 <h6 class="h6 mt-4 mb-4">Deteksi Kolesterol</h6>
                                             </div>
+                                            <div class="col-md-4">
+                                                <label for="kolesterol_manual">Data Manual</label>
+                                            </div>
+                                            <div class="col-md form-group">
+                                                <input type="text" id="kolesterol_manual" class="form-control" name="kolesterol_manual" placeholder="Kolesterol Manual">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="tinggi">Data Sensor</label>
+                                            </div>
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="button" id="kolesterolBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
                                             </div>
@@ -213,6 +231,22 @@
                                             </div>
                                             <div class="col form-group">
                                                 <textarea class="form-control" id="kolesterol_red" name="kolesterol_red" rows="5" placeholder="Sinyal Red" readonly></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Fields untuk Deteksi Glukosa -->
+                                        <div id="glukosaFields" style="display: none;">
+                                            <div>
+                                                <h6 class="h6 mt-4 mb-4">Deteksi Kolesterol</h6>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="button" id="glukosaBtn" class="btn btn-light-primary me-1 mb-1 px-5">Ambil Data</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="gula_darah">Gula Darah</label>
+                                            </div>
+                                            <div class="col form-group">
+                                                <textarea class="form-control" id="gula_darah" name="gula_darah" rows="5" placeholder="Gula Darah" readonly></textarea>
                                             </div>
                                         </div>
 
@@ -853,6 +887,7 @@
         const suntikFields = document.getElementById('suntikFields');
         const asamFields = document.getElementById('asamFields');
         const kolesterolFields = document.getElementById('kolesterolFields');
+        const glukosaFields = document.getElementById('glukosaFields');
         const superBrightFields = document.getElementById('superBrightFields');
         const magnetikFields = document.getElementById('magnetikFields');
 
@@ -862,6 +897,7 @@
             suntikFields.style.display = selectedAlat === 'suntik' ? 'block' : 'none';
             asamFields.style.display = selectedAlat === 'asamUrat' ? 'block' : 'none';
             kolesterolFields.style.display = selectedAlat === 'kolesterol' ? 'block' : 'none';
+            glukosaFields.style.display = selectedAlat === 'glukosa' ? 'block' : 'none';
             superBrightFields.style.display = selectedAlat === 'superBright' ? 'block' : 'none';
             magnetikFields.style.display = selectedAlat === 'magnetik' ? 'block' : 'none';
         }
@@ -934,6 +970,22 @@
 
                 // Tampilkan div asamFields (jika sebelumnya disembunyikan)
                 document.getElementById('kolesterolFields').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('glukosaBtn').addEventListener('click', function() {
+        var glukosaId = 1;
+
+        // Ambil data_glukosa dari API (controller) menggunakan AJAX
+        fetch('analisis_darah/get_glukosa_data/' + glukosaId)
+            .then(response => response.json())
+            .then(data_glukosa => {
+                // Mengisi nilai textarea dengan data dari data_glukosa
+                document.getElementById('gula_darah').value = data_glukosa.nilai_glukosa || '';
+
+                // Tampilkan div asamFields (jika sebelumnya disembunyikan)
+                document.getElementById('glukosaFields').style.display = 'block';
             })
             .catch(error => console.error('Error:', error));
     });

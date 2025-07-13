@@ -9,7 +9,7 @@ url = 'http://cemti.org/api_magnetik/update/1'
 
 # Konfigurasi Serial
 ser = serial.Serial(
-    port='COM6',  # Ganti sesuai dengan port ESP32 Anda
+    port='COM5',  # Ganti sesuai dengan port ESP32 Anda
     baudrate=9600,
     timeout=1
 )
